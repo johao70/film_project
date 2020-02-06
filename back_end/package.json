@@ -1,20 +1,21 @@
 {
   "name": "back_end",
   "version": "1.0.0",
-  "description": "API REST NodeJS - Express - Knex",
+  "description": "NodeJS, Express, Sequelize, MySQL",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./instalacion/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./app.js"
   },
-  "author": "Johao Nicolas Perlaza Zambrano",
+  "keywords": [],
+  "author": "Johao Perlaza",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "knex": "^0.20.4",
-    "pg": "^7.12.0"
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.3"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "nodemon": "^2.0.2",
+    "sequelize-cli": "^5.5.1"
   }
 }
