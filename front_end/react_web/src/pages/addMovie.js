@@ -15,6 +15,7 @@ class AddMovie extends Component {
             categoria: '',
             valorBoleto: '',
             imagen: '',
+            estado: 'ON'
         }
     }
 
@@ -31,15 +32,16 @@ class AddMovie extends Component {
                 resumen: this.state.resumen,
                 categoria: this.state.categoria,
                 valorBoleto: this.state.valorBoleto,
-                imagen: this.state.imagen,
+                // imagen: this.state.imagen,
+                estado: this.state.estado,
             }
         }
 
         if (this.post.datos.titulo === "" ||
             this.post.datos.resumen === "" ||
             this.post.datos.categoria === "" ||
-            this.post.datos.valorBoleto === "" ||
-            this.post.datos.imagen === ""
+            this.post.datos.valorBoleto === ""
+            // this.post.datos.imagen === ""
             ) {
           alert("Complete todos los datos para continuar...");
         } else {
@@ -118,7 +120,8 @@ class AddMovie extends Component {
                                         Valor del Boleto
                                     </label>
                                     <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" 
-                                        type="number" 
+                                        type="number"
+                                        min="0"
                                         placeholder="Ej: 3,50"
                                         name="valorBoleto"
                                         value={ valorBoleto }

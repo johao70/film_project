@@ -4,65 +4,53 @@ exports.up = function(knex, Promise) {
   .createTable( 'tipo_persona', function( table ) {
     table.increments('id');
     table.string('tipo_persona_nombre').notNullable().unique();
-    table.string('tipo_persona_descripcion');
   })
 
-  .createTable( 'estado_persona', function( table ) {
+  .createTable( 'pelicula', function( table ) {
     table.increments('id');
-    table.string('estado_persona_nombre').notNullable().unique();
-    table.string('estado_persona_descripcion');
+    table.string('titulo');
+    table.string('resumen');
+    table.string('categoria');
+    table.integer('valorBoleto');
+    table.string('estado');
+    table.string('imagen');
   })
 
-  .createTable( 'estado_reserva', function( table ) {
+  .createTable( 'horario', function( table ) {
     table.increments('id');
-    table.string('estado_reserva_nombre').notNullable().unique();
-    table.string('estado_reserva_descripcion');
-  })
-
-  .createTable( 'estado_libro', function( table ) {
-    table.increments('id');
-    table.string('estado_libro_nombre').notNullable().unique();
-    table.string('estado_libro_descripcion');
-  })
-
-  .createTable( 'libro', function( table ) {
-    table.increments('id');
-    table.integer('estado_libro_id').references('id').inTable('estado_libro');
-    table.string('libro_autor');
-    table.string('libro_pais');
-    table.string('libro_año');
-    table.string('libro_titulo');
-    table.string('libro_editorial');
-    table.string('libro_existencias');
+    table.string('hora');
   })
 
   .createTable( 'persona', function( table ) {
     table.increments('id');
-    table.integer('tipo_persona_id').references('id').inTable('tipo_persona');
-    table.integer('estado_persona_id').references('id').inTable('estado_persona');
-    table.string('persona_identificacion').unique();
-    table.string('persona_nombre');
-    table.string('persona_email').unique();
-    table.string('persona_direccion');
-    table.string('persona_telefono');
-    table.string('persona_clave');
+    table.integer('idTipoPersona').references('id').inTable('tipo_persona');
+    table.string('nombre');
+    table.string('correo').notNullable().unique();
+    table.string('clave').notNullable();
   })
-  
-  .createTable( 'reserva', function( table ) {
+
+  .createTable( 'sala', function( table ) {
     table.increments('id');
-    table.integer('estado_reserva_id').references('id').inTable('estado_reserva');
-    table.integer('persona_id').references('id').inTable('persona');
-    table.integer('libro_id').references('id').inTable('libro');
+    table.integer('idPelicula').references('id').inTable('pelicula');
+    table.integer('idHorario').references('id').inTable('horario');
+    table.string('nombre');
+    table.string('descripcion');
+  })
+
+  .createTable( 'compra', function( table ) {
+    table.increments('id');
+    table.integer('idPersona').references('id').inTable('persona');
+    table.integer('idSala').references('id').inTable('sala');
+    table.string('numeroBoletos');
   })
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema
-  .dropTableIfExists( 'tipo_persona' )
-  .dropTableIfExists( 'estado_persona' )
-  .dropTableIfExists( 'estado_reserva' )
-  .dropTableIfExists( 'estado_libro' )
-  .dropTableIfExists( 'libro' )
+  .dropTableIfExists( 'compra' )
+  .dropTableIfExists( 'sala' )
   .dropTableIfExists( 'persona' )
-  .dropTableIfExists( 'reserva' )
+  .dropTableIfExists( 'horario' )
+  .dropTableIfExists( 'pelicula' )
+  .dropTableIfExists( 'tipo_persona' )
 };

@@ -15,7 +15,7 @@ const Sidebar = () => (
                 <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                     <li className="items-center">
                         <Link to="/home">
-                            <button className="text-pink-500 hover:text-pink-600 text-xs uppercase py-3 font-bold block">
+                            <button className="text-pink-500 hover:text-pink-700 text-xs uppercase py-3 font-bold block">
                                 <i className="fas fa-tv opacity-75 mr-2 text-sm"></i>
                                 Inicio
                             </button>
@@ -23,24 +23,32 @@ const Sidebar = () => (
                     </li>
                     <li className="items-center">
                         <Link to="/home">
-                            <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
-                                <i className="fas fa-newspaper text-gray-900 mr-2 text-sm"></i>
+                            <button className="text-gray-600 hover:text-gray-900 text-xs uppercase py-3 font-bold block">
+                                <i className="fas fa-newspaper mr-2 text-sm"></i>
                                 Reporte de Compras
                             </button>
                         </Link>
                     </li>
                     <li className="items-center">
                         <Link to="/add_movie">
-                            <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
-                                <i className="fas fa-book-open text-gray-900 mr-2 text-sm"></i>
-                                Añadir Peliculas
+                            <button className="text-gray-600 hover:text-gray-900 text-xs uppercase py-3 font-bold block">
+                                <i className="fas fa-book-open mr-2 text-sm"></i>
+                                Añadir Películas
                             </button>
                         </Link>
+                        <ul>
+                            <Link to="/movies">
+                                <li className="mx-8 text-gray-600 hover:text-gray-900">
+                                    <i className="fas fa-arrow-circle-right"></i>
+                                    Películas
+                                </li>
+                            </Link>
+                        </ul>
                     </li>
                     <li className="items-center">
                         <Link to="/home">
-                            <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
-                                <i className="fas fa-check text-gray-900 mr-2 text-sm"></i>
+                            <button className="text-gray-600 hover:text-gray-900 text-xs uppercase py-3 font-bold block">
+                                <i className="fas fa-check mr-2 text-sm"></i>
                                 Crear y Asignar Sala
                             </button>
                         </Link>
