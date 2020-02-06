@@ -4,18 +4,17 @@ import Sidebar from '../components/sidebar';
 import Header from '../components/header';
 import axios from 'axios';
 
-const API = "http://localhost:8001/server/library";
+const API = "http://localhost:8001/server/film";
 
 class AddMovie extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            libro_autor: '',
-            libro_pais: '',
-            libro_año: '',
-            libro_titulo: '',
-            libro_editorial: '',
-            libro_existencias: '',
+            titulo: '',
+            resumen: '',
+            categoria: '',
+            valorBoleto: '',
+            imagen: '',
         }
     }
 
@@ -26,25 +25,21 @@ class AddMovie extends Component {
     saveData = e => {
         e.preventDefault()
         this.post = {
-            tabla: "libro",
+            tabla: "pelicula",
             datos: {
-                libro_autor: this.state.libro_autor,
-                libro_pais: this.state.libro_pais,
-                libro_año: this.state.libro_año,
-                libro_titulo: this.state.libro_titulo,
-                libro_editorial: this.state.libro_editorial,
-                libro_existencias: this.state.libro_existencias,
+                titulo: this.state.titulo,
+                resumen: this.state.resumen,
+                categoria: this.state.categoria,
+                valorBoleto: this.state.valorBoleto,
+                imagen: this.state.imagen,
             }
         }
 
-        console.log(JSON.stringify(this.post.datos.estado_libro_id))
-
-        if (this.post.datos.libro_autor === "" ||
-            this.post.datos.libro_pais === "" ||
-            this.post.datos.libro_año === "" ||
-            this.post.datos.libro_titulo === "" ||
-            this.post.datos.libro_editorial === "" ||
-            this.post.datos.libro_existencias === ""
+        if (this.post.datos.titulo === "" ||
+            this.post.datos.resumen === "" ||
+            this.post.datos.categoria === "" ||
+            this.post.datos.valorBoleto === "" ||
+            this.post.datos.imagen === ""
             ) {
           alert("Complete todos los datos para continuar...");
         } else {
@@ -52,7 +47,7 @@ class AddMovie extends Component {
           .then(response => {
             if ( response.data.ok === true ) {
                 alert("Agregado exitosamente")
-                window.location.assign("http://localhost:3000/add_book");
+                window.location.assign("http://localhost:3000/add_movie");
             }
           })
           .catch(error => {
@@ -64,107 +59,94 @@ class AddMovie extends Component {
 
     render() {
         const { 
-            libro_autor, 
-            libro_pais, 
-            libro_año, 
-            libro_titulo, 
-            libro_editorial, 
-            libro_existencias,
+            titulo, 
+            resumen, 
+            categoria, 
+            valorBoleto, 
+            // imagen,
         } = this.state
         return(
             <div>
                 <Sidebar />,
                 <Header />,
-                {/* <div className="ml-64">
+                <div className="ml-64">
                     <hr />
                     <main className="my-8">
-                        <p className="text-center my-5 text-2xl">Bienvenido a la sección para agregar un nuevo libro a la biblioteca virtual.</p>
+                        <p className="text-center my-5 text-2xl">Bienvenido a la sección para agregar una nueva pelicula.</p>
                         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mx-8" onSubmit={ this.saveData }>
                             <div className="-mx-3 md:flex mb-6">
                                 <div className="md:w-full px-3">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="libro-titulo">
-                                        Titulo
+                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="titulo">
+                                        Título
                                     </label>
                                     <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" 
                                         type="text" 
                                         placeholder="Ej: El Viaje al Centro de la Tierra"
-                                        name="libro_titulo"
-                                        value={ libro_titulo }
+                                        name="titulo"
+                                        value={ titulo }
                                         onChange={ this.changeHandler } 
                                     />
                                 </div>
                             </div>
                             <div className="-mx-3 md:flex mb-6 ">
                                 <div className="md:w-1/3 px-3 mb-6 md:mb-0">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="libro_autor">
-                                        Autor
+                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="resumen">
+                                        Resumen
                                     </label>
-                                    <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
+                                    <textarea className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                                         type="text" 
-                                        placeholder="Ej: Joel"
-                                        name="libro_autor"
-                                        value={ libro_autor }
+                                        placeholder="Sinopsis de la película"
+                                        name="resumen"
+                                        value={ resumen }
                                         onChange={ this.changeHandler } 
                                     />
                                 </div>
                                 <div className="md:w-1/3 px-3">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="libro_pais">
-                                        Pais
+                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="categoria">
+                                        Categoria
                                     </label>
                                     <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" 
                                         type="text" 
-                                        placeholder="Ej: Ecuador"
-                                        name="libro_pais"
-                                        value={ libro_pais }
+                                        placeholder="Ej: Comedia"
+                                        name="categoria"
+                                        value={ categoria }
                                         onChange={ this.changeHandler } 
                                     />
                                 </div>
                                 <div className="md:w-1/3 px-3">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="libro_año">
-                                        Año
+                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="valorBoleto">
+                                        Valor del Boleto
                                     </label>
                                     <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" 
-                                        type="text" 
-                                        placeholder="Ej: 2020"
-                                        name="libro_año"
-                                        value={ libro_año }
+                                        type="number" 
+                                        placeholder="Ej: 3,50"
+                                        name="valorBoleto"
+                                        value={ valorBoleto }
                                         onChange={ this.changeHandler } 
                                     />
                                 </div>
                             </div>
-                            <div className="-mx-3 md:flex mb-6 ">
+                            {/* <div className="-mx-3 md:flex mb-6 ">
                                 <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="libro_editorial">
+                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="imagen">
                                         Editorial
                                     </label>
                                     <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
                                         type="text" 
                                         placeholder="Ej: Encarta Interprise"
-                                        name="libro_editorial"
-                                        value={ libro_editorial }
+                                        name="imagen"
+                                        value={ imagen }
                                         onChange={ this.changeHandler } 
                                     />
                                 </div>
-                                <div className="md:w-1/2 px-3">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="libro_existencias">
-                                        Existencias
-                                    </label>
-                                    <input className="appearance-none block w-1/2 bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-2" 
-                                        type="number"
-                                        name="libro_existencias"
-                                        min="1"
-                                        value={ libro_existencias }
-                                        onChange={ this.changeHandler } 
-                                    />
-                                </div>
-                            </div>
+                            </div> */}
                             <p className="text-red text-xs italic">Por favor complete todos los campos.</p>
                             <div className="mt-4">
                                 <button className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 hover:bg-gray-800 rounded" type="submit">Guardar</button>
                             </div>
                         </form>
                     </main>
-                </div> */}
+                </div>
             </div>
         )
     }

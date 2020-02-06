@@ -69,7 +69,7 @@ class Login extends Component {
                   <button type="submit" className="bg-teal-600 hover:bg-teal-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded">
                     Ingresar
                   </button>
-                  <a className="bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded" onClick={() => window.location.assign("http://localhost:3000/register")}>
+                  <a href="http://localhost:3000/register" className="bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded">
                     Registrarse
                   </a>
                 </div>  

@@ -22,7 +22,7 @@ const Sidebar = () => (
                         </Link>
                     </li>
                     <li className="items-center">
-                        <Link to="/add_movie">
+                        <Link to="/home">
                             <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
                                 <i className="fas fa-newspaper text-gray-900 mr-2 text-sm"></i>
                                 Reporte de Compras
@@ -30,41 +30,21 @@ const Sidebar = () => (
                         </Link>
                     </li>
                     <li className="items-center">
-                        <div className="text-gray-800 text-xs uppercase py-3 font-bold block">
-                            <i className="fas fa-book-open text-gray-900 mr-2 text-sm"></i>
-                            Añadir Peliculas
-                            {/* <ul>
-                                <Link to="/add_book">
-                                    <li className="mx-8 hover:text-gray-600">
-                                        <i className="fas fa-arrow-circle-right"></i>
-                                        Agregar Libro
-                                    </li>
-                                </Link>
-                                <Link to="/virtual_library">
-                                    <li className="mx-8 hover:text-gray-600">
-                                        <i className="fas fa-arrow-circle-right"></i>
-                                        Biblioteca Virtual
-                                    </li>
-                                </Link>
-                            </ul> */}
-                        </div>
+                        <Link to="/add_movie">
+                            <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
+                                <i className="fas fa-book-open text-gray-900 mr-2 text-sm"></i>
+                                Añadir Peliculas
+                            </button>
+                        </Link>
                     </li>
                     <li className="items-center">
-                        <Link to="/reserve">
+                        <Link to="/home">
                             <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
                                 <i className="fas fa-check text-gray-900 mr-2 text-sm"></i>
                                 Crear y Asignar Sala
                             </button>
                         </Link>
                     </li>
-                    {/* <li className="items-center">
-                        <Link to="/reserve_history">
-                            <button className="text-gray-800 text-xs uppercase py-3 font-bold block">
-                                <i className="fas fa-archive text-gray-900 mr-2 text-sm"></i>
-                                Historial de Reservas
-                            </button>
-                        </Link>
-                    </li> */}
                 </ul>
                 <hr />
             </div>
