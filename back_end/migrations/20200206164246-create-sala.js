@@ -1,4 +1,8 @@
 'use strict';
+
+const Pelicula = require("../models/pelicula");
+const Horario = require("../models/horario");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Salas', {
@@ -15,10 +19,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       idPelicula: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: Pelicula,
+          key: 'id'
+        }
       },
       idHorario: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: Horario,
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

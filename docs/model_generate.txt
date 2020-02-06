@@ -1,5 +1,16 @@
+--CREAR MODELOS
+
 npx sequelize-cli model:generate --name Persona --attributes nombre:string,correo:string,clave:string,rol:string
 npx sequelize-cli model:generate --name Pelicula --attributes titulo:string,resumen:string,categoria:string,valorBoleto:string,estado:string,imagen:string
 npx sequelize-cli model:generate --name Horario --attributes hora:string
 npx sequelize-cli model:generate --name Sala --attributes nombre:string,descripcion:string,idPelicula:integer,idHorario:integer
 npx sequelize-cli model:generate --name Compra --attributes numeroBoletos:number,idPersona:integer,idSala:integer
+
+-- CORRER MIGRACIONES
+
+npx sequelize-cli db:migrate
+
+-- REVERTIR MIGRACIONES (CAMBIOS)
+
+npx sequelize-cli db:migrate:undo
+npx sequelize-cli db:migrate:undo:all
