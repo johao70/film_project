@@ -40,7 +40,7 @@ class Register extends Component {
       <div className="bg-teal-200 h-screen font-sans">
         <div className="container mx-auto h-full flex justify-center items-center">
         <div className="w-1/3">
-            <h1 className="font-hairline mb-6 text-center text-2xl">Bienvenido!</h1>
+            <h1 className="font-hairline mb-6 text-center text-2xl">Registrarse!</h1>
             <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
               <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={ this.registerUser }>
                 <div className="mb-4">
@@ -71,6 +71,9 @@ class Register extends Component {
                   <button type="submit" className="bg-teal-600 hover:bg-teal-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded">
                     Registrarse
                   </button>
+                  <a className="bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded" onClick={() => window.location.assign("http://localhost:3000/")}>
+                    Volver
+                  </a>
                 </div>  
               </form>
             </div>

@@ -46,7 +46,7 @@ class Login extends Component {
                   <label className="font-bold text-gray-700 block mb-2">Correo Institucional</label>
                   <input className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow"
                   type="text"
-                  placeholder="correo@yavirac.edu.ec"
+                  placeholder="correo@gmail.com"
                   name="correo"
                   value={ correo }
                   onChange={ this.changeHandler } 
@@ -57,7 +57,7 @@ class Login extends Component {
                   <label className="font-bold text-gray-700 block mb-2">Contraseña</label>
                   <input className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow"
                   type="password"
-                  placeholder="******************"
+                  placeholder="**************"
                   name="clave"
                   value={ clave }
                   onChange={ this.changeHandler } 
@@ -69,6 +69,9 @@ class Login extends Component {
                   <button type="submit" className="bg-teal-600 hover:bg-teal-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded">
                     Ingresar
                   </button>
+                  <a className="bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded" onClick={() => window.location.assign("http://localhost:3000/register")}>
+                    Registrarse
+                  </a>
                 </div>  
               </form>
             </div>
