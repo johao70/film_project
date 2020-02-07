@@ -16,19 +16,5 @@ module.exports = db.sequelize.define("sala", {
   },
   descripcion: {
     type: Sequelize.STRING
-  },
-  idpelicula: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: pelicula,
-      key: 'id'
-    }
-  },
-  idhorario: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: horario,
-      key: 'id'
-    }
   }
 });
