@@ -2,12 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Sala = sequelize.define('Sala', {
     nombre: DataTypes.STRING,
-    descripcion: DataTypes.STRING,
-    idPelicula: DataTypes.INTEGER,
-    idHorario: DataTypes.INTEGER
+    descripcion: DataTypes.STRING
   }, {});
   Sala.associate = function(models) {
-    // associations can be defined here
+    Sala.hasMany(models.Pelicula)
+    Sala.hasMany(models.Horario)
   };
   return Sala;
 };

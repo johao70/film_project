@@ -1,8 +1,5 @@
 'use strict';
 
-const Persona= require("../models/persona");
-const Sala= require("../models/sala");
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Compras', {
@@ -14,20 +11,6 @@ module.exports = {
       },
       numeroBoletos: {
         type: Sequelize.INTEGER
-      },
-      idPersona: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: Persona,
-          key: 'id'
-        }
-      },
-      idSala: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: Sala,
-          key: 'id'
-        }
       },
       createdAt: {
         allowNull: false,

@@ -1,12 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Compra = sequelize.define('Compra', {
-    numeroBoletos: DataTypes.NUMBER,
-    idPersona: DataTypes.INTEGER,
-    idSala: DataTypes.INTEGER
+    numeroBoletos: DataTypes.NUMBER
   }, {});
   Compra.associate = function(models) {
-    // associations can be defined here
+    Compra.hasMany(models.Persona),
+    Compra.hasMany(models.Sala),
   };
   return Compra;
 };
