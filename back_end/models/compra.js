@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Compra.associate = function(models) {
     Compra.hasMany(models.Persona),
-    Compra.hasMany(models.Sala),
+    Compra.hasMany(models.Sala)
   };
   return Compra;
 };
