@@ -15,7 +15,7 @@ class AddMovie extends Component {
             categoria: '',
             valorBoleto: '',
             imagen: '',
-            estado: 'ON'
+            estado: true
         }
     }
 
@@ -26,7 +26,6 @@ class AddMovie extends Component {
     saveData = e => {
         e.preventDefault()
         this.post = {
-            tabla: "pelicula",
             datos: {
                 titulo: this.state.titulo,
                 resumen: this.state.resumen,

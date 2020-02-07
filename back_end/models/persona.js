@@ -16,8 +16,5 @@ module.exports = db.sequelize.define("persona", {
   },
   clave:{
     type:Sequelize.STRING
-  },
-  rol:{
-    type:Sequelize.STRING
   }
 });

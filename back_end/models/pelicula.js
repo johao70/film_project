@@ -8,6 +8,9 @@ module.exports = db.sequelize.define("pelicula", {
     primaryKey: true,
     autoIncrement: true
   },
+  titulo: {
+    type: Sequelize.STRING
+  },
   resumen: {
     type: Sequelize.STRING
   },
