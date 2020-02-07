@@ -1,10 +1,14 @@
+-- INICIAR SEQUELIZE-INIT
+npx sequelize-cli init
+
 --CREAR MODELOS
 
-npx sequelize-cli model:generate --name Persona --attributes nombre:string,correo:string,clave:string,rol:string
-npx sequelize-cli model:generate --name Pelicula --attributes titulo:string,resumen:string,categoria:string,valorBoleto:string,estado:string,imagen:string
-npx sequelize-cli model:generate --name Horario --attributes hora:string
-npx sequelize-cli model:generate --name Sala --attributes nombre:string,descripcion:string
-npx sequelize-cli model:generate --name Compra --attributes numeroBoletos:number
+npx sequelize-cli model:generate --name persona --attributes nombre:string,correo:string,clave:string,rol:string
+npx sequelize-cli model:generate --name pelicula --attributes titulo:string,resumen:string,categoria:string,valorBoleto:string,estado:string,imagen:string
+npx sequelize-cli model:generate --name horario --attributes hora:string
+npx sequelize-cli model:generate --name sala --attributes nombre:string,descripcion:string
+npx sequelize-cli model:generate --name compra --attributes numeroBoletos:float
+npx sequelize-cli migration:generate --name associations
 
 -- CORRER MIGRACIONES
 
