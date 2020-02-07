@@ -1,8 +1,8 @@
-const Persona = require('../models/persona');
+const Compra = require('../models/compra');
 
 const getData = (req, res) => {
     const { query } = req;
-    Persona.findAll({ query })
+    Compra.findAll({ query })
     .then( response => {
         return res.status(200).json({
             ok: true,
@@ -28,7 +28,7 @@ const postData = (req, res) => {
                 error: "Bad Request"
             });
     } else {
-        Persona.create(datos)
+        Compra.create(datos)
             .then( response => {
                 return res.status(200).json({
                     ok: true,
@@ -48,7 +48,7 @@ const postData = (req, res) => {
 const putData = (req, res) => {
     const id = req.query.id
     const datos = req.body.datos
-    Persona.update(datos, { where: { id }})
+    Compra.update(datos, { where: { id }})
     .then( response => {
         return res.status(200).json({
             ok: true,
@@ -67,7 +67,7 @@ const putData = (req, res) => {
 const deleteData = (req, res) => {
     const { id } = req.query;
     
-    Persona.destroy({ where: { id } })
+    Compra.destroy({ where: { id } })
     .then( response => {
         return res.status(200).json({
             ok: true,
