@@ -44,7 +44,7 @@ class Movies extends Component {
                     <hr />
                     <main className="my-8">
                         <p className="text-center my-5 text-2xl">Cartelera</p>
-                        <div class="flex flex-wrap items-center justify-center">
+                        <div className="flex flex-wrap items-center justify-center">
                         { peliculas.map(element => 
                             <div className="max-w-md w-full lg:flex" key={ element.id }>
                                 <img className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" src={ image_cover } alt="image_cover" />

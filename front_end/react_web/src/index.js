@@ -11,6 +11,7 @@ import Page404 from './pages/Page404';
 import Register from './pages/register';
 import Home from './pages/home';
 import Movies from './pages/movies';
+import Rooms from './pages/rooms';
 
 ReactDOM.render(
     <Router>
@@ -20,6 +21,7 @@ ReactDOM.render(
             <Route exact path="/home" component={ Home } />
             <Route path="/add_movie" component={ AddMovie } />
             <Route path="/movies" component={ Movies } />
+            <Route path="/rooms" component={ Rooms } />
             <Route component={ Page404 } />
         </Switch>
     </Router>,

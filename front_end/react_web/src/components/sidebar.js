@@ -30,31 +30,50 @@ const Sidebar = () => (
                         </Link>
                     </li>
                     <li className="items-center">
-                        <Link to="/add_movie">
-                            <button className="text-gray-600 hover:text-gray-900 text-xs uppercase py-3 font-bold block">
-                                <i className="fas fa-book-open mr-2 text-sm"></i>
-                                Añadir Películas
-                            </button>
-                        </Link>
+                        <p className="text-gray-900 text-xs uppercase py-3 font-bold block">
+                            <i className="fas fa-book-open mr-2 text-sm"></i>
+                            Películas
+                        </p>
+                        <ul>
+                            <Link to="/add_movie">
+                                <li className="mx-8 text-gray-600 hover:text-gray-900">
+                                    <i className="fas fa-arrow-circle-right"></i>
+                                    Crear Película
+                                </li>
+                            </Link>
+                        </ul>
                         <ul>
                             <Link to="/movies">
                                 <li className="mx-8 text-gray-600 hover:text-gray-900">
                                     <i className="fas fa-arrow-circle-right"></i>
-                                    Películas
+                                    Catálogo
                                 </li>
                             </Link>
                         </ul>
                     </li>
                     <li className="items-center">
-                        <Link to="/home">
-                            <button className="text-gray-600 hover:text-gray-900 text-xs uppercase py-3 font-bold block">
-                                <i className="fas fa-check mr-2 text-sm"></i>
-                                Crear y Asignar Sala
-                            </button>
-                        </Link>
+                        <p className="text-gray-900 text-xs uppercase py-3 font-bold block">
+                            <i className="fas fa-check mr-2 text-sm"></i>
+                            Crear y Asignar
+                        </p>
+                        <ul>
+                            <Link to="/rooms">
+                                <li className="mx-8 text-gray-600 hover:text-gray-900">
+                                    <i className="fas fa-arrow-circle-right"></i>
+                                    Crear Salas
+                                </li>
+                            </Link>
+                        </ul>
+                        <ul>
+                            <Link to="/home">
+                                <li className="mx-8 text-gray-600 hover:text-gray-900">
+                                    <i className="fas fa-arrow-circle-right"></i>
+                                    Asignar Peliculas
+                                </li>
+                            </Link>
+                        </ul>
                     </li>
                 </ul>
-                <hr />
             </div>
         </div>
     </nav>
