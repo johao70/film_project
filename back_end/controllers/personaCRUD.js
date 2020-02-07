@@ -20,29 +20,21 @@ const getData = (req, res) => {
 
 const postData = (req, res) => {
     const datos = req.body.datos
-    
-    if (!datos) {
-        res.status(400);
-        res,
-            json({
-                error: "Bad Request"
-            });
-    } else {
-        Persona.create(datos)
-            .then( response => {
-                return res.status(200).json({
-                    ok: true,
-                    datos: response
-                })
-            })
-            .catch( error => {
-                return res.status(500).json({
-                    ok: false,
-                    datos: null,
-                    mensaje: `Error del servidor: ${ error }` 
-                })
-            });
-    }
+
+    Persona.create(datos)
+    .then( response => {
+        return res.status(200).json({
+            ok: true,
+            datos: response
+        })
+    })
+    .catch( error => {
+        return res.status(500).json({
+            ok: false,
+            datos: null,
+            mensaje: `Error del servidor: ${ error }` 
+        })
+    });
 }
 
 const putData = (req, res) => {
