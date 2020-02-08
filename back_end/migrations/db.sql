@@ -11,6 +11,7 @@ create table salas(id int auto_increment not null primary key, nombre varchar(15
 
 create table sala_peliculas(id int auto_increment not null primary key,
 idpelicula int, foreign key (idpelicula) references peliculas(id),
+idsala int, foreign key (idsala) references salas(id),
 idhorario int, foreign key (idhorario) references horarios(id));
 
 create table compras(id int auto_increment not null primary key, numero_boletos varchar(150), idpersona int, foreign key (idpersona) references personas(id),
