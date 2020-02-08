@@ -24,7 +24,7 @@ class Login extends Component {
       axios.post(API_LOGIN, this.state)
       .then(response => {
         if ( response.data.mensaje === "found" ) {
-          window.location.assign("http://localhost:3000/home");
+          window.location.assign("http://localhost:3000/movies");
         }
       })
       .catch(error => {

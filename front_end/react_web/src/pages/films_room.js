@@ -150,11 +150,15 @@ class FilmsRoom extends Component {
                                         <p className="text-gray-800 font-medium">Asignar Películas</p>
                                             <div className="mt-2">
                                                 <label className="block text-sm text-gray-600" htmlFor="idsala">Sala</label>
-                                                <select className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" name="idsala" onChange={ this.handleSala }>
+                                                <select className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" 
+                                                    name="idsala"
+                                                    value={ idsala }
+                                                    onChange={ this.changeHandler } 
+                                                >
                                                     { salas.map(element => <option key={ element.id } value={ element.id }> {element.nombre} </option>) }
                                                 </select>
                                             </div>
-                                            {/* <div className="mt-2">
+                                            <div className="mt-2">
                                                 <label className="block text-sm text-gray-600" htmlFor="idpelicula">Película</label>
                                                 <select className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
                                                     name="idpelicula"
@@ -173,7 +177,7 @@ class FilmsRoom extends Component {
                                                 >
                                                     { horarios.map(element => <option key={ element.id } value={ element.id }> {element.hora} </option>) }
                                                 </select>
-                                            </div> */}
+                                            </div>
                                             <div className="mt-4">
                                                 <button className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 hover:bg-gray-800 rounded" type="submit">Guardar</button>
                                             </div>
