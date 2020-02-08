@@ -5,7 +5,7 @@ create table personas(id int auto_increment not null primary key, nombre varchar
 create table peliculas(id int auto_increment not null primary key, titulo varchar(150), resumen varchar(150), categoria char (150), valorBoleto char(150), 
 imagen text, estado boolean);
 
-create table horarios(id int auto_increment not null primary key, hora date);
+create table horarios(id int auto_increment not null primary key, hora varchar(100));
 
 create table salas(id int auto_increment not null primary key, nombre varchar(150), descripcion varchar(150));
 

@@ -65,6 +65,14 @@ const Sidebar = () => (
                             </Link>
                         </ul>
                         <ul>
+                            <Link to="/schedules">
+                                <li className="mx-8 text-gray-600 hover:text-gray-900">
+                                    <i className="fas fa-arrow-circle-right"></i>
+                                    Crear Horarios
+                                </li>
+                            </Link>
+                        </ul>
+                        <ul>
                             <Link to="/films_room">
                                 <li className="mx-8 text-gray-600 hover:text-gray-900">
                                     <i className="fas fa-arrow-circle-right"></i>

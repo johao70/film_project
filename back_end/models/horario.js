@@ -9,6 +9,6 @@ module.exports = db.sequelize.define("horario", {
     autoIncrement: true
   },
   hora: {
-    type: Sequelize.DATE
+    type: Sequelize.STRING
   }
 });
