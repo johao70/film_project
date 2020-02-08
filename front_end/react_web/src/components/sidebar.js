@@ -65,7 +65,7 @@ const Sidebar = () => (
                             </Link>
                         </ul>
                         <ul>
-                            <Link to="/home">
+                            <Link to="/films_room">
                                 <li className="mx-8 text-gray-600 hover:text-gray-900">
                                     <i className="fas fa-arrow-circle-right"></i>
                                     Asignar Peliculas

@@ -12,6 +12,7 @@ import Register from './pages/register';
 import Home from './pages/home';
 import Movies from './pages/movies';
 import Rooms from './pages/rooms';
+import FilmsRoom from './pages/films_room';
 
 ReactDOM.render(
     <Router>
@@ -22,6 +23,7 @@ ReactDOM.render(
             <Route path="/add_movie" component={ AddMovie } />
             <Route path="/movies" component={ Movies } />
             <Route path="/rooms" component={ Rooms } />
+            <Route path="/films_room" component={ FilmsRoom } />
             <Route component={ Page404 } />
         </Switch>
     </Router>,

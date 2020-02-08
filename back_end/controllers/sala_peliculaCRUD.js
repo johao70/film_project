@@ -1,8 +1,8 @@
-const Sala_persona = require('../models/sala_persona');
+const Sala_pelicula = require('../models/sala_pelicula');
 
 const getData = (req, res) => {
     const { query } = req;
-    Sala_persona.findAll({ query })
+    Sala_pelicula.findAll({ query })
     .then( response => {
         return res.status(200).json({
             ok: true,
@@ -28,7 +28,7 @@ const postData = (req, res) => {
                 error: "Bad Request"
             });
     } else {
-        Sala_persona.create(datos)
+        Sala_pelicula.create(datos)
             .then( response => {
                 return res.status(200).json({
                     ok: true,
@@ -48,7 +48,7 @@ const postData = (req, res) => {
 const putData = (req, res) => {
     const id = req.query.id
     const datos = req.body.datos
-    Sala_persona.update(datos, { where: { id }})
+    Sala_pelicula.update(datos, { where: { id }})
     .then( response => {
         return res.status(200).json({
             ok: true,
@@ -67,7 +67,7 @@ const putData = (req, res) => {
 const deleteData = (req, res) => {
     const { id } = req.query;
     
-    Sala_persona.destroy({ where: { id } })
+    Sala_pelicula.destroy({ where: { id } })
     .then( response => {
         return res.status(200).json({
             ok: true,

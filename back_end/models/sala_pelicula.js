@@ -4,8 +4,9 @@ const db = require("../config/db");
 
 const pelicula = require("./pelicula")
 const horario = require("./horario")
+const sala = require("./sala")
 
-module.exports = db.sequelize.define("sala_persona", {
+module.exports = db.sequelize.define("sala_pelicula", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -22,6 +23,13 @@ module.exports = db.sequelize.define("sala_persona", {
     type: Sequelize.INTEGER,
     references: {
       model: horario,
+      key: 'id'
+    }
+  },
+  idsala: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: sala,
       key: 'id'
     }
   }

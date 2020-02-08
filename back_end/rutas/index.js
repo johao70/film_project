@@ -6,7 +6,7 @@ const horario = require('../controllers/horarioCRUD');
 const pelicula = require('../controllers/peliculaCRUD');
 const persona = require('../controllers/personaCRUD');
 const sala = require('../controllers/salaCRUD');
-const sala_persona = require('../controllers/sala_personaCRUD');
+const sala_pelicula = require('../controllers/sala_peliculaCRUD');
 
 const router = Router();
 
@@ -39,9 +39,9 @@ router.post('/sala', sala.postData);
 router.put('/sala', sala.putData);
 router.delete('/sala', sala.deleteData);
 
-router.get('/sala_persona', sala_persona.getData);
-router.post('/sala_persona', sala_persona.postData);
-router.put('/sala_persona', sala_persona.putData);
-router.delete('/sala_persona', sala_persona.deleteData);
+router.get('/sala_pelicula', sala_pelicula.getData);
+router.post('/sala_pelicula', sala_pelicula.postData);
+router.put('/sala_pelicula', sala_pelicula.putData);
+router.delete('/sala_pelicula', sala_pelicula.deleteData);
 
 module.exports = router;
