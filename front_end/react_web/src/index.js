@@ -13,6 +13,7 @@ import Home from './pages/home';
 import Movies from './pages/movies';
 import Rooms from './pages/rooms';
 import FilmsRoom from './pages/films_room';
+import FilmsRoomAdd from './pages/films_room_add';
 import Schedules from './pages/schedules';
 
 ReactDOM.render(
@@ -25,6 +26,7 @@ ReactDOM.render(
             <Route path="/movies" component={ Movies } />
             <Route path="/rooms" component={ Rooms } />
             <Route path="/films_room" component={ FilmsRoom } />
+            <Route path="/films_room_add" component={ FilmsRoomAdd } />
             <Route path="/schedules" component={ Schedules } />
             <Route component={ Page404 } />
         </Switch>

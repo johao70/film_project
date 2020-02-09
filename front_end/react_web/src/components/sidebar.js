@@ -21,14 +21,14 @@ const Sidebar = () => (
                             </button>
                         </Link>
                     </li>
-                    <li className="items-center">
+                    {/* <li className="items-center">
                         <Link to="/home">
                             <button className="text-gray-600 hover:text-gray-900 text-xs uppercase py-3 font-bold block">
                                 <i className="fas fa-newspaper mr-2 text-sm"></i>
                                 Reporte de Compras
                             </button>
                         </Link>
-                    </li>
+                    </li> */}
                     <li className="items-center">
                         <p className="text-gray-900 text-xs uppercase py-3 font-bold block">
                             <i className="fas fa-book-open mr-2 text-sm"></i>
