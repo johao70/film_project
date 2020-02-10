@@ -1,12 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { NativeRouter, Switch, Route } from "react-router-native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+import Movies from './src/pages/movies';
+import MovieDetail from './src/pages/movie_detail';
+import BuyTickets from './src/pages/buy_tickets';
+import SendTickets from './src/pages/send_tickets';
+
+export default class App extends Component {
+  render() {
+    return (
+      <NativeRouter>
+        <View style={styles.container}>
+          <Switch>
+            <Route exact path="/" component={ Movies } />
+            <Route exact path="/movie_detail" component={ MovieDetail } />
+            <Route exact path="/buy_tickets" component={ BuyTickets } />
+            <Route exact path="/send_tickets" component={ SendTickets } />
+          </Switch>
+        </View>
+      </NativeRouter>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
