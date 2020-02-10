@@ -119,9 +119,9 @@ class AddMovie extends Component {
                                         Valor del Boleto
                                     </label>
                                     <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" 
-                                        type="number"
+                                        type="text"
                                         min="0"
-                                        placeholder="Ej: 3,50"
+                                        placeholder="Ej: 3.50"
                                         name="valorBoleto"
                                         value={ valorBoleto }
                                         onChange={ this.changeHandler } 
