@@ -8,7 +8,7 @@ import axios from 'axios';
 const API = "http://localhost:5000/film/sala";
 
 class Rooms extends Component {
-    handleOpenModal () { this.setState({ showModal: true }) }      
+    handleOpenModal (id) { this.setState({ showModal: true, test: id }) }
     handleCloseModal () { this.setState({ showModal: false }) }
 
     constructor(props) {
@@ -20,7 +20,8 @@ class Rooms extends Component {
             },
             salas: [],
             nombre: '',
-            descripcion: ''
+            descripcion: '',
+            test: ''
         }
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -160,7 +161,7 @@ class Rooms extends Component {
                                             { salas.map(element => <p className="p-2 px-5" key={ element.id }> {element.descripcion} </p>) }
                                         </td>
                                         <td>
-                                            { salas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ this.handleOpenModal } className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button></p> )}
+                                            { salas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.handleOpenModal(element.id) } className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button></p> )}
                                         </td>
                                         <td>
                                             { salas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.deleteData(element.id) } className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button></p> )}
