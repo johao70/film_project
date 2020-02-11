@@ -2,7 +2,7 @@ const Sala = require('../models/sala');
 
 const getData = (req, res) => {
     const { query } = req;
-    Sala.findAll({ query })
+    Sala.findAll({ where: query })
     .then( response => {
         return res.status(200).json({
             ok: true,

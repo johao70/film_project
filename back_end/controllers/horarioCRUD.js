@@ -2,7 +2,7 @@ const Horario = require('../models/horario');
 
 const getData = (req, res) => {
     const { query } = req;
-    Horario.findAll({ query })
+    Horario.findAll({ where: query })
     .then( response => {
         return res.status(200).json({
             ok: true,

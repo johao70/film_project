@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, Image } fr
 import { Link } from "react-router-native";
 import axios from 'axios';
 
-const API = "http://192.168.1.11:5000/film/pelicula";
+const API = "http://172.16.11.129:5000/film/sala_pelicula";
 
 export default class RoomsSchedule extends Component {
   constructor(props) {
@@ -12,6 +12,13 @@ export default class RoomsSchedule extends Component {
 
     };
 }
+
+  componentDidMount() {
+    axios.get(API)
+    .then( response => {
+      alert(JSON.stringify(response.data.datos))
+    })
+  }
 
   render() {
     return(

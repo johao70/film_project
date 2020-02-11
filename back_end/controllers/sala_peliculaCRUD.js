@@ -2,7 +2,7 @@ const Sala_pelicula = require('../models/sala_pelicula');
 
 const getData = (req, res) => {
     const { query } = req;
-    Sala_pelicula.findAll({ query })
+    Sala_pelicula.findAll({ where: query })
     .then( response => {
         return res.status(200).json({
             ok: true,

@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView } from 'react-native';
+import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 import axios from 'axios';
 
-const API = "http://192.168.1.11:5000/film/pelicula";
+const API = "http://192.168.1.11:5000/film/";
 
 export default class MovieDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pelicula: [],
+      sala_peliculas: [],
     };
 }
 
-componentDidMount() {
-    axios.get(`${ API }?id=2`)
+  componentDidMount() {
+    axios.get(`${ API }pelicula?id=2`)
     .then(response => {
       this.setState({ pelicula: response.data.datos })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+    axios.get(`${ API }sala_pelicula?idpelicula=1`)
+    .then(response => {
+      this.setState({ sala_peliculas: response.data.datos })
     })
     .catch(error => {
       console.log(error)
@@ -24,7 +34,7 @@ componentDidMount() {
   }
 
   render() {
-    const { pelicula } = this.state
+    const { pelicula, sala_peliculas } = this.state
     return(
       <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
         <View style={ styles.overlayContainer}>
@@ -32,31 +42,43 @@ componentDidMount() {
             <Text style={ styles.header }>DETALLE DE LA PELÍCULA</Text>
           </View>
 
-          <View style={ styles.menuContainer }>
-            { pelicula.map(element => 
-              <View key={ element.id } style={ styles.menuItem }>
-                <View>
-                  <Text style={ styles.text }> { element.titulo } </Text>
-                  <Image source={ require('../../assets/film_default.jpg') } style={ styles.image } />
-                  <Text style={ styles.text }> { element.resumen } </Text>
-                  <Text style={ styles.text }> { element.categoria } </Text>
-                  <Text style={ styles.text }> { element.valorBoleto } </Text>
-                </View>
-              </View>
-            ) }
+          <ScrollView vertical={true}>
+            { pelicula.map( element => 
+              <Card key={ element.id } title={ element.titulo } image={require('../../assets/film_default.jpg')}>
+                <Text style={{marginBottom: 10}}>
+                  Resumen: { element.resumen }
+                </Text>
+                <Text style={{marginBottom: 10}}>
+                  Categoría: { element.categoria }
+                </Text>
+                <Text style={{marginBottom: 10}}>
+                  Valor de Boleto: { element.valorBoleto }
+                </Text>
+              </Card>
+              )
+            }
 
-            <TouchableHighlight style={ styles.button }>
-              <Link to="/">
-                <Text>Volver</Text>
-              </Link>
-            </TouchableHighlight>
+            { sala_peliculas.map( element => 
+              <Card key={ element.id } title="Horarios Disponibles" >
+                <Text> { element.idhorario } </Text>
+              </Card>
+              )
+            }
 
-            <TouchableHighlight style={ styles.button }>
-              <Link to="/rooms_schedule">
-                <Text>Continuar</Text>
-              </Link>
-            </TouchableHighlight>
-          </View>
+            <Card>
+              <TouchableHighlight>
+                <Link to="/" style={ styles.button }>
+                  <Text>Volver</Text>
+                </Link>
+              </TouchableHighlight>
+            
+              <TouchableHighlight>
+                <Link to="/rooms_schedule"  style={ styles.button }>
+                  <Text>Comprar</Text>
+                </Link>
+              </TouchableHighlight>
+            </Card>
+          </ScrollView>
         </View>
       </ImageBackground>
     )
@@ -64,10 +86,14 @@ componentDidMount() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
+  container:{
+    flex:1,
+    width: '100%', 
     height: '100%',
+    flexDirection: 'column',
+    justifyContent:'center',
+    alignItems: 'stretch',
+    backgroundColor: '#ffffff',
   },
   overlayContainer: {
     flex: 1,
@@ -89,17 +115,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255, .1)',
     textAlign: 'center'
   },
-  menuContainer: {
-    height: '30%',
-    flexDirection: 'column',
-    // flexWrap: 'nowrap',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
   button: {
-    top: '50%',
-    width: '25%',
-    left: '25%',
+    position: 'relative',
+    bottom: '0%',
     marginBottom: 20,
     borderRadius: 100,
     backgroundColor: '#fff',
@@ -107,13 +125,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  image: {
-    width: '50%',
-    height: '100%',
-    left: '25%',
-    opacity: 0.8,
-    borderColor: '#fff',
-    borderWidth: 3,
   },
 })

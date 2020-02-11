@@ -2,7 +2,7 @@ const Compra = require('../models/compra');
 
 const getData = (req, res) => {
     const { query } = req;
-    Compra.findAll({ query })
+    Compra.findAll({ where: query })
     .then( response => {
         return res.status(200).json({
             ok: true,

@@ -10,7 +10,7 @@ export default class Movies extends Component {
             peliculas: [],
         };
     }
-
+    
     render() {
     return(
         <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
