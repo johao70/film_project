@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
       backgroundColor: 'rgba(47,163,218, .4)',
   },
   top: {
-      height: '25%',
-      alignItems: 'center',
-      justifyContent: 'center',
+    height: '20%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
       color: '#fff',
@@ -72,15 +72,15 @@ const styles = StyleSheet.create({
       // flexWrap: 'wrap',
   },
   button: {
-    position: 'relative',
+    top: '50%',
     width: '25%',
+    left: '25%',
     marginBottom: 20,
-    left: '50%',
-    color: '#000',
     borderRadius: 100,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })

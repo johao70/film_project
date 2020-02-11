@@ -6,6 +6,7 @@ import Movies from './src/pages/movies';
 import MovieDetail from './src/pages/movie_detail';
 import BuyTickets from './src/pages/buy_tickets';
 import SendTickets from './src/pages/send_tickets';
+import RoomsSchedule from './src/pages/rooms_schedule';
 
 export default class App extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={ Movies } />
             <Route exact path="/movie_detail" component={ MovieDetail } />
+            <Route exact path="/rooms_schedule" component={ RoomsSchedule } />
             <Route exact path="/buy_tickets" component={ BuyTickets } />
             <Route exact path="/send_tickets" component={ SendTickets } />
           </Switch>

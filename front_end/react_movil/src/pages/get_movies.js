@@ -29,7 +29,8 @@ export default class GetMovies extends Component {
         <View>
             { peliculas.map(element => 
                 <View key={ element.id } style={ styles.menuItem }>
-                    <Link to="/movie_detail" >
+                    {/* <Link to="/movie_detail" onPress={ () => idkey=(element.id) }> */}
+                    <Link to="/movie_detail">
                         <View>
                             <Image source={ this.props.itemImage } style={ styles.image } />
                             <Text style={ styles.text }> { element.titulo } </Text>

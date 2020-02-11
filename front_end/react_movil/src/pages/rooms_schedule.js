@@ -5,55 +5,33 @@ import axios from 'axios';
 
 const API = "http://192.168.1.11:5000/film/pelicula";
 
-export default class MovieDetail extends Component {
+export default class RoomsSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pelicula: [],
+
     };
 }
 
-componentDidMount() {
-    axios.get(`${ API }?id=2`)
-    .then(response => {
-      this.setState({ pelicula: response.data.datos })
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
-
   render() {
-    const { pelicula } = this.state
     return(
       <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
         <View style={ styles.overlayContainer}>
           <View style={ styles.top }>
-            <Text style={ styles.header }>DETALLE DE LA PELÍCULA</Text>
+            <Text style={ styles.header }>SALA - HORARIO</Text>
           </View>
 
           <View style={ styles.menuContainer }>
-            { pelicula.map(element => 
-              <View key={ element.id } style={ styles.menuItem }>
-                <View>
-                  <Text style={ styles.text }> { element.titulo } </Text>
-                  <Image source={ require('../../assets/film_default.jpg') } style={ styles.image } />
-                  <Text style={ styles.text }> { element.resumen } </Text>
-                  <Text style={ styles.text }> { element.categoria } </Text>
-                  <Text style={ styles.text }> { element.valorBoleto } </Text>
-                </View>
-              </View>
-            ) }
 
             <TouchableHighlight style={ styles.button }>
-              <Link to="/">
+              <Link to="/movie_detail">
                 <Text>Volver</Text>
               </Link>
             </TouchableHighlight>
 
             <TouchableHighlight style={ styles.button }>
-              <Link to="/rooms_schedule">
-                <Text>Continuar</Text>
+              <Link to="/buy_tickets">
+                <Text>Comprar</Text>
               </Link>
             </TouchableHighlight>
           </View>

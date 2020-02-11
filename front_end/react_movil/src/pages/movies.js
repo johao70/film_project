@@ -22,11 +22,6 @@ export default class Movies extends Component {
                 <View style={ styles.menuContainer }>
                     <GetMovies itemImage={ require('../../assets/film_default.jpg') } />
                 </View>
-
-                {/* <Link to="/test">
-                    <Text>Topics</Text>
-                </Link> */}
-
             </View>
         </ImageBackground>
     )}
@@ -43,7 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(47,163,218, .4)',
     },
     top: {
-        height: '25%',
+        height: '20%',
         alignItems: 'center',
         justifyContent: 'center',
     },
