@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet,ImageBackground,TouchableHighlight } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView, TextInput } from 'react-native';
+import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
+import axios from 'axios';
+
+const API = "http://192.168.1.11:5000/film/";
 
 export default class BuyTickets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      pelicula: [],
     };
   }
 
   componentDidMount() {
-      
+    axios.get(`${ API }pelicula?id=2`)
+    .then(response => {
+      this.setState({ pelicula: response.data.datos })
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 
   render() {
+    const { pelicula } = this.state
     return(
       <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
         <View style={ styles.overlayContainer}>
@@ -22,25 +33,51 @@ export default class BuyTickets extends Component {
             <Text style={ styles.header }>COMPRAR</Text>
           </View>
 
-          <View style={ styles.menuContainer }>
-              <TouchableHighlight style={ styles.button }>
-                <Link to="/">
-                  <Text>Cartelera</Text>
-                </Link>
-              </TouchableHighlight>
+          <ScrollView vertical={true}>
+            { pelicula.map( element => 
+              <Card key={ element.id } title={ element.titulo } image={require('../../assets/film_default.jpg')}>
+                <Text style={{marginBottom: 10}}>
+                  Resumen: { element.resumen }
+                </Text>
+                <Text style={{marginBottom: 10}}>
+                  Categoría: { element.categoria }
+                </Text>
+                <Text style={{marginBottom: 10}}>
+                  Valor de Boleto: { element.valorBoleto }
+                </Text>
+              </Card>
+              )
+            }
 
-              <TouchableHighlight style={ styles.button }>
-                <Link to="/rooms_schedule">
-                  <Text>Volver</Text>
-                </Link>
-              </TouchableHighlight>
+            <Card title="Número de boletos">
+              <TextInput 
+                placeholder="Ingrese el número de boletos que desea"  
+                underlineColorAndroid='transparent'  
+                style={styles.TextInputStyle}  
+                keyboardType={'numeric'}
+              />
+            </Card>
 
-              <TouchableHighlight style={ styles.button }>
-                <Link to="/send_tickets">
-                  <Text>Confirmar</Text>
-                </Link>
-              </TouchableHighlight>
-          </View>
+            <TouchableHighlight>
+              <Link to="/" style={ styles.button }>
+                <Text>Cartelera</Text>
+              </Link>
+            </TouchableHighlight>
+
+            <TouchableHighlight>
+              <Link to="/movie_detail" style={ styles.button }>
+                <Text>Volver</Text>
+              </Link>
+            </TouchableHighlight>
+
+            <TouchableHighlight>
+              <Link to="/send_tickets" style={ styles.button }>
+                <Text>Confirmar</Text>
+              </Link>
+            </TouchableHighlight>
+          </ScrollView>
+
+
         </View>
       </ImageBackground>
     )
@@ -48,14 +85,16 @@ export default class BuyTickets extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
+  container:{
+    flex:1,
+    width: '100%', 
     height: '100%',
+    justifyContent:'center',
+    backgroundColor: 'red',
   },
   overlayContainer: {
-      flex: 1,
-      backgroundColor: 'rgba(47,163,218, .4)',
+    flex: 1,
+    backgroundColor: 'rgba(47,163,218, .4)',
   },
   top: {
     height: '20%',
@@ -63,25 +102,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-      color: '#fff',
-      fontSize: 28,
-      borderColor: '#fff',
-      borderWidth: 2,
-      padding: 20,
-      paddingLeft: 40,
-      paddingRight: 40,
-      backgroundColor: 'rgba(255,255,255, .1)',
-      textAlign: 'center'
-  },
-  menuContainer: {
-      height: '40%',
-      // flexDirection: 'row',
-      // flexWrap: 'wrap',
+    color: '#fff',
+    fontSize: 28,
+    borderColor: '#fff',
+    borderWidth: 2,
+    padding: 10,
+    paddingLeft: 40,
+    paddingRight: 40,
+    backgroundColor: 'rgba(255,255,255, .1)',
+    textAlign: 'center'
   },
   button: {
-    top: '50%',
-    width: '25%',
-    left: '25%',
+    position: 'relative',
+    bottom: '0%',
     marginBottom: 20,
     borderRadius: 100,
     backgroundColor: '#fff',

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, StyleSheet } from 'react-native';
+import { Text, View, ImageBackground, StyleSheet, ScrollView } from 'react-native';
+import { Link } from "react-router-native";
+import { Card } from 'react-native-elements';
+import axios from 'axios';
 
-import GetMovies from './get_movies'
+const API = "http://192.168.1.11:5000/film/pelicula";
 
 export default class Movies extends Component {
     constructor(props) {
@@ -10,8 +13,19 @@ export default class Movies extends Component {
             peliculas: [],
         };
     }
+
+    componentDidMount() {
+        axios.get(API)
+        .then(response => {
+            this.setState({ peliculas: response.data.datos })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
     
     render() {
+    const { peliculas } = this.state
     return(
         <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
             <View style={ styles.overlayContainer}>
@@ -19,9 +33,14 @@ export default class Movies extends Component {
                     <Text style={ styles.header }>CARTELERA</Text>
                 </View>
 
-                <View style={ styles.menuContainer }>
-                    <GetMovies itemImage={ require('../../assets/film_default.jpg') } />
-                </View>
+                <ScrollView vertical={true}>
+                    { peliculas.map( element => 
+                        <Link to="/movie_detail" key={ element.id }>
+                            <Card title={ element.titulo } image={require('../../assets/film_default.jpg')} />
+                        </Link>
+                        ) 
+                    }
+                </ScrollView>
             </View>
         </ImageBackground>
     )}

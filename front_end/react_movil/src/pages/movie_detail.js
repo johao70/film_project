@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
+import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 
 const API = "http://192.168.1.11:5000/film/";
@@ -10,6 +11,7 @@ export default class MovieDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      checked: '',
       pelicula: [],
       sala_peliculas: [],
     };
@@ -34,7 +36,7 @@ export default class MovieDetail extends Component {
   }
 
   render() {
-    const { pelicula, sala_peliculas } = this.state
+    const { pelicula, sala_peliculas, checked } = this.state
     return(
       <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
         <View style={ styles.overlayContainer}>
@@ -58,26 +60,31 @@ export default class MovieDetail extends Component {
               )
             }
 
-            { sala_peliculas.map( element => 
-              <Card key={ element.id } title="Horarios Disponibles" >
-                <Text> { element.idhorario } </Text>
-              </Card>
-              )
-            }
-
-            <Card>
-              <TouchableHighlight>
-                <Link to="/" style={ styles.button }>
-                  <Text>Volver</Text>
-                </Link>
-              </TouchableHighlight>
-            
-              <TouchableHighlight>
-                <Link to="/rooms_schedule"  style={ styles.button }>
-                  <Text>Comprar</Text>
-                </Link>
-              </TouchableHighlight>
+            <Card title="Horarios Disponibles" >
+              { sala_peliculas.map( element => 
+                <View key={ element.id }>
+                  <Text>Horario: { element.idhorario }</Text>
+                  <Text>Sala: { element.idsala }</Text>
+                  <RadioButton value={ element.id }
+                    status={checked === element.id ? 'checked' : 'unchecked'}
+                    onPress={() => { this.setState({ checked: element.id }); }}
+                  />
+                </View>
+                )
+              }
             </Card>
+
+            <TouchableHighlight>
+              <Link to="/" style={ styles.button }>
+                <Text>Volver</Text>
+              </Link>
+            </TouchableHighlight>
+          
+            <TouchableHighlight>
+              <Link to="/buy_tickets"  style={ styles.button }>
+                <Text>Comprar</Text>
+              </Link>
+            </TouchableHighlight>
           </ScrollView>
         </View>
       </ImageBackground>
@@ -90,10 +97,8 @@ const styles = StyleSheet.create({
     flex:1,
     width: '100%', 
     height: '100%',
-    flexDirection: 'column',
     justifyContent:'center',
-    alignItems: 'stretch',
-    backgroundColor: '#ffffff',
+    backgroundColor: 'red',
   },
   overlayContainer: {
     flex: 1,
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     borderColor: '#fff',
     borderWidth: 2,
-    padding: 20,
+    padding: 10,
     paddingLeft: 40,
     paddingRight: 40,
     backgroundColor: 'rgba(255,255,255, .1)',
