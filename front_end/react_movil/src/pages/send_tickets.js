@@ -4,48 +4,45 @@ import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 
 export default class SendTickets extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+  constructor(props) {
+      super(props);
+      this.state = {
 
-        };
-    }
+      };
+  }
 
-    componentDidMount() {
-        
-    }
+  render() {
+    return(
+      <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
+        <View style={ styles.overlayContainer}>
+          <View style={ styles.top }>
+            <Text style={ styles.header }>Enviar Boletos</Text>
+          </View>
 
-    render() {
-  return(
-    <ImageBackground style={ styles.container } source={ require('../../assets/bg.jpg') }>
-      <View style={ styles.overlayContainer}>
-        <View style={ styles.top }>
-          <Text style={ styles.header }>Enviar Boletos</Text>
+          <Card title="Dirección de Correo Electrónico">
+            <TextInput 
+              placeholder="user@gmail.com"  
+              underlineColorAndroid='transparent'  
+              style={styles.TextInputStyle}  
+              keyboardType={'default'}
+            />
+          </Card>
+
+            <TouchableHighlight>
+              <Link to="/" style={ styles.button }>
+                <Text>Cartelera</Text>
+              </Link>
+            </TouchableHighlight>
+
+            <TouchableHighlight>
+              <Link to="/buy_tickets" style={ styles.button }>
+                <Text>Volver</Text>
+              </Link>
+            </TouchableHighlight>
         </View>
-
-        <Card title="Dirección de Correo Electrónico">
-          <TextInput 
-            placeholder="user@gmail.com"  
-            underlineColorAndroid='transparent'  
-            style={styles.TextInputStyle}  
-            keyboardType={'default'}
-          />
-        </Card>
-
-          <TouchableHighlight>
-            <Link to="/" style={ styles.button }>
-              <Text>Cartelera</Text>
-            </Link>
-          </TouchableHighlight>
-
-          <TouchableHighlight>
-            <Link to="/buy_tickets" style={ styles.button }>
-              <Text>Volver</Text>
-            </Link>
-          </TouchableHighlight>
-      </View>
-    </ImageBackground>
-  )}
+      </ImageBackground>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

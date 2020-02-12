@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Text, View, ImageBackground, StyleSheet, ScrollView } from 'react-native';
 import { Link } from "react-router-native";
 import { Card } from 'react-native-elements';
+// import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
-const API = "http://192.168.1.11:5000/film/pelicula";
+const API = "http://172.16.11.136:5000/film/pelicula";
 
 export default class Movies extends Component {
     constructor(props) {
@@ -22,7 +23,17 @@ export default class Movies extends Component {
         .catch(error => {
             console.log(error)
         })
+        alert("localstorage")
     }
+
+    // storeData = async () => {
+    //     try {
+    //       await AsyncStorage.setItem('idpelicula', this.state.peliculas.id)
+    //       alert(this.state.peliculas.id)
+    //     } catch (e) {
+    //       alert(e)
+    //     }
+    // }
     
     render() {
     const { peliculas } = this.state
