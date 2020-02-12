@@ -48,7 +48,7 @@ class AddMovie extends Component {
           .then(response => {
             if ( response.data.ok === true ) {
                 alert("Agregado exitosamente")
-                window.location.assign("http://localhost:3000/add_movie");
+                window.location.assign("http://localhost:3000/movies");
             }
           })
           .catch(error => {
