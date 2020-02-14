@@ -51,7 +51,6 @@ class FilmsRoomAdd extends Component {
 
     saveData = e => {
         e.preventDefault()
-        console.log(this.state.idsala)
         this.post = {
             datos: {
                 idsala: this.state.idsala,
@@ -60,7 +59,6 @@ class FilmsRoomAdd extends Component {
             }
         }
 
-        alert(JSON.stringify(this.post.datos))
         if (this.post.datos.idsala === "" ||
             this.post.datos.idpelicula === "" ||
             this.post.datos.idhorario === ""

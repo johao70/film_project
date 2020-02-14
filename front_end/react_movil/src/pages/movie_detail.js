@@ -5,7 +5,7 @@ import { Link } from "react-router-native";
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 
-const API = "http://172.16.11.136:5000/film/";
+const API = "http://172.16.24.30:5000/film/";
 
 export default class MovieDetail extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class MovieDetail extends Component {
 }
 
   componentDidMount() {
-    axios.get(`${ API }pelicula?id=2`)
+    axios.get(`${ API }pelicula?id=1`)
     .then(response => {
       this.setState({ pelicula: response.data.datos })
     })

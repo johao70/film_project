@@ -8,27 +8,27 @@ import BuyTickets from './src/pages/buy_tickets';
 import SendTickets from './src/pages/send_tickets';
 
 export default class App extends Component {
-  render() {
-    return (
-      <NativeRouter>
-        <View style={styles.container}>
-          <Switch>
-            <Route exact path="/" component={ Movies } />
-            <Route exact path="/movie_detail" component={ MovieDetail } />
-            <Route exact path="/buy_tickets" component={ BuyTickets } />
-            <Route exact path="/send_tickets" component={ SendTickets } />
-          </Switch>
-        </View>
-      </NativeRouter>
-    )
-  }
+    render() {
+        return ( 
+            <NativeRouter >
+                <View style = { styles.container } >
+                    <Switch >
+                        <Route exact path = "/" component = { Movies } /> 
+                        <Route exact path = "/movie_detail" component = { MovieDetail } /> 
+                        <Route exact path = "/buy_tickets" component = { BuyTickets } /> 
+                        <Route exact path = "/send_tickets" component = { SendTickets } /> 
+                    </Switch > 
+                </View> 
+            </NativeRouter >
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
