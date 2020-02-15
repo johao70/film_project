@@ -2,14 +2,57 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet,ImageBackground,TouchableHighlight, TextInput, AsyncStorage } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
+import axios from 'axios';
+
+const API = "http://192.168.1.11:5000/film/";
 
 export default class SendTickets extends Component {
   constructor(props) {
       super(props);
       this.state = {
-
+        correo: '',
+        sala: '',
+        pelicula: '',
+        horario: '',
+        boletos: ''
       };
   }
+
+  handleCorreo = text => {
+    this.setState({ correo: text });
+  };
+
+  saveData = () => {
+    this.post = {
+        datos: {
+          correo: this.state.correo,
+          sala: this.state.sala,
+          pelicula: this.state.pelicula,
+          horario: this.state.horario,
+          boletos: this.state.boletos
+        }
+    }
+
+    if (this.post.datos.correo === "" 
+    // ||
+    //     this.post.datos.sala === "" ||
+    //     this.post.datos.pelicula === "" ||
+    //     this.post.datos.horario === "" ||
+    //     this.post.datos.boletos === ""
+        ) {
+      alert("Complete todos los datos para continuar...");
+    } else {
+      axios.post(API+"send_mail", this.post)
+      .then(response => {
+        if ( response.data.ok === true ) {
+          alert("Correo Enviado!")
+        }
+      })
+      .catch(error => {
+        alert(error)
+      })
+    }
+  };
 
   asyncstorageClear = async () => {
     try {
@@ -33,6 +76,7 @@ export default class SendTickets extends Component {
               underlineColorAndroid='transparent'  
               style={styles.TextInputStyle}  
               keyboardType={'default'}
+              onChangeText={ this.handleCorreo }
             />
           </Card>
 
@@ -43,7 +87,7 @@ export default class SendTickets extends Component {
             </TouchableHighlight>
 
             <TouchableHighlight>
-              <Link to="/" style={ styles.button }>
+              <Link to="/" style={ styles.button } onPress={ () => this.saveData() }>
                 <Text>Enviar Comprobante</Text>
               </Link>
             </TouchableHighlight>
