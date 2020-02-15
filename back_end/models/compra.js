@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const db = require("../config/db");
 const persona = require("./persona")
-const sala = require("./sala")
+const sala_pelicula = require("./sala_pelicula")
 
 module.exports = db.sequelize.define('compra', {
     id: {
@@ -20,10 +20,10 @@ module.exports = db.sequelize.define('compra', {
             key: 'id'
         }
     },
-    idsala: {
+    idsala_peliculas: {
         type: Sequelize.INTEGER,
         references: {
-            model: sala,
+            model: sala_pelicula,
             key: 'id'
         }
     }

@@ -43,8 +43,8 @@ export default class SendTickets extends Component {
             </TouchableHighlight>
 
             <TouchableHighlight>
-              <Link to="/buy_tickets" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
-                <Text>Volver</Text>
+              <Link to="/" style={ styles.button }>
+                <Text>Enviar Comprobante</Text>
               </Link>
             </TouchableHighlight>
         </View>
