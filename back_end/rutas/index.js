@@ -46,5 +46,6 @@ router.put('/sala_pelicula', sala_pelicula.putData);
 router.delete('/sala_pelicula', sala_pelicula.deleteData);
 
 router.post('/send_mail', send_mail.sendMail);
+router.get('/send_mail', send_mail.raw);
 
 module.exports = router;
