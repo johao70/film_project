@@ -68,7 +68,6 @@ class FilmsRoomAdd extends Component {
           axios.post(API+"sala_pelicula", this.post)
           .then(response => {
             if ( response.data.ok === true ) {
-                alert("Asignación agregada exitosamente")
                 window.location.assign("http://localhost:3000/films_room");
             }
           })

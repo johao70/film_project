@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, ImageBackground, StyleSheet, ScrollView, AsyncStorage } from 'react-native';
 import { Link } from "react-router-native";
 import { Card } from 'react-native-elements';
-import { openDatabase } from 'react-native-sqlite-storage';
 import axios from 'axios';
 
-const API = "http://172.16.24.30:5000/film/pelicula";
-const db = openDatabase({ name: 'Cine.db' });
+const API = "http://192.168.1.11:5000/film/pelicula";
 
 // https://aboutreact.com/example-of-sqlite-database-in-react-native/
 
@@ -28,6 +26,14 @@ export default class Movies extends Component {
             })
     }
 
+    asyncstorageSave = async (idpelicula) => {
+        try {
+          await AsyncStorage.setItem('idpelicula', idpelicula.toString())
+        } catch (err) {
+          alert(err)
+        }
+    }
+
     render() {
         const { peliculas } = this.state
         return ( 
@@ -40,8 +46,8 @@ export default class Movies extends Component {
                     <ScrollView vertical = { true } > 
                     {
                         peliculas.map(element =>
-                            <Link to = "/movie_detail" key = { element.id }>
-                                <Card title = { element.titulo } image = { require('../../assets/film_default.jpg') } onPress={ () => this.storeData(element.id) } />  
+                            <Link to = "/movie_detail" key = { element.id } onPress={ () => this.asyncstorageSave(element.id) }>
+                                <Card title = { element.titulo } image = { require('../../assets/film_default.jpg') } />  
                             </Link >
                         )
                     } 

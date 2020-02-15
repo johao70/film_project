@@ -54,7 +54,6 @@ class Schedules extends Component {
           axios.post(API, this.post)
           .then(response => {
             if ( response.data.ok === true ) {
-                alert("Horario agregado exitosamente")
                 window.location.assign("http://localhost:3000/schedules");
             }
           })
@@ -133,7 +132,7 @@ class Schedules extends Component {
                                     <tr>
                                         <th className="text-left p-3 px-5">{ this.state.table_header.id }</th>
                                         <th className="text-left p-3 px-5">{ this.state.table_header.hora }</th>
-                                        <th></th>
+                                        {/* <th></th> */}
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -146,9 +145,9 @@ class Schedules extends Component {
                                         <td>
                                             { horarios.map(element => <p className="p-2 px-5" key={ element.id }> {element.hora} </p>) }
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             { horarios.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ this.handleOpenModal } className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button></p> )}
-                                        </td>
+                                        </td> */}
                                         <td>
                                             { horarios.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.deleteData(element.id) } className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button></p> )}
                                         </td>

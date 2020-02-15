@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView, AsyncStorage } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 
-const API = "http://172.16.24.30:5000/film/";
+const API = "http://192.168.1.11:5000/film/";
 
 export default class MovieDetail extends Component {
   constructor(props) {
@@ -14,25 +14,50 @@ export default class MovieDetail extends Component {
       checked: '',
       pelicula: [],
       sala_peliculas: [],
+      //
+      idpelicula: '',
     };
-}
+  }
 
-  componentDidMount() {
-    axios.get(`${ API }pelicula?id=1`)
+  getData = () => {
+    axios.get(`${ API }pelicula?id=${ this.state.idpelicula }`)
     .then(response => {
       this.setState({ pelicula: response.data.datos })
     })
     .catch(error => {
       console.log(error)
     })
-
-    axios.get(`${ API }sala_pelicula?idpelicula=1`)
+  
+    axios.get(`${ API }sala_pelicula?idpelicula=${ this.state.idpelicula }`)
     .then(response => {
       this.setState({ sala_peliculas: response.data.datos })
     })
     .catch(error => {
       console.log(error)
     })
+  }
+
+  readData = async () => {
+    try {
+      const idfilm = await AsyncStorage.getItem('idpelicula')
+      this.setState({idpelicula: idfilm})
+      this.getData()
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  removeData = async () => {
+    try {
+      await AsyncStorage.clear()
+      this.setState({ idpelicula: '' })
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  componentDidMount() {
+    this.readData()
   }
 
   render() {
@@ -75,7 +100,7 @@ export default class MovieDetail extends Component {
             </Card>
 
             <TouchableHighlight>
-              <Link to="/" style={ styles.button }>
+              <Link to="/" style={ styles.button } onPress={ () => this.removeData() }>
                 <Text>Volver</Text>
               </Link>
             </TouchableHighlight>

@@ -58,7 +58,6 @@ class Rooms extends Component {
           axios.post(API, this.post)
           .then(response => {
             if ( response.data.ok === true ) {
-                alert("Sala agregada exitosamente")
                 window.location.assign("http://localhost:3000/rooms");
             }
           })
@@ -147,7 +146,7 @@ class Rooms extends Component {
                                     <tr>
                                         <th className="text-left p-3 px-5">{ this.state.table_header.nombre }</th>
                                         <th className="text-left p-3 px-5">{ this.state.table_header.descripcion }</th>
-                                        <th></th>
+                                        {/* <th></th> */}
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -160,9 +159,9 @@ class Rooms extends Component {
                                         <td>
                                             { salas.map(element => <p className="p-2 px-5" key={ element.id }> {element.descripcion} </p>) }
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             { salas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.handleOpenModal(element.id) } className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button></p> )}
-                                        </td>
+                                        </td> */}
                                         <td>
                                             { salas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.deleteData(element.id) } className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button></p> )}
                                         </td>
