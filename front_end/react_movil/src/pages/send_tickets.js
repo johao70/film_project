@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet,ImageBackground,TouchableHighlight, TextInput } from 'react-native';
+import { Text, View, StyleSheet,ImageBackground,TouchableHighlight, TextInput, AsyncStorage } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 
@@ -9,6 +9,14 @@ export default class SendTickets extends Component {
       this.state = {
 
       };
+  }
+
+  asyncstorageClear = async () => {
+    try {
+      await AsyncStorage.clear()
+    } catch (e) {
+      alert(e)
+    }
   }
 
   render() {
@@ -29,13 +37,13 @@ export default class SendTickets extends Component {
           </Card>
 
             <TouchableHighlight>
-              <Link to="/" style={ styles.button }>
+              <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
                 <Text>Cartelera</Text>
               </Link>
             </TouchableHighlight>
 
             <TouchableHighlight>
-              <Link to="/buy_tickets" style={ styles.button }>
+              <Link to="/buy_tickets" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
                 <Text>Volver</Text>
               </Link>
             </TouchableHighlight>

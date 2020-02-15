@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView, TextInput } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView, TextInput, AsyncStorage } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 import axios from 'axios';
@@ -11,17 +11,74 @@ export default class BuyTickets extends Component {
     super(props);
     this.state = {
       pelicula: [],
+      idpelicula: '',
+      idsala_peliculas: '',
+      numero_boletos: '',
     };
   }
 
-  componentDidMount() {
-    axios.get(`${ API }pelicula?id=1`)
+  handleNumeroBoletos = text => {
+    this.setState({ numero_boletos: text });
+  };
+
+  getData = () => {
+    axios.get(`${ API }pelicula?id=${ this.state.idpelicula }`)
     .then(response => {
       this.setState({ pelicula: response.data.datos })
     })
     .catch(error => {
       console.log(error)
     })
+  }
+
+  saveData = () => {
+    this.post = {
+        datos: {
+          idsala_peliculas: this.state.idsala_peliculas,
+          numero_boletos: this.state.numero_boletos
+        }
+    }
+
+    if (this.post.datos.idsala_peliculas === "" ||
+        this.post.datos.numero_boletos === ""
+        ) {
+      alert("Complete todos los datos para continuar...");
+    } else {
+      axios.post(API+"compra", this.post)
+      .then(response => {
+        if ( response.data.ok === true ) {
+          alert("Agregado exitosamente")
+        }
+      })
+      .catch(error => {
+        alert(error)
+      })
+    }
+  };
+
+  asyncstorageGet = async () => {
+    try {
+      const idfilm = await AsyncStorage.getItem('idpelicula')
+      this.setState({idpelicula: idfilm})
+      const idroom_movies = await AsyncStorage.getItem('idsala_peliculas')
+      this.setState({idsala_peliculas: idroom_movies})
+      this.getData()
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  asyncstorageClear = async () => {
+    try {
+      await AsyncStorage.clear()
+      this.setState({ idpelicula: '', idsala_peliculas: '' })
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  componentDidMount() {
+    this.asyncstorageGet()
   }
 
   render() {
@@ -43,7 +100,7 @@ export default class BuyTickets extends Component {
                   Categoría: { element.categoria }
                 </Text>
                 <Text style={{marginBottom: 10}}>
-                  Valor de Boleto: { element.valorBoleto }
+                  Valor de Boleto: $ { element.valorBoleto }
                 </Text>
               </Card>
               )
@@ -55,23 +112,24 @@ export default class BuyTickets extends Component {
                 underlineColorAndroid='transparent'  
                 style={styles.TextInputStyle}  
                 keyboardType={'numeric'}
+                onChangeText={ this.handleNumeroBoletos }
               />
             </Card>
 
             <TouchableHighlight>
-              <Link to="/" style={ styles.button }>
+              <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
                 <Text>Cartelera</Text>
               </Link>
             </TouchableHighlight>
 
             <TouchableHighlight>
-              <Link to="/movie_detail" style={ styles.button }>
+              <Link to="/movie_detail" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
                 <Text>Volver</Text>
               </Link>
             </TouchableHighlight>
 
             <TouchableHighlight>
-              <Link to="/send_tickets" style={ styles.button }>
+              <Link to="/send_tickets" style={ styles.button } onPress={ () => this.saveData() }>
                 <Text>Confirmar</Text>
               </Link>
             </TouchableHighlight>

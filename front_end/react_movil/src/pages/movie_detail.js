@@ -37,7 +37,15 @@ export default class MovieDetail extends Component {
     })
   }
 
-  readData = async () => {
+  asyncstorageSave = async (id) => {
+    try {
+      await AsyncStorage.setItem('idsala_peliculas', id.toString())
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  asyncstorageGet = async () => {
     try {
       const idfilm = await AsyncStorage.getItem('idpelicula')
       this.setState({idpelicula: idfilm})
@@ -47,7 +55,7 @@ export default class MovieDetail extends Component {
     }
   }
 
-  removeData = async () => {
+  asyncstorageClear = async () => {
     try {
       await AsyncStorage.clear()
       this.setState({ idpelicula: '' })
@@ -57,7 +65,7 @@ export default class MovieDetail extends Component {
   }
 
   componentDidMount() {
-    this.readData()
+    this.asyncstorageGet()
   }
 
   render() {
@@ -92,7 +100,7 @@ export default class MovieDetail extends Component {
                   <Text>Sala: { element.idsala }</Text>
                   <RadioButton value={ element.id }
                     status={checked === element.id ? 'checked' : 'unchecked'}
-                    onPress={() => { this.setState({ checked: element.id }); }}
+                    onPress={() => { this.setState({ checked: element.id }), this.asyncstorageSave(element.id) }}
                   />
                 </View>
                 )
@@ -100,7 +108,7 @@ export default class MovieDetail extends Component {
             </Card>
 
             <TouchableHighlight>
-              <Link to="/" style={ styles.button } onPress={ () => this.removeData() }>
+              <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
                 <Text>Volver</Text>
               </Link>
             </TouchableHighlight>
