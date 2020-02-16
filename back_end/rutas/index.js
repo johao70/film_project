@@ -8,6 +8,7 @@ const persona = require('../controllers/personaCRUD');
 const sala = require('../controllers/salaCRUD');
 const sala_pelicula = require('../controllers/sala_peliculaCRUD');
 const send_mail = require('../controllers/send_mailCRUD');
+const raw = require('../controllers/raw_CRUD');
 
 const router = Router();
 
@@ -46,6 +47,8 @@ router.put('/sala_pelicula', sala_pelicula.putData);
 router.delete('/sala_pelicula', sala_pelicula.deleteData);
 
 router.post('/send_mail', send_mail.sendMail);
-router.get('/send_mail', send_mail.raw);
+
+router.get('/raw1', raw.raw1);
+router.get('/raw2', raw.raw2);
 
 module.exports = router;

@@ -33,12 +33,11 @@ export default class SendTickets extends Component {
         }
     }
 
-    if (this.post.datos.correo === "" 
-    // ||
-    //     this.post.datos.sala === "" ||
-    //     this.post.datos.pelicula === "" ||
-    //     this.post.datos.horario === "" ||
-    //     this.post.datos.boletos === ""
+    if (this.post.datos.correo === "" ||
+        this.post.datos.sala === "" ||
+        this.post.datos.pelicula === "" ||
+        this.post.datos.horario === "" ||
+        this.post.datos.boletos === ""
         ) {
       alert("Complete todos los datos para continuar...");
     } else {
@@ -54,12 +53,31 @@ export default class SendTickets extends Component {
     }
   };
 
+  asyncstorageGet = async () => {
+    try {
+      const idpelicula_titulo = await AsyncStorage.getItem('idpelicula_titulo')
+      this.setState({pelicula: idpelicula_titulo})
+      const idhorario_hora = await AsyncStorage.getItem('idhorario_hora')
+      this.setState({horario: idhorario_hora})
+      const idsala_nombre = await AsyncStorage.getItem('idsala_nombre')
+      this.setState({sala: idsala_nombre})
+      const numero_boletos = await AsyncStorage.getItem('numero_boletos')
+      this.setState({boletos: numero_boletos})
+    } catch (e) {
+      alert(e)
+    }
+  }
+
   asyncstorageClear = async () => {
     try {
       await AsyncStorage.clear()
     } catch (e) {
       alert(e)
     }
+  }
+
+  componentDidMount() {
+    this.asyncstorageGet();
   }
 
   render() {
@@ -80,11 +98,11 @@ export default class SendTickets extends Component {
             />
           </Card>
 
-            <TouchableHighlight>
+            {/* <TouchableHighlight>
               <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
                 <Text>Cartelera</Text>
               </Link>
-            </TouchableHighlight>
+            </TouchableHighlight> */}
 
             <TouchableHighlight>
               <Link to="/" style={ styles.button } onPress={ () => this.saveData() }>

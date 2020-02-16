@@ -28,7 +28,7 @@ export default class MovieDetail extends Component {
       console.log(error)
     })
   
-    axios.get(`${ API }sala_pelicula?idpelicula=${ this.state.idpelicula }`)
+    axios.get(`${ API }raw2?idpelicula=${ this.state.idpelicula }`)
     .then(response => {
       this.setState({ sala_peliculas: response.data.datos })
     })
@@ -37,9 +37,33 @@ export default class MovieDetail extends Component {
     })
   }
 
-  asyncstorageSave = async (id) => {
+  asyncstorageSave_idsala_peliculas = async (id) => {
     try {
       await AsyncStorage.setItem('idsala_peliculas', id.toString())
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  asyncstorageSave_idpelicula_titulo = async (item) => {
+    try {
+      await AsyncStorage.setItem('idpelicula_titulo', item.toString())
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  asyncstorageSave_idhorario_hora = async (item) => {
+    try {
+      await AsyncStorage.setItem('idhorario_hora', item.toString())
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  asyncstorageSave_idsala_nombre = async (item) => {
+    try {
+      await AsyncStorage.setItem('idsala_nombre', item.toString())
     } catch (err) {
       alert(err)
     }
@@ -96,11 +120,17 @@ export default class MovieDetail extends Component {
             <Card title="Horarios Disponibles" >
               { sala_peliculas.map( element => 
                 <View key={ element.id }>
-                  <Text>Horario: { element.idhorario }</Text>
-                  <Text>Sala: { element.idsala }</Text>
+                  <Text>Horario: { element.idhorario_hora }</Text>
+                  <Text>Sala: { element.idsala_nombre }</Text>
                   <RadioButton value={ element.id }
                     status={checked === element.id ? 'checked' : 'unchecked'}
-                    onPress={() => { this.setState({ checked: element.id }), this.asyncstorageSave(element.id) }}
+                    onPress={() => { 
+                      this.setState({ checked: element.id }), 
+                      this.asyncstorageSave_idsala_peliculas(element.id), 
+                      this.asyncstorageSave_idpelicula_titulo(element.idpelicula_titulo),
+                      this.asyncstorageSave_idhorario_hora(element.idhorario_hora),
+                      this.asyncstorageSave_idsala_nombre(element.idsala_nombre)
+                    }}
                   />
                 </View>
                 )

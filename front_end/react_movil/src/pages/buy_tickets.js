@@ -47,7 +47,7 @@ export default class BuyTickets extends Component {
       axios.post(API+"compra", this.post)
       .then(response => {
         if ( response.data.ok === true ) {
-          alert("Agregado exitosamente")
+          alert("Compra exito, por favor ingrese su correo electrónico para enviar su comprobante")
         }
       })
       .catch(error => {
@@ -65,6 +65,14 @@ export default class BuyTickets extends Component {
       this.getData()
     } catch (e) {
       alert(e)
+    }
+  }
+
+  asyncstorageSave = async (item) => {
+    try {
+      await AsyncStorage.setItem('numero_boletos', item.toString())
+    } catch (err) {
+      alert(err)
     }
   }
 
@@ -129,7 +137,7 @@ export default class BuyTickets extends Component {
             </TouchableHighlight>
 
             <TouchableHighlight>
-              <Link to="/send_tickets" style={ styles.button } onPress={ () => this.saveData() }>
+              <Link to="/send_tickets" style={ styles.button } onPress={ () => {this.asyncstorageSave(this.state.numero_boletos), this.saveData()} }>
                 <Text>Confirmar</Text>
               </Link>
             </TouchableHighlight>
