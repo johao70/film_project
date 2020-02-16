@@ -4,7 +4,7 @@ import Sidebar from '../components/sidebar';
 import Header from '../components/header';
 import axios from 'axios';
 
-const API = "http://localhost:5000/film/sala_pelicula";
+const API = "http://localhost:5000/film/raw3";
 
 class FilmsRoom extends Component {
     constructor(props) {
@@ -32,6 +32,7 @@ class FilmsRoom extends Component {
             console.log(error)
         })
     }
+    
     deleteData = (value) => {
         axios.delete(`${ API }?id=${ value }`, {
             data: { id: value }
@@ -68,13 +69,13 @@ class FilmsRoom extends Component {
                                 <tbody>
                                     <tr className="border-b hover:bg-orange-100 bg-gray-100">
                                         <td>
-                                            { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }> {element.idsala} </p>) }
+                                            { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }> {element.idsala_nombre} </p>) }
                                         </td>
                                         <td>
-                                            { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }> {element.idpelicula} </p>) }
+                                            { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }> {element.idpelicula_titulo} </p>) }
                                         </td>
                                         <td>
-                                            { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }> {element.idhorario} </p>) }
+                                            { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }> {element.idhorario_hora} </p>) }
                                         </td>
                                         <td>
                                             { sala_peliculas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.deleteData(element.id) } className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button></p> )}

@@ -50,5 +50,7 @@ router.post('/send_mail', send_mail.sendMail);
 
 router.get('/raw1', raw.raw1);
 router.get('/raw2', raw.raw2);
+router.get('/raw3', raw.raw3);
+router.get('/raw4', raw.raw4);
 
 module.exports = router;
