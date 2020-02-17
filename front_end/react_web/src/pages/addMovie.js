@@ -84,7 +84,8 @@ class AddMovie extends Component {
                                         placeholder="Ej: El Viaje al Centro de la Tierra"
                                         name="titulo"
                                         value={ titulo }
-                                        onChange={ this.changeHandler } 
+                                        onChange={ this.changeHandler }
+                                        autoComplete="off"
                                     />
                                 </div>
                             </div>
@@ -98,7 +99,8 @@ class AddMovie extends Component {
                                         placeholder="Sinopsis de la película"
                                         name="resumen"
                                         value={ resumen }
-                                        onChange={ this.changeHandler } 
+                                        onChange={ this.changeHandler }
+                                        autoComplete="off"
                                     />
                                 </div>
                                 <div className="md:w-1/3 px-3">
@@ -110,7 +112,8 @@ class AddMovie extends Component {
                                         placeholder="Ej: Comedia"
                                         name="categoria"
                                         value={ categoria }
-                                        onChange={ this.changeHandler } 
+                                        onChange={ this.changeHandler }
+                                        autoComplete="off"
                                     />
                                 </div>
                                 <div className="md:w-1/3 px-3">
@@ -123,24 +126,11 @@ class AddMovie extends Component {
                                         placeholder="Ej: 3.50"
                                         name="valorBoleto"
                                         value={ valorBoleto }
-                                        onChange={ this.changeHandler } 
+                                        onChange={ this.changeHandler }
+                                        autoComplete="off"
                                     />
                                 </div>
                             </div>
-                            {/* <div className="-mx-3 md:flex mb-6 ">
-                                <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="imagen">
-                                        Editorial
-                                    </label>
-                                    <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" 
-                                        type="text" 
-                                        placeholder="Ej: Encarta Interprise"
-                                        name="imagen"
-                                        value={ imagen }
-                                        onChange={ this.changeHandler } 
-                                    />
-                                </div>
-                            </div> */}
                             <p className="text-red text-xs italic">Por favor complete todos los campos.</p>
                             <div className="mt-4">
                                 <button className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 hover:bg-gray-800 rounded" type="submit">Guardar</button>

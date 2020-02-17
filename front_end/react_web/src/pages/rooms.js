@@ -118,7 +118,8 @@ class Rooms extends Component {
                                                     placeholder="Ej: Sala 1" 
                                                     name="nombre"
                                                     value={ nombre }
-                                                    onChange={ this.changeHandler } 
+                                                    onChange={ this.changeHandler }
+                                                    autoComplete="off"
                                                 />
                                             </div>
                                             <div className="mt-2">
@@ -129,6 +130,7 @@ class Rooms extends Component {
                                                     name="descripcion"
                                                     value={ descripcion }
                                                     onChange={ this.changeHandler }
+                                                    autoComplete="off"
                                                 />
                                             </div>
                                             <div className="mt-4">

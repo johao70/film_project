@@ -32,7 +32,6 @@ class Register extends Component {
       axios.post(API_URL, this.post)
       .then(response => {
         if ( response.data.ok === true ) {
-          alert("Usuario registrado correctamente")
           window.location.assign("http://localhost:3000/");
         }
       })
@@ -58,7 +57,8 @@ class Register extends Component {
                   placeholder="Ej: Paul"
                   name="nombre"
                   value={ nombre }
-                  onChange={ this.changeHandler } 
+                  onChange={ this.changeHandler }
+                  autoComplete="off"
                   />
                 </div>
 
@@ -69,7 +69,8 @@ class Register extends Component {
                   placeholder="correo@gmail.com"
                   name="correo"
                   value={ correo }
-                  onChange={ this.changeHandler } 
+                  onChange={ this.changeHandler }
+                  autoComplete="off"
                   />
                 </div>
 
@@ -81,7 +82,7 @@ class Register extends Component {
                   name="clave"
                   value={ clave }
                   minLength="6"
-                  onChange={ this.changeHandler } 
+                  onChange={ this.changeHandler }
                   securetextentry="true"
                   />
                 </div>

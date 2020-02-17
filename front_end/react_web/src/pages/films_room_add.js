@@ -88,8 +88,6 @@ class FilmsRoomAdd extends Component {
                     <main className="my-8">
                         <p className="text-center my-5 text-2xl">Asignar Peliculas.</p>
                         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mx-8" onSubmit={ this.saveData }>
-                            <p className="text-red text-xs italic">Coloque el número de la sala, pelicula y horario deseado.</p>
-                            <hr />
                             <div className="-mx-3 md:flex mb-6 ">
                                 <div className="md:w-1/3 px-3 mb-6 md:mb-0">
                                     <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="idsala">

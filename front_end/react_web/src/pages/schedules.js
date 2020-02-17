@@ -114,7 +114,8 @@ class Schedules extends Component {
                                                     placeholder="Ej: 10 a 12 horas" 
                                                     name="hora"
                                                     value={ hora }
-                                                    onChange={ this.changeHandler } 
+                                                    onChange={ this.changeHandler }
+                                                    autoComplete="off"
                                                 />
                                             </div>
                                             <div className="mt-4">
