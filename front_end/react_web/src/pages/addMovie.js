@@ -15,7 +15,7 @@ class AddMovie extends Component {
             categoria: '',
             valorBoleto: '',
             imagen: '',
-            estado: true
+            estado: true,
         }
     }
 

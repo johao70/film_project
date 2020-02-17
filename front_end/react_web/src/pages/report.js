@@ -15,6 +15,10 @@ export default class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      table_header: {
+        pelicula: 'Película',
+        boletos: 'Número de Boletos',
+      },
       reporte: [],
     };
   }
@@ -30,6 +34,7 @@ export default class Report extends Component {
   }
 
   render() {
+    const { reporte } = this.state
     const datos = {
       chart: {
         caption: "Reporte de Compras",
@@ -61,7 +66,43 @@ export default class Report extends Component {
           <div className="ml-64">
             <hr />
             <main className="my-8">
-              <ReactFusioncharts {...chartConfigs} />
+              <div className="px-3 py-4 flex justify-center">
+                <table className="w-full text-md bg-white shadow-md rounded mb-4">
+                    <thead className="border-b">
+                        <tr>
+                          <th className="text-left p-3 px-5">{ this.state.table_header.pelicula }</th>
+                          <th className="text-left p-3 px-5">{ this.state.table_header.boletos }</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr className="border-b hover:bg-orange-100 bg-gray-100">
+                          <td>
+                              { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.label} </p>) }
+                          </td>
+                          <td>
+                              { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.value} </p>) }
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+              <div className=" sm:ml-6 sm:mr-6 pb-8 flex flex-wrap">
+                <div className="w-full px-4">
+                  <div className="bg-white border-t border-b sm:rounded sm:border shadow">
+                    <div>
+                      <div className="text-center px-6">
+                        <div className="">
+                          <div className=" flex-grow flex-no-shrink ">
+                            <ReactFusioncharts {...chartConfigs} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </main>
           </div>
       </div>

@@ -9,7 +9,7 @@ const sendMail = (req, res) => {
         secure: true,
         auth: {
             type: 'login',
-            user: '',
+            user: '@gmail.com',
             pass: ''
         }
     });

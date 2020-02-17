@@ -4,7 +4,9 @@ import { Link } from "react-router-native";
 import { Card } from 'react-native-elements';
 import axios from 'axios';
 
-const API = "http://192.168.1.11:5000/film/pelicula";
+//const API = "http://192.168.1.11:5000/film/pelicula";
+// const API = "http://192.168.43.44:5000/film/pelicula";
+const API = "http://172.16.11.119:5000/film/pelicula";
 
 // https://aboutreact.com/example-of-sqlite-database-in-react-native/
 

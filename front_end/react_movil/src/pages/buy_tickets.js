@@ -4,7 +4,9 @@ import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 import axios from 'axios';
 
-const API = "http://192.168.1.11:5000/film/";
+//const API = "http://192.168.1.11:5000/film/";
+// const API = "http://192.168.43.44:5000/film/";
+const API = "http://172.16.11.119:5000/film/";
 
 export default class BuyTickets extends Component {
   constructor(props) {
