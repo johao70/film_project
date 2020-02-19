@@ -5,7 +5,7 @@ use cine;
 create table personas(id int auto_increment not null primary key, nombre varchar(150), correo varchar(150), clave varchar(150));
 
 create table peliculas(id int auto_increment not null primary key, titulo varchar(150), resumen varchar(150), categoria char (150), valorBoleto char(150), 
-imagen varchar(60000), estado boolean);
+imagen longtext, estado boolean);
 
 create table horarios(id int auto_increment not null primary key, hora varchar(100));
 
@@ -20,3 +20,45 @@ create table compras(id int auto_increment not null primary key, numero_boletos 
 idsala_peliculas int, foreign key (idsala_peliculas) references sala_peliculas(id));
 
 insert into personas values(1,'admin','admin@gmail.com','1234');
+
+DELIMITER $$ 
+CREATE FUNCTION F_PELICULA(P_ID INTEGER)
+RETURNS VARCHAR(150)
+DETERMINISTIC
+BEGIN
+    DECLARE V_PELICULA VARCHAR(150);
+ 
+    SELECT titulo INTO V_PELICULA
+    FROM peliculas
+    WHERE id = P_ID;
+    RETURN V_PELICULA;
+END$$
+DELIMITER;
+
+DELIMITER $$
+CREATE FUNCTION F_SALA(P_ID INTEGER)
+RETURNS VARCHAR(150)
+DETERMINISTIC
+BEGIN
+    DECLARE V_SALA VARCHAR(150);
+ 
+    SELECT nombre INTO V_SALA
+    FROM salas
+    WHERE id = P_ID;
+    RETURN V_SALA;
+END$$
+DELIMITER;
+
+DELIMITER $$
+CREATE FUNCTION F_HORARIO(P_ID INTEGER)
+RETURNS VARCHAR(150)
+DETERMINISTIC
+BEGIN
+    DECLARE V_HORA VARCHAR(150);
+ 
+    SELECT hora INTO V_HORA
+    FROM horarios
+    WHERE id = P_ID;
+    RETURN V_HORA;
+END$$
+DELIMITER;

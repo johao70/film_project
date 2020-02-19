@@ -18,6 +18,8 @@ export default class Report extends Component {
       table_header: {
         pelicula: 'Película',
         boletos: 'Número de Boletos',
+        precio: 'Valor Unitario',
+        total: 'Total Recaudado',
       },
       reporte: [],
     };
@@ -71,17 +73,25 @@ export default class Report extends Component {
                     <thead className="border-b">
                         <tr>
                           <th className="text-left p-3 px-5">{ this.state.table_header.pelicula }</th>
+                          <th className="text-left p-3 px-5">{ this.state.table_header.precio }</th>
                           <th className="text-left p-3 px-5">{ this.state.table_header.boletos }</th>
+                          <th className="text-left p-3 px-5">{ this.state.table_header.total }</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <tr className="border-b hover:bg-orange-100 bg-gray-100">
                           <td>
-                              { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.label} </p>) }
+                            { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.label} </p>) }
                           </td>
                           <td>
-                              { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.value} </p>) }
+                            { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.valorBoleto} </p>) }
+                          </td>
+                          <td>
+                            { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.value} </p>) }
+                          </td>
+                          <td>
+                            { reporte.map(element => <p className="p-2 px-5" key={ element.id }> {element.recaudado} </p>) }
                           </td>
                         </tr>
                     </tbody>

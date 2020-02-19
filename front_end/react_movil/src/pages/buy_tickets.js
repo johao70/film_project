@@ -6,7 +6,7 @@ import axios from 'axios';
 
 //const API = "http://192.168.1.11:5000/film/";
 // const API = "http://192.168.43.44:5000/film/";
-const API = "http://172.16.11.119:5000/film/";
+const API = "http://172.16.24.36:5000/film/";
 
 export default class BuyTickets extends Component {
   constructor(props) {
@@ -102,7 +102,7 @@ export default class BuyTickets extends Component {
 
           <ScrollView vertical={true}>
             { pelicula.map( element => 
-              <Card key={ element.id } title={ element.titulo } image={require('../../assets/film_default.jpg')}>
+              <Card key={ element.id } title={ element.titulo } image = { {uri: `${element.imagen}` } }>
                 <Text style={{marginBottom: 10}}>
                   Resumen: { element.resumen }
                 </Text>

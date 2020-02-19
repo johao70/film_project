@@ -6,7 +6,7 @@ import axios from 'axios';
 
 //const API = "http://192.168.1.11:5000/film/pelicula";
 // const API = "http://192.168.43.44:5000/film/pelicula";
-const API = "http://172.16.11.119:5000/film/pelicula";
+const API = "http://172.16.24.36:5000/film/pelicula";
 
 // https://aboutreact.com/example-of-sqlite-database-in-react-native/
 
@@ -49,7 +49,7 @@ export default class Movies extends Component {
                     {
                         peliculas.map(element =>
                             <Link to = "/movie_detail" key = { element.id } onPress={ () => this.asyncstorageSave(element.id) }>
-                                <Card title = { element.titulo } image = { require('../../assets/film_default.jpg') } />  
+                                <Card title = { element.titulo } image = { {uri: `${element.imagen}` } } />  
                             </Link >
                         )
                     } 
