@@ -23,6 +23,26 @@ class AddMovie extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
+    encodeImageFileAsURL = (e) => {
+        const reader = new FileReader();
+        const file = new Blob([e.target.value], { type: 'img/png' });
+        this.setState({ imagen: file });
+        reader.onloadend = e => {
+            this.setState({ imagen: e.target.result })
+        }
+        reader.readAsDataURL(file);
+    }
+
+    onFileChange = (e) => {
+        const file = e.target.files[0]
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({ imagen: reader.result })
+            console.log(reader.result)
+        }
+        reader.readAsDataURL(file);
+    }
+
     saveData = e => {
         e.preventDefault()
         this.post = {
@@ -31,7 +51,7 @@ class AddMovie extends Component {
                 resumen: this.state.resumen,
                 categoria: this.state.categoria,
                 valorBoleto: this.state.valorBoleto,
-                // imagen: this.state.imagen,
+                imagen: this.state.imagen,
                 estado: this.state.estado,
             }
         }
@@ -39,8 +59,8 @@ class AddMovie extends Component {
         if (this.post.datos.titulo === "" ||
             this.post.datos.resumen === "" ||
             this.post.datos.categoria === "" ||
-            this.post.datos.valorBoleto === ""
-            // this.post.datos.imagen === ""
+            this.post.datos.valorBoleto === "" ||
+            this.post.datos.imagen === ""
             ) {
           alert("Complete todos los datos para continuar...");
         } else {
@@ -63,7 +83,7 @@ class AddMovie extends Component {
             resumen, 
             categoria, 
             valorBoleto, 
-            // imagen,
+            imagen,
         } = this.state
         return(
             <div>
@@ -128,6 +148,18 @@ class AddMovie extends Component {
                                         value={ valorBoleto }
                                         onChange={ this.changeHandler }
                                         autoComplete="off"
+                                    />
+                                </div>
+                                <div className="md:w-1/3 px-3">
+                                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="imagen">
+                                        Portada de la Película
+                                    </label>
+                                    <input 
+                                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                                        name="imagen"
+                                        type="file"
+                                        defaultValue={ imagen }
+                                        onChange={ this.onFileChange }
                                     />
                                 </div>
                             </div>

@@ -23,25 +23,24 @@ const postData = (req, res) => {
 
     if (!datos) {
         res.status(400);
-        res,
-        json({
+        res.json({
             error: "Bad Request"
         });
     } else {
         Pelicula.create(datos)
-            .then(response => {
-                return res.status(200).json({
-                    ok: true,
-                    datos: response
-                })
+        .then(response => {
+            return res.status(200).json({
+                ok: true,
+                datos: response
             })
-            .catch(error => {
-                return res.status(500).json({
-                    ok: false,
-                    datos: null,
-                    mensaje: `Error del servidor: ${ error }`
-                })
-            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                ok: false,
+                datos: null,
+                mensaje: `Error del servidor: ${ error }`
+            })
+        });
     }
 }
 
