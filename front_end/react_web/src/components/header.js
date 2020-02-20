@@ -1,13 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from'react';
+import React, { Component } from'react';
 import { Link } from "react-router-dom";
 
-const Header = () => (
-        <div className="flex-grow flex mr-2 ml-64">
+export default class Header extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    render() {
+        return(
+            <div className="flex-grow flex mr-2 ml-64">
             <div className="flex-grow flex">
-                {/* <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
-                    Ayuda
-                </a> */}
+                <a className="block mt-4 inline-block mt-0 text-teal-lighter mr-4 ml-4">
+                    Bienvenido { localStorage.getItem('nombre') }
+                </a>
             </div>
             <div>
                 <Link to="/">
@@ -17,6 +26,6 @@ const Header = () => (
                 </Link>
             </div>            
         </div>
-)
-
-export default Header;
+        )
+    }
+}

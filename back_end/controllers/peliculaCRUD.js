@@ -2,7 +2,7 @@ const Pelicula = require('../models/pelicula');
 
 const getData = (req, res) => {
     const { query } = req;
-    Pelicula.findAll({ where: query })
+    Pelicula.findAll({ where: query, order: [['id', 'DESC']] })
         .then(response => {
             return res.status(200).json({
                 ok: true,

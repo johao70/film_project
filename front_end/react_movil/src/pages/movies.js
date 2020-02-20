@@ -4,11 +4,9 @@ import { Link } from "react-router-native";
 import { Card } from 'react-native-elements';
 import axios from 'axios';
 
-//const API = "http://192.168.1.11:5000/film/pelicula";
+// const API = "http://192.168.1.16:5000/film/pelicula";
 // const API = "http://192.168.43.44:5000/film/pelicula";
-const API = "http://172.16.24.36:5000/film/pelicula";
-
-// https://aboutreact.com/example-of-sqlite-database-in-react-native/
+const API = "http://172.16.11.140:5000/film/pelicula";
 
 export default class Movies extends Component {
     constructor(props) {
@@ -19,7 +17,7 @@ export default class Movies extends Component {
     }
 
     componentDidMount() {
-        axios.get(API)
+        axios.get(API+"?estado=1")
             .then(response => {
                 this.setState({ peliculas: response.data.datos })
             })

@@ -32,7 +32,8 @@ class Register extends Component {
       axios.post(API_URL, this.post)
       .then(response => {
         if ( response.data.ok === true ) {
-          window.location.assign("http://localhost:3000/");
+          localStorage.setItem('nombre', this.state.nombre);
+          window.location.assign("http://localhost:3000/movies");
         }
       })
       .catch(error => {

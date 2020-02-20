@@ -4,7 +4,7 @@ use cine;
 
 create table personas(id int auto_increment not null primary key, nombre varchar(150), correo varchar(150), clave varchar(150));
 
-create table peliculas(id int auto_increment not null primary key, titulo varchar(150), resumen varchar(150), categoria char (150), valorBoleto char(150), 
+create table peliculas(id int auto_increment not null primary key, titulo varchar(150), resumen varchar(150), categoria char (150), valorBoleto float(10,2), 
 imagen longtext, estado boolean);
 
 create table horarios(id int auto_increment not null primary key, hora varchar(100));
@@ -21,6 +21,10 @@ idsala_peliculas int, foreign key (idsala_peliculas) references sala_peliculas(i
 
 insert into personas values(1,'admin','admin@gmail.com','1234');
 
+
+-- FUNCIONES
+
+
 DELIMITER $$ 
 CREATE FUNCTION F_PELICULA(P_ID INTEGER)
 RETURNS VARCHAR(150)
@@ -33,7 +37,7 @@ BEGIN
     WHERE id = P_ID;
     RETURN V_PELICULA;
 END$$
-DELIMITER;
+DELIMITER ;
 
 DELIMITER $$
 CREATE FUNCTION F_SALA(P_ID INTEGER)
@@ -47,7 +51,7 @@ BEGIN
     WHERE id = P_ID;
     RETURN V_SALA;
 END$$
-DELIMITER;
+DELIMITER ;
 
 DELIMITER $$
 CREATE FUNCTION F_HORARIO(P_ID INTEGER)
@@ -61,4 +65,4 @@ BEGIN
     WHERE id = P_ID;
     RETURN V_HORA;
 END$$
-DELIMITER;
+DELIMITER ;

@@ -5,9 +5,9 @@ import { Link } from "react-router-native";
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 
-//const API = "http://192.168.1.11:5000/film/";
+// const API = "http://192.168.1.16:5000/film/";
 // const API = "http://192.168.43.44:5000/film/";
-const API = "http://172.16.24.36:5000/film/";
+const API = "http://172.16.11.140:5000/film/";
 
 export default class MovieDetail extends Component {
   constructor(props) {

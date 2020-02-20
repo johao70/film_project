@@ -8,7 +8,6 @@ import axios from 'axios';
 
 const API = "http://localhost:5000/film/raw4";
 
-// Resolves charts dependancy
 charts(FusionCharts);
 
 export default class Report extends Component {

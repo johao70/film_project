@@ -15,6 +15,7 @@ import FilmsRoom from './pages/films_room';
 import FilmsRoomAdd from './pages/films_room_add';
 import Schedules from './pages/schedules';
 import Report from './pages/report';
+import UpdateMovie from './pages/updateMovie';
 
 ReactDOM.render(
     <Router>
@@ -22,6 +23,7 @@ ReactDOM.render(
             <Route exact path="/" component={ Login } />
             <Route path="/register" component={ Register } />
             <Route path="/add_movie" component={ AddMovie } />
+            <Route path="/update_movie" component={ UpdateMovie } />
             <Route path="/movies" component={ Movies } />
             <Route path="/rooms" component={ Rooms } />
             <Route path="/films_room" component={ FilmsRoom } />
