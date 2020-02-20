@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet,ImageBackground,TouchableHighlight, TextInput, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet,ImageBackground,TextInput, AsyncStorage, Button } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 import axios from 'axios';
@@ -101,17 +101,10 @@ export default class SendTickets extends Component {
             />
           </Card>
 
-            {/* <TouchableHighlight>
-              <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
-                <Text>Cartelera</Text>
-              </Link>
-            </TouchableHighlight> */}
+          <View style={ styles.button }>
+            <Button title="Enviar Comprobante" onPress={ () => { this.saveData(), this.props.history.push("/")} } />
+          </View>
 
-            <TouchableHighlight>
-              <Link to="/" style={ styles.button } onPress={ () => this.saveData() }>
-                <Text>Enviar Comprobante</Text>
-              </Link>
-            </TouchableHighlight>
         </View>
       </ImageBackground>
     )
@@ -147,13 +140,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    position: 'relative',
-    bottom: '0%',
-    marginBottom: 20,
-    borderRadius: 100,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    marginBottom: 10,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },

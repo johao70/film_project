@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView, TextInput, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ScrollView, TextInput, AsyncStorage, Button } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Link } from "react-router-native";
 import axios from 'axios';
@@ -100,6 +100,10 @@ export default class BuyTickets extends Component {
             <Text style={ styles.header }>COMPRAR</Text>
           </View>
 
+          <View style={ styles.button }>
+            <Button title="Volver a la Cartelera" onPress={ () => {this.asyncstorageClear(), this.props.history.push("/")} } />
+          </View>
+
           <ScrollView vertical={true}>
             { pelicula.map( element => 
               <Card key={ element.id } title={ element.titulo } image = { {uri: `${element.imagen}` } }>
@@ -126,25 +130,10 @@ export default class BuyTickets extends Component {
               />
             </Card>
 
-            <TouchableHighlight>
-              <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
-                <Text>Cartelera</Text>
-              </Link>
-            </TouchableHighlight>
-
-            <TouchableHighlight>
-              <Link to="/movie_detail" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
-                <Text>Volver</Text>
-              </Link>
-            </TouchableHighlight>
-
-            <TouchableHighlight>
-              <Link to="/send_tickets" style={ styles.button } onPress={ () => {this.asyncstorageSave(this.state.numero_boletos), this.saveData()} }>
-                <Text>Confirmar</Text>
-              </Link>
-            </TouchableHighlight>
+            <View style={ styles.button }>
+              <Button title="Continuar" onPress={ () => {this.asyncstorageSave(this.state.numero_boletos), this.saveData(), this.props.history.push("/send_tickets")} } />
+            </View>
           </ScrollView>
-
 
         </View>
       </ImageBackground>
@@ -181,13 +170,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    position: 'relative',
-    bottom: '0%',
-    marginBottom: 20,
-    borderRadius: 100,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    marginBottom: 10,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TouchableHighlight, ScrollView, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ScrollView, AsyncStorage, Button } from 'react-native';
 import { Card } from 'react-native-elements';
-import { Link } from "react-router-native";
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 
@@ -131,7 +130,8 @@ export default class MovieDetail extends Component {
                       this.asyncstorageSave_idsala_peliculas(element.id), 
                       this.asyncstorageSave_idpelicula_titulo(element.idpelicula_titulo),
                       this.asyncstorageSave_idhorario_hora(element.idhorario_hora),
-                      this.asyncstorageSave_idsala_nombre(element.idsala_nombre)
+                      this.asyncstorageSave_idsala_nombre(element.idsala_nombre),
+                      this.props.history.push("buy_tickets")
                     }}
                   />
                 </View>
@@ -139,17 +139,10 @@ export default class MovieDetail extends Component {
               }
             </Card>
 
-            <TouchableHighlight>
-              <Link to="/" style={ styles.button } onPress={ () => this.asyncstorageClear() }>
-                <Text>Volver</Text>
-              </Link>
-            </TouchableHighlight>
-          
-            <TouchableHighlight>
-              <Link to="/buy_tickets"  style={ styles.button }>
-                <Text>Comprar</Text>
-              </Link>
-            </TouchableHighlight>
+              <View style={ styles.button }>
+                <Button title="Volver" onPress={ () => {this.asyncstorageClear(), this.props.history.push("/")} } />
+              </View>
+
           </ScrollView>
         </View>
       </ImageBackground>
@@ -186,13 +179,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    position: 'relative',
-    bottom: '0%',
-    marginBottom: 20,
-    borderRadius: 100,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    marginBottom: 10,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
