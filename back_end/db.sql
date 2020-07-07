@@ -21,10 +21,6 @@ idsala_peliculas int, foreign key (idsala_peliculas) references sala_peliculas(i
 
 insert into personas values(1,'admin','admin@gmail.com','1234');
 
-
--- FUNCIONES
-
-
 DELIMITER $$ 
 CREATE FUNCTION F_PELICULA(P_ID INTEGER)
 RETURNS VARCHAR(150)

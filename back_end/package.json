@@ -1,22 +1,24 @@
 {
-    "name": "apimysql",
-    "version": "1.0.0",
-    "description": "NodeJS Express Sequelize",
-    "main": "index.js",
-    "scripts": {
-        "start": "nodemon ./app.js"
-    },
-    "author": "Johao Perlaza",
-    "license": "MIT",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "mysql2": "^2.1.0",
-        "nodemailer": "^6.4.2",
-        "sequelize": "^5.21.3"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.2"
-    }
+  "name": "server",
+  "version": "1.5.0",
+  "description": "NodeJS Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./setup/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "nodemailer": "^6.4.2",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
