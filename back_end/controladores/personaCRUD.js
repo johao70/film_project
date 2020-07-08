@@ -2,6 +2,7 @@ const Persona = require("../models/persona");
 
 let getData = (req, res) => {
   let { query } = req;
+
   Persona.findAll({ where: query })
     .then((response) => {
       return res.status(200).json({

@@ -4,6 +4,6 @@ const env = require("dotenv").config(),
 
 app.listen(port, (err) => {
   !err
-    ? console.log(`The service is running at http://localhost:${port}/`)
-    : console.log(`the service is not working`);
+    ? console.log(`El servidor esta funcionando en http://localhost:${port}/`)
+    : console.log(`El servidor no esta funcionando`);
 });
