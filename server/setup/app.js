@@ -1,6 +1,6 @@
 const express = require("express"),
-  bodyParser = require("body-parser");
-// cors = require("cors")
+  bodyParser = require("body-parser"),
+  cors = require("cors");
 
 let app = express(),
   personaRutas = require("../rutas/persona.rutas"),
@@ -9,11 +9,11 @@ let app = express(),
   peliculaRutas = require("../rutas/pelicula.rutas"),
   salaRutas = require("../rutas/sala.rutas"),
   sala_peliculaRutas = require("../rutas/sala_pelicula.rutas"),
-  rawRutas = require("../rutas/raw.rutas");
-// corsOptions = {
-//   origin: "http://localhost:4200",
-//   optionsSuccessStatus: 200,
-// };
+  rawRutas = require("../rutas/raw.rutas"),
+  corsOptions = {
+    origin: "http://localhost:4200",
+    optionsSuccessStatus: 200,
+  };
 
 app.use(
   bodyParser.urlencoded({
@@ -23,10 +23,9 @@ app.use(
 
 app.use(bodyParser.json());
 
-//Cors configuration
-//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-//Routes
+//Rutas
 app.get("/", (req, res) => res.send("Bienvenido"));
 app.use("/api", personaRutas);
 app.use("/api", compraRutas);
