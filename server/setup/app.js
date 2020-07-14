@@ -11,7 +11,7 @@ let app = express(),
   sala_peliculaRutas = require("../rutas/sala_pelicula.rutas"),
   rawRutas = require("../rutas/raw.rutas"),
   corsOptions = {
-    origin: "http://localhost:4200",
+    origin: "*",
     optionsSuccessStatus: 200,
   };
 
