@@ -27,12 +27,12 @@ app.use(cors(corsOptions));
 
 //Rutas
 app.get("/", (req, res) => res.send("Bienvenido"));
-app.use("/api", personaRutas);
-app.use("/api", compraRutas);
-app.use("/api", horarioRutas);
-app.use("/api", peliculaRutas);
-app.use("/api", salaRutas);
-app.use("/api", sala_peliculaRutas);
-app.use("/api", rawRutas);
+app.use("/film", personaRutas);
+app.use("/film", compraRutas);
+app.use("/film", horarioRutas);
+app.use("/film", peliculaRutas);
+app.use("/film", salaRutas);
+app.use("/film", sala_peliculaRutas);
+app.use("/film", rawRutas);
 
 module.exports = app;
