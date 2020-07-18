@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const API_LOGIN = "http://localhost:5000/film/login";
 
@@ -18,20 +20,33 @@ class Login extends Component {
 
   loginAccess = (e) => {
     e.preventDefault();
+
     if (this.state.correo === "" || this.state.clave === "") {
-      alert("Complete todos los datos para continuar...");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Complete todos los datos para continuar, por favor.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } else {
       axios
         .post(API_LOGIN, this.state)
         .then((response) => {
           if (response.data.mensaje === "found") {
             localStorage.setItem("correo", this.state.correo);
-            this.props.history.push("/movies");
-            // window.location.assign("http://localhost:3000/movies");
+            this.props.history.push("movies");
           }
         })
         .catch((error) => {
-          alert("Datos Incorrectos");
+          Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Datos incorrectos, vuelve a intentarlo.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          console.log(error);
         });
     }
   };
@@ -39,68 +54,63 @@ class Login extends Component {
   render() {
     const { correo, clave } = this.state;
     return (
-      <div className="bg-teal-200 h-screen font-sans">
-        <div className="container mx-auto h-full flex justify-center items-center">
-          <div className="w-1/3">
-            <h1 className="font-hairline mb-6 text-center text-2xl">
-              Bienvenido!
-            </h1>
-            <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
-              <form
-                className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
-                onSubmit={this.loginAccess}
-              >
-                <div className="mb-4">
-                  <label className="font-bold text-gray-700 block mb-2">
-                    Correo Electrónico
-                  </label>
-                  <input
-                    className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow"
-                    type="text"
-                    placeholder="tucorreo@gmail.com"
-                    name="correo"
-                    value={correo}
-                    onChange={this.changeHandler}
-                    autoComplete="off"
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label className="font-bold text-gray-700 block mb-2">
-                    Contraseña
-                  </label>
-                  <input
-                    className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow"
-                    type="password"
-                    placeholder="**************"
-                    name="clave"
-                    value={clave}
-                    onChange={this.changeHandler}
-                    securetextentry="true"
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <button
-                    type="submit"
-                    className="bg-teal-600 hover:bg-teal-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
-                  >
-                    Ingresar
-                  </button>
-                  <a
-                    href="http://localhost:3000/register"
-                    className="bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
-                  >
-                    Registrarse
-                  </a>
-                </div>
-              </form>
+      <div className="bg-teal-200 h-screen flex justify-center items-center">
+        <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg">
+          <h1 className="font-bold uppercase underline mb-4 text-center text-2xl">
+            Bienvenido!
+          </h1>
+          <form onSubmit={this.loginAccess}>
+            <div className="mb-6">
+              <label className="font-bold text-gray-700 mb-2">
+                Correo Electrónico
+              </label>
+              <input
+                className="appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-2 py-2 rounded shadow"
+                type="text"
+                placeholder="tucorreo@email.com"
+                name="correo"
+                value={correo}
+                onChange={this.changeHandler}
+                autoComplete="off"
+              />
             </div>
-          </div>
+
+            <div className="mb-6">
+              <label className="font-bold text-gray-700 mb-2">Contraseña</label>
+              <input
+                className="appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-2 py-2 rounded shadow"
+                type="password"
+                placeholder="******"
+                name="clave"
+                value={clave}
+                minLength="6"
+                onChange={this.changeHandler}
+                securetextentry="true"
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <button
+                className="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+                type="submit"
+              >
+                <i className="fas fa-sign-in-alt mr-2"></i>
+                Ingresar
+              </button>
+
+              <button
+                className="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+                onClick={() => this.props.history.push("register")}
+              >
+                <i className="fas fa-user-plus mr-2"></i>
+                Registrarme
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);

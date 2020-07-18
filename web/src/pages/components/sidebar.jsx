@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 class Sidebar extends Component {
   render() {
     return (
       <nav>
-        <div className="text-left text-gray-700 whitespace-no-wrap uppercase p-4">
+        <div className="text-gray-700 whitespace-no-wrap uppercase p-4">
           <h1 className="font-bold text-2xl tracking-tight">Proyecto Cine</h1>
         </div>
-        <ul className="flex flex-col list-none">
+        <ul className="flex flex-col">
           {/* <li className="items-center">
             <Link to="/report">
               <button className="text-gray-900 text-xs uppercase py-3 font-bold block">
@@ -18,57 +17,72 @@ class Sidebar extends Component {
               </button>
             </Link>
           </li> */}
-          <li className="items-center">
-            <p className="text-gray-900 text-xs uppercase py-3 font-bold block">
-              <i className="fas fa-book-open mr-2 text-sm"></i>
+          <li className="py-4">
+            <p className="text-gray-900 text-md uppercase py-3 font-bold">
+              <i className="fas fa-film mr-2 text-md"></i>
               Películas
             </p>
             <ul>
-              <Link to="/add_movie">
-                <li className="mx-8 text-gray-600 hover:text-gray-900">
-                  <i className="fas fa-arrow-circle-right"></i>
-                  Crear Película
-                </li>
-              </Link>
+              <button
+                className="mx-6 text-gray-600 hover:text-gray-900"
+                onClick={() => {
+                  this.props.history.push("add_movie");
+                }}
+              >
+                <i className="fas fa-plus mr-2"></i>
+                Crear Película
+              </button>
             </ul>
             <ul>
-              <Link to="/movies">
-                <li className="mx-8 text-gray-600 hover:text-gray-900">
-                  <i className="fas fa-arrow-circle-right"></i>
-                  Catálogo
-                </li>
-              </Link>
+              <button
+                className="mx-6 text-gray-600 hover:text-gray-900"
+                onClick={() => {
+                  this.props.history.push("movies");
+                }}
+              >
+                <i className="fas fa-ticket-alt mr-2"></i>
+                Catálogo
+              </button>
             </ul>
           </li>
 
-          <li className="items-center">
-            <p className="text-gray-900 text-xs uppercase py-3 font-bold block">
-              <i className="fas fa-check mr-2 text-sm"></i>
+          <li className="py-2">
+            <p className="text-gray-900 text-md uppercase py-3 font-bold">
+              <i className="fas fa-check mr-2 text-md"></i>
               Crear y Asignar
             </p>
             <ul>
-              <Link to="/rooms">
-                <li className="mx-8 text-gray-600 hover:text-gray-900">
-                  <i className="fas fa-arrow-circle-right"></i>
-                  Crear Salas
-                </li>
-              </Link>
+              <button
+                className="mx-6 text-gray-600 hover:text-gray-900"
+                onClick={() => {
+                  this.props.history.push("rooms");
+                }}
+              >
+                <i className="fas fa-arrow-circle-right mr-2"></i>
+                Crear Salas
+              </button>
             </ul>
             <ul>
-              <Link to="/schedules">
-                <li className="mx-8 text-gray-600 hover:text-gray-900">
-                  <i className="fas fa-arrow-circle-right"></i>
-                  Crear Horarios
-                </li>
-              </Link>
+              <button
+                className="mx-6 text-gray-600 hover:text-gray-900"
+                onClick={() => {
+                  this.props.history.push("schedules");
+                }}
+              >
+                <i className="fas fa-arrow-circle-right mr-2"></i>
+                Crear Horarios
+              </button>
             </ul>
             <ul>
-              <Link to="/films_room">
-                <li className="mx-8 text-gray-600 hover:text-gray-900">
-                  <i className="fas fa-arrow-circle-right"></i>
-                  Asignar Peliculas
-                </li>
-              </Link>
+              <button
+                className="mx-6 text-gray-600 hover:text-gray-900"
+                onClick={() => {
+                  this.props.history.push("films_room");
+                }}
+              >
+                <i className="fas fa-arrow-circle-right mr-2"></i>
+                Asignar Peliculas
+              </button>
             </ul>
           </li>
         </ul>

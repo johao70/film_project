@@ -9,11 +9,7 @@ let app = express(),
   peliculaRutas = require("../rutas/pelicula.rutas"),
   salaRutas = require("../rutas/sala.rutas"),
   sala_peliculaRutas = require("../rutas/sala_pelicula.rutas"),
-  rawRutas = require("../rutas/raw.rutas"),
-  corsOptions = {
-    origin: "*",
-    optionsSuccessStatus: 200,
-  };
+  rawRutas = require("../rutas/raw.rutas");
 
 app.use(
   bodyParser.urlencoded({
@@ -23,7 +19,7 @@ app.use(
 
 app.use(bodyParser.json());
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 //Rutas
 app.get("/", (req, res) => res.send("Bienvenido"));

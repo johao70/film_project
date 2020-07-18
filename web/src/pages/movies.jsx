@@ -37,14 +37,14 @@ class Movies extends Component {
 
   logicDelete = (item) => {
     axios
-      .put(`${API}?id=${item}`, {
+      .put(`${API}/${item}`, {
         datos: {
           id: item,
           estado: 0,
         },
       })
       .then((response) => {
-        window.location.assign("http://localhost:3000/movies");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -70,7 +70,6 @@ class Movies extends Component {
 
   render() {
     const { peliculasDisponible, peliculas } = this.state;
-    const image_categorie = require("../assets/category.png");
 
     return (
       <div className="flex">
@@ -85,10 +84,7 @@ class Movies extends Component {
             <p className="my-5 text-2xl">Cartelera Disponible</p>
             <div className="flex flex-wrap items-center justify-center py-2">
               {peliculasDisponible.map((element) => (
-                <div
-                  className="max-w-md flex border rounded-md mx-2"
-                  key={element.id}
-                >
+                <div className="max-w-md flex" key={element.id}>
                   <img
                     className="w-48"
                     src={element.imagen}
@@ -96,13 +92,13 @@ class Movies extends Component {
                   />
                   <div className="bg-white p-4 flex flex-col justify-between leading-normal">
                     <div className="mb-8">
-                      <div className="text-black font-bold text-2xl py-2">
+                      <h1 className="font-bold text-2xl py-2">
                         {element.titulo}
-                      </div>
+                      </h1>
                       <p className="text-gray-700">{element.resumen}</p>
                     </div>
                     <div className="flex items-center">
-                      <i className="fas fa-certificate text-2xl mr-4"></i>
+                      <i className="fas fa-archive text-2xl mr-2"></i>
                       <div className="text-sm">
                         <p className="leading-none">{element.categoria}</p>
                         <p>Valor: $ {element.valorBoleto}</p>
@@ -160,11 +156,7 @@ class Movies extends Component {
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <img
-                        className="w-10 h-10 rounded-full mr-4"
-                        src={image_categorie}
-                        alt="image_categorie"
-                      />
+                      <i className="fas fa-archive text-2xl mr-2"></i>
                       <div className="text-sm">
                         <p className="text-black leading-none">
                           {element.categoria}
