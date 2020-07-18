@@ -19,7 +19,7 @@ idhorario int, foreign key (idhorario) references horarios(id));
 create table compras(id int auto_increment not null primary key, numero_boletos varchar(150), idpersona int, foreign key (idpersona) references personas(id),
 idsala_peliculas int, foreign key (idsala_peliculas) references sala_peliculas(id));
 
-insert into personas values(1,'admin','admin@gmail.com','1234');
+insert into personas values(1,'admin','admin@gmail.com','123456');
 
 DELIMITER $$ 
 CREATE FUNCTION F_PELICULA(P_ID INTEGER)
