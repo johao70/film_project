@@ -5,7 +5,7 @@ let api = express.Router(),
 
 api.get("/pelicula", pelicula.getData);
 api.post("/pelicula", pelicula.postData);
-api.put("/pelicula/:id", pelicula.putData); //SISTEMA REVISAR - MANDAR ID COMO PARAMETRO
-api.delete("/pelicula/:id", pelicula.deleteData); //SISTEMA REVISAR - MANDAR ID COMO PARAMETRO
+api.put("/pelicula/:id", pelicula.putData);
+api.delete("/pelicula/:id", pelicula.deleteData);
 
 module.exports = api;

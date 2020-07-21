@@ -58,7 +58,7 @@ class Sidebar extends Component {
                   this.props.history.push("rooms");
                 }}
               >
-                <i className="fas fa-arrow-circle-right mr-2"></i>
+                <i className="fas fa-person-booth mr-2"></i>
                 Crear Salas
               </button>
             </ul>
@@ -69,7 +69,7 @@ class Sidebar extends Component {
                   this.props.history.push("schedules");
                 }}
               >
-                <i className="fas fa-arrow-circle-right mr-2"></i>
+                <i className="fas fa-calendar-plus mr-2"></i>
                 Crear Horarios
               </button>
             </ul>

@@ -65,7 +65,8 @@ class Movies extends Component {
     localStorage.setItem("imagen", p_imagen);
     localStorage.setItem("categoria", p_categoria);
     localStorage.setItem("valorBoleto", p_valorBoleto);
-    window.location.assign("http://localhost:3000/update_movie");
+    this.props.history.push("update_movie");
+    // window.location.assign("http://localhost:3000/update_movie");
   };
 
   render() {
