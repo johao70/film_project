@@ -9,14 +9,6 @@ class Sidebar extends Component {
           <h1 className="font-bold text-2xl tracking-tight">Proyecto Cine</h1>
         </div>
         <ul className="flex flex-col">
-          {/* <li className="items-center">
-            <Link to="/report">
-              <button className="text-gray-900 text-xs uppercase py-3 font-bold block">
-                <i className="fas fa-newspaper mr-2 text-sm"></i>
-                Reporte de Compras
-              </button>
-            </Link>
-          </li> */}
           <li className="py-4">
             <p className="text-gray-900 text-md uppercase py-3 font-bold">
               <i className="fas fa-film mr-2 text-md"></i>
@@ -42,6 +34,17 @@ class Sidebar extends Component {
               >
                 <i className="fas fa-ticket-alt mr-2"></i>
                 Catálogo
+              </button>
+            </ul>
+            <ul>
+              <button
+                className="mx-6 text-gray-600 hover:text-gray-900"
+                onClick={() => {
+                  this.props.history.push("report");
+                }}
+              >
+                <i className="fas fa-newspaper mr-2"></i>
+                Reporte Compras
               </button>
             </ul>
           </li>
@@ -80,7 +83,7 @@ class Sidebar extends Component {
                   this.props.history.push("films_room");
                 }}
               >
-                <i className="fas fa-arrow-circle-right mr-2"></i>
+                <i className="fas fa-map-signs mr-2"></i>
                 Asignar Peliculas
               </button>
             </ul>

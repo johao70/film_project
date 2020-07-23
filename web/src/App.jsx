@@ -7,14 +7,13 @@ import Login from "./pages/login.jsx";
 import Register from "./pages/register.jsx";
 import Movies from "./pages/movies.jsx";
 import AddMovie from "./pages/addMovie.jsx";
-import UpdateMovie from "./pages/updateMovie";
+import UpdateMovie from "./pages/updateMovie.jsx";
 import Rooms from "./pages/rooms.jsx";
-import Schedules from "./pages/schedules";
-
-// import Page404 from "./pages/Page404";
-// import FilmsRoom from "./pages/films_room";
-// import FilmsRoomAdd from "./pages/films_room_add";
-// import Report from "./pages/report";
+import Schedules from "./pages/schedules.jsx";
+import FilmsRoom from "./pages/films_room.jsx";
+import FilmsRoomAdd from "./pages/films_room_add.jsx";
+import Report from "./pages/report.jsx";
+import Page404 from "./pages/Page404.jsx";
 
 class App extends Component {
   render() {
@@ -28,11 +27,10 @@ class App extends Component {
           <Route path="/update_movie" component={UpdateMovie} />
           <Route path="/rooms" component={Rooms} />
           <Route path="/schedules" component={Schedules} />
-
-          {/* <Route path="/films_room" component={ FilmsRoom } />
-            <Route path="/films_room_add" component={ FilmsRoomAdd } />
-            <Route path="/report" component={ Report } />
-            <Route component={ Page404 } /> */}
+          <Route path="/films_room" component={FilmsRoom} />
+          <Route path="/films_room_add" component={FilmsRoomAdd} />
+          <Route path="/report" component={Report} />
+          <Route component={Page404} />
         </Switch>
       </Router>
     );
