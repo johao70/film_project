@@ -61,21 +61,20 @@ let putData = (req, res) => {
 let deleteData = (req, res) => {
   let { id } = req.params;
 
-  Sala.destroy({ where: { id } }).then(() => {
-    return res
-      .status(200)
-      .json({
+  Sala.destroy({ where: { id } })
+    .then(() => {
+      return res.status(200).json({
         ok: true,
         datos: "Eliminado",
-      })
-      .catch((error) => {
-        return res.status(500).json({
-          ok: false,
-          datos: null,
-          mensaje: `Error del servidor: ${error}`,
-        });
       });
-  });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: `Error del servidor: ${error}`,
+      });
+    });
 };
 
 module.exports = {

@@ -9,19 +9,17 @@ let raw1 = (req, res) => {
       { type: db.sequelize.QueryTypes.SELECT }
     )
     .then((response) => {
-      return res
-        .status(200)
-        .json({
-          ok: true,
-          datos: response,
-        })
-        .catch((error) => {
-          return res.status(500).json({
-            ok: false,
-            datos: null,
-            mensaje: `Error del servidor: ${error}`,
-          });
-        });
+      return res.status(200).json({
+        ok: true,
+        datos: response,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: `Error del servidor: ${error}`,
+      });
     });
 };
 
@@ -34,19 +32,17 @@ let raw2 = (req, res) => {
       { type: db.sequelize.QueryTypes.SELECT }
     )
     .then((response) => {
-      return res
-        .status(200)
-        .json({
-          ok: true,
-          datos: response,
-        })
-        .catch((error) => {
-          return res.status(500).json({
-            ok: false,
-            datos: null,
-            mensaje: `Error del servidor: ${error}`,
-          });
-        });
+      return res.status(200).json({
+        ok: true,
+        datos: response,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: `Error del servidor: ${error}`,
+      });
     });
 };
 
@@ -57,19 +53,17 @@ let raw3 = (req, res) => {
       { type: db.sequelize.QueryTypes.SELECT }
     )
     .then((response) => {
-      return res
-        .status(200)
-        .json({
-          ok: true,
-          datos: response,
-        })
-        .catch((error) => {
-          return res.status(500).json({
-            ok: false,
-            datos: null,
-            mensaje: `Error del servidor: ${error}`,
-          });
-        });
+      return res.status(200).json({
+        ok: true,
+        datos: response,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: `Error del servidor: ${error}`,
+      });
     });
 };
 
@@ -80,19 +74,17 @@ let raw4 = (req, res) => {
       { type: db.sequelize.QueryTypes.SELECT }
     )
     .then((response) => {
-      return res
-        .status(200)
-        .json({
-          ok: true,
-          datos: response,
-        })
-        .catch((error) => {
-          return res.status(500).json({
-            ok: false,
-            datos: null,
-            mensaje: `Error del servidor: ${error}`,
-          });
-        });
+      return res.status(200).json({
+        ok: true,
+        datos: response,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: `Error del servidor: ${error}`,
+      });
     });
 };
 

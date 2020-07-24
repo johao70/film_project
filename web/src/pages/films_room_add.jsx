@@ -36,7 +36,7 @@ class FilmsRoomAdd extends Component {
       });
 
     axios
-      .get(API + "pelicula")
+      .get(API + "pelicula?estado=1")
       .then((response) => {
         this.setState({ peliculas: response.data.datos });
       })
