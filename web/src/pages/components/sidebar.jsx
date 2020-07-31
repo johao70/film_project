@@ -4,13 +4,13 @@ import { withRouter } from "react-router-dom";
 class Sidebar extends Component {
   render() {
     return (
-      <nav>
+      <nav className="flex xl:flex-col lg:flex-col flex-row flex-wrap xl:border-r-2 lg:border-r-2 border-b-2 xl:justify-start lg:justify-start justify-center">
         <div className="text-gray-700 whitespace-no-wrap uppercase p-4">
           <h1 className="font-bold text-2xl tracking-tight">Proyecto Cine</h1>
         </div>
-        <ul className="flex flex-col">
-          <li className="py-4">
-            <p className="text-gray-900 text-md uppercase py-3 font-bold">
+        <ul className="flex xl:flex-col lg:flex-col flex-row">
+          <li className="py-4 flex xl:flex-col lg:flex-col flex-row flex-wrap">
+            <p className="text-gray-900 text-md uppercase py-3 font-bold xl:flex lg:flex hidden">
               <i className="fas fa-film mr-2 text-md"></i>
               Películas
             </p>
@@ -49,8 +49,8 @@ class Sidebar extends Component {
             </ul>
           </li>
 
-          <li className="py-2">
-            <p className="text-gray-900 text-md uppercase py-3 font-bold">
+          <li className="py-4 flex xl:flex-col lg:flex-col flex-row flex-wrap">
+            <p className="text-gray-900 text-md uppercase py-3 font-bold xl:flex lg:flex hidden">
               <i className="fas fa-check mr-2 text-md"></i>
               Crear y Asignar
             </p>

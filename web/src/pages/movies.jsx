@@ -66,20 +66,19 @@ class Movies extends Component {
     localStorage.setItem("categoria", p_categoria);
     localStorage.setItem("valorBoleto", p_valorBoleto);
     this.props.history.push("update_movie");
-    // window.location.assign("http://localhost:3000/update_movie");
   };
 
   render() {
     const { peliculasDisponible, peliculas } = this.state;
 
     return (
-      <div className="flex">
-        <div className="flex w-1/5 border-r-2 h-screen px-6">
-          <Sidebar />
+      <div className="flex flex-col">
+        <div>
+          <Header />
         </div>
-        <div className="w-full">
-          <div>
-            <Header />
+        <div className="w-full flex xl:flex-row lg:flex-row flex-col">
+          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
+            <Sidebar />
           </div>
           <div className="flex flex-col px-12 border-b-2">
             <p className="my-5 text-2xl">Cartelera Disponible</p>
