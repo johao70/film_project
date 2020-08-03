@@ -15,7 +15,7 @@
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "sweetalert2": "^9.17.0"
+    "sweetalert2": "^9.17.1"
   },
   "scripts": {
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
@@ -40,8 +40,8 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.5",
+    "autoprefixer": "^9.8.6",
     "postcss-cli": "^7.1.1",
-    "tailwindcss": "^1.5.1"
+    "tailwindcss": "^1.6.1"
   }
 }

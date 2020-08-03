@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 const sendMail = (req, res) => {
-  const datos = req.body.datos;
+  const { datos } = req.body;
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -17,7 +17,7 @@ const sendMail = (req, res) => {
   const mailOptions = {
     from: "cine@gmail.com",
     to: datos.correo,
-    subject: "Cine",
+    subject: "Comprobante",
     html: `<div><h1>CINE</h1><br><h2>Sala: ${datos.sala}</h2><br><h2>Película: ${datos.pelicula}</h2><br><h2>Horario: ${datos.horario}</h2><br><h2>Número de Boletos: ${datos.boletos}</h2></div>`,
   };
 

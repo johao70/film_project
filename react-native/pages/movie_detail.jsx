@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import {
-  StyleSheet,
   ImageBackground,
   ScrollView,
   AsyncStorage,
   Button,
-  Image,
-  TouchableOpacity,
 } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card } from "react-native-elements";
 import { RadioButton } from "react-native-paper";
 import axios from "axios";
-
-const API = "http://192.168.10.113:5000/film/";
+import { API_URL } from "./components/web-service";
 
 export default class MovieDetail extends Component {
   constructor(props) {
@@ -30,81 +26,43 @@ export default class MovieDetail extends Component {
   }
 
   movieDetails = async () => {
-    try {
-      const idpelicula = await AsyncStorage.getItem("idpelicula");
+    const idpelicula = await AsyncStorage.getItem("idpelicula");
 
-      axios
-        .get(`${API}pelicula?id=${idpelicula}`)
-        .then((response) => {
-          this.setState({ pelicula: response.data.datos });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    await axios
+      .get(`${API_URL}/pelicula?id=${idpelicula}`)
+      .then((response) => {
+        this.setState({ pelicula: response.data.datos });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-      axios
-        .get(`${API}raw2?idpelicula=${idpelicula}`)
-        .then((response) => {
-          this.setState({ sala_peliculas: response.data.datos });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
+    await axios
+      .get(`${API_URL}/raw2?idpelicula=${idpelicula}`)
+      .then((response) => {
+        this.setState({ sala_peliculas: response.data.datos });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   saveDataSelected = async (idSalaPelicula, idPelicula, idHorario, idSala) => {
-    // console.log(
-    //   idSalaPelicula + " " + idPelicula + " " + idHorario + " " + idSala
-    // );
     try {
       await AsyncStorage.setItem("idSalaPelicula", idSalaPelicula.toString());
       await AsyncStorage.setItem("idPelicula", idPelicula.toString());
-      await AsyncStorage.setItem("idHorario", idHorario.toString());
-      await AsyncStorage.setItem("idSala", idSala.toString());
+
+      await AsyncStorage.setItem("peliculaTitulo", idHorario.toString());
+      await AsyncStorage.setItem("horaHorario", idHorario.toString());
+      await AsyncStorage.setItem("salaNombre", idSala.toString());
+
+      //AGREGAR MENSAJE DE CONFIRMACION SEGURO DE ESCOJER ESE HORARIO
+      this.props.history.push("/buy_tickets");
     } catch (error) {
       console.error(err);
       this.clearLocalStorage();
     }
   };
-
-  // asyncstorageSave_idsala_peliculas = async (id) => {
-  //   console.log(id);
-  //   try {
-  //     await AsyncStorage.setItem("idsala_peliculas", id.toString());
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-  // asyncstorageSave_idpelicula_titulo = async (item) => {
-  //   console.log(item);
-  //   try {
-  //     await AsyncStorage.setItem("idpelicula_titulo", item.toString());
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-  // asyncstorageSave_idhorario_hora = async (item) => {
-  //   console.log(item);
-  //   try {
-  //     await AsyncStorage.setItem("idhorario_hora", item.toString());
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-  // asyncstorageSave_idsala_nombre = async (item) => {
-  //   console.log(item);
-  //   try {
-  //     await AsyncStorage.setItem("idsala_nombre", item.toString());
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   clearLocalStorage = () => {
     try {
@@ -123,14 +81,13 @@ export default class MovieDetail extends Component {
         style={{ width: "100%", height: "100%" }}
         source={require("../assets/bg.jpg")}
       >
-        <View className="">
+        <View>
           <View className="h-24 flex justify-center">
             <Text className="text-center text-white text-4xl font-bold border-b-4 border-white">
               DETALLES PELÍCULA
             </Text>
           </View>
 
-          {/* REVISAR DISEÑO DE DETALLES PELICULA */}
           <ScrollView vertical={true}>
             <View className="flex justify-center">
               <View className="flex flex-row">
@@ -144,12 +101,8 @@ export default class MovieDetail extends Component {
                     </View>
                     <View className="flex w-1/2 h-64 py-6 bg-white">
                       <Text>Resumen: {element.resumen}</Text>
-                      <Text className="text-white">
-                        Categoría: {element.categoria}
-                      </Text>
-                      <Text className="text-white">
-                        Valor de Boleto: {element.valorBoleto}
-                      </Text>
+                      <Text>Categoría: {element.categoria}</Text>
+                      <Text>Valor de Boleto: {element.valorBoleto}</Text>
                     </View>
                     {/* <Card
                       title={element.titulo}
@@ -183,12 +136,6 @@ export default class MovieDetail extends Component {
                         }
                         onPress={() => {
                           this.setState({ checked: element.id }),
-                            // this.asyncstorageSave_idsala_peliculas(element.id),
-                            // this.asyncstorageSave_idpelicula_titulo(
-                            //   element.idpelicula
-                            // ),
-                            // this.asyncstorageSave_idhorario_hora(element.idhorario),
-                            // this.asyncstorageSave_idsala_nombre(element.idsala);
                             this.saveDataSelected(
                               element.id,
                               element.idpelicula,
@@ -197,28 +144,24 @@ export default class MovieDetail extends Component {
                             );
                         }}
                       />
-                      <Text className="font-bold">
-                        Horario: {element.idhorario_hora}
-                      </Text>
-                      <Text className="font-bold">
-                        Sala: {element.idsala_nombre}
-                      </Text>
+                      <View className="flex flex-col">
+                        <Text className="font-bold">
+                          Horario: {element.idhorario_hora}
+                        </Text>
+                        <Text className="font-bold">
+                          Sala: {element.idsala_nombre}
+                        </Text>
+                      </View>
                     </View>
                   ))}
                 </Card>
               </View>
 
-              <View className="flex">
+              <View className="py-6 items-center">
                 <Button
                   title="Volver"
                   onPress={() => {
                     this.clearLocalStorage();
-                  }}
-                />
-                <Button
-                  title="Siguiente"
-                  onPress={() => {
-                    this.props.history.push("buy_tickets");
                   }}
                 />
               </View>
@@ -229,12 +172,3 @@ export default class MovieDetail extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    marginBottom: 10,
-    marginTop: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

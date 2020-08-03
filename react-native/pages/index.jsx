@@ -8,8 +8,7 @@ import {
 import { View, Text } from "react-native-tailwind";
 import { Card } from "react-native-elements";
 import axios from "axios";
-
-const API = "http://192.168.10.113:5000/film/pelicula";
+import { API_URL } from "./components/web-service";
 
 export default class Index extends Component {
   constructor(props) {
@@ -23,16 +22,16 @@ export default class Index extends Component {
     this.getMovies();
   }
 
-  getMovies() {
-    axios
-      .get(`${API}?estado=1`)
+  getMovies = async () => {
+    await axios
+      .get(`${API_URL}/pelicula?estado=1`)
       .then((response) => {
         this.setState({ peliculas: response.data.datos });
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   asyncstorageSave = async (idpelicula) => {
     try {
