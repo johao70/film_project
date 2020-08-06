@@ -80,23 +80,6 @@ class Schedules extends Component {
     window.location.assign("http://localhost:3000/schedules");
   };
 
-  // updateData = () => {
-  //     axios.put(API+"?tabla=persona", {
-  //         persona_identificacion: this.state.persona_identificacion,
-  //         persona_nombre: this.state.persona_nombre,
-  //         persona_email: this.state.persona_email,
-  //         persona_direccion: this.state.persona_direccion,
-  //         persona_telefono: this.state.persona_telefono,
-  //         persona_clave: this.state.persona_clave
-  //     })
-  //     .then(response => {
-  //         console.log(response);
-  //     })
-  //     .catch(error => {
-  //         console.log(error);
-  //     });
-  // }
-
   render() {
     const { horarios, hora } = this.state;
     return (
@@ -104,10 +87,12 @@ class Schedules extends Component {
         <div className="flex w-1/5 border-r-2 h-screen px-6">
           <Sidebar />
         </div>
+
         <div className="w-full">
           <div>
             <Header />
           </div>
+
           <div className="flex flex-col px-12">
             <p className="mt-5 text-2xl">Horarios</p>
 
@@ -156,6 +141,7 @@ class Schedules extends Component {
             </ReactModal>
             {/* MODAL */}
           </div>
+
           <div className="px-3 py-4 flex flex-col justify-center">
             <table className="w-full text-md bg-white shadow-md rounded mb-4">
               <thead className="border-b">
@@ -166,45 +152,29 @@ class Schedules extends Component {
                   <th className="text-left p-3 px-5">
                     {this.state.table_header.hora}
                   </th>
-                  {/* <th></th> */}
                   <th></th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr className="border-b hover:bg-orange-100 bg-gray-100">
-                  <td>
-                    {horarios.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.id}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  <td>
-                    {horarios.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.hora}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  {/* <td>
-                        { horarios.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ this.handleOpenModal } className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button></p> )}
-                    </td> */}
-                  <td>
-                    {horarios.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        <button
-                          className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
-                          onClick={() => this.deleteData(element.id)}
-                        >
-                          <i className="fas fa-trash-alt"></i>
-                        </button>
-                      </p>
-                    ))}
-                  </td>
-                </tr>
+                {horarios.map((element, index) => (
+                  <tr className="border-b hover:bg-orange-100 bg-gray-100" key={element.id}>
+                    <td className="p-2 px-5" >
+                      {index + 1}
+                    </td>
+                    <td className="p-2 px-5">
+                      {element.hora}
+                    </td>
+                    <td className="p-2 px-5">
+                      <button
+                        className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+                        onClick={() => this.deleteData(element.id)}
+                      >
+                        <i className="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <button
@@ -215,6 +185,7 @@ class Schedules extends Component {
               Agregar nuevo horario
             </button>
           </div>
+
         </div>
       </div>
     );

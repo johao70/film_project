@@ -61,7 +61,7 @@ class Report extends Component {
       width: "800",
       height: "600",
     };
-    // return (<ReactFusioncharts {...chartConfigs} />);
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">
@@ -95,40 +95,22 @@ class Report extends Component {
                 </thead>
 
                 <tbody>
-                  <tr className="border-b hover:bg-orange-100 bg-gray-100">
-                    <td>
-                      {reporte.map((element) => (
-                        <p className="p-2 px-5" key={element.id}>
-                          {" "}
-                          {element.label}{" "}
-                        </p>
-                      ))}
-                    </td>
-                    <td>
-                      {reporte.map((element) => (
-                        <p className="p-2 px-5" key={element.id}>
-                          {" "}
-                          {element.valorBoleto}{" "}
-                        </p>
-                      ))}
-                    </td>
-                    <td>
-                      {reporte.map((element) => (
-                        <p className="p-2 px-5" key={element.id}>
-                          {" "}
-                          {element.value}{" "}
-                        </p>
-                      ))}
-                    </td>
-                    <td>
-                      {reporte.map((element) => (
-                        <p className="p-2 px-5" key={element.id}>
-                          {" "}
-                          {element.recaudado}{" "}
-                        </p>
-                      ))}
-                    </td>
-                  </tr>
+                  {reporte.map((element) => (
+                    <tr className="border-b hover:bg-orange-100 bg-gray-100" key={element.label}>
+                      <td className="p-2 px-5" >
+                        {element.label}
+                      </td>
+                      <td className="p-2 px-5">
+                        {element.valorBoleto}
+                      </td>
+                      <td className="p-2 px-5">
+                        {element.value}
+                      </td>
+                      <td className="p-2 px-5">
+                        $ {element.recaudado}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

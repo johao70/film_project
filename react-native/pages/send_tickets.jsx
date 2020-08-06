@@ -61,18 +61,17 @@ export default class SendTickets extends Component {
       axios
         .post(`${API_URL}/send_mail`, this.post)
         .then(async (response) => {
-          //REVISAR RESPUESTA SERVIDOR
-          console.log(response);
-
-          if (response.data.ok) {
+          if (await response.data.ok) {
             alert("Correo Enviado!");
+            console.log(response);
             await AsyncStorage.clear();
             this.props.history.push("/");
           } else {
-            alert("Algo salio mal intentalo de nuevo más tarde");
+            alert("Algo salio mal intentalo de nuevo");
           }
         })
         .catch((error) => {
+          alert("Algo salio mal intentalo de nuevo más tarde");
           console.error(error);
         });
     }

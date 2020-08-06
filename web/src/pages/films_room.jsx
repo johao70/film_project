@@ -74,44 +74,27 @@ class FilmsRoom extends Component {
               </thead>
 
               <tbody>
-                <tr className="border-b hover:bg-orange-100 bg-gray-100">
-                  <td>
-                    {sala_peliculas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.idsala_nombre}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  <td>
-                    {sala_peliculas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.idpelicula_titulo}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  <td>
-                    {sala_peliculas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.idhorario_hora}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  <td>
-                    {sala_peliculas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        <button
-                          className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
-                          onClick={() => this.deleteData(element.id)}
-                        >
-                          <i className="fas fa-trash-alt"></i>
-                        </button>
-                      </p>
-                    ))}
-                  </td>
-                </tr>
+                {sala_peliculas.map((element) => (
+                  <tr className="border-b hover:bg-orange-100 bg-gray-100" key={element.id}>
+                    <td className="p-2 px-5" >
+                      {element.idsala_nombre}
+                    </td>
+                    <td className="p-2 px-5">
+                      {element.idpelicula_titulo}
+                    </td>
+                    <td className="p-2 px-5">
+                      {element.idhorario_hora}
+                    </td>
+                    <td className="p-2 px-5">
+                      <button
+                        className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+                        onClick={() => this.deleteData(element.id)}
+                      >
+                        <i className="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <button

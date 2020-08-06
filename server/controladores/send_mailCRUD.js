@@ -9,8 +9,8 @@ const sendMail = (req, res) => {
     secure: true,
     auth: {
       type: "login",
-      user: "@gmail.com",
-      pass: "",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
@@ -29,7 +29,6 @@ const sendMail = (req, res) => {
         mensaje: `Error del servidor: ${err}`,
       });
     } else {
-      console.log(mailOptions);
       return res.status(200).json({
         ok: true,
         datos: "Correo Enviado",
@@ -38,6 +37,4 @@ const sendMail = (req, res) => {
   });
 };
 
-module.exports = {
-  sendMail,
-};
+module.exports = sendMail

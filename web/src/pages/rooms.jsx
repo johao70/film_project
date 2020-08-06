@@ -82,23 +82,6 @@ class Rooms extends Component {
     window.location.assign("http://localhost:3000/rooms");
   };
 
-  // updateData = () => {
-  //     axios.put(API+"?tabla=persona", {
-  //         persona_identificacion: this.state.persona_identificacion,
-  //         persona_nombre: this.state.persona_nombre,
-  //         persona_email: this.state.persona_email,
-  //         persona_direccion: this.state.persona_direccion,
-  //         persona_telefono: this.state.persona_telefono,
-  //         persona_clave: this.state.persona_clave
-  //     })
-  //     .then(response => {
-  //         console.log(response);
-  //     })
-  //     .catch(error => {
-  //         console.log(error);
-  //     });
-  // }
-
   render() {
     const { salas, nombre, descripcion } = this.state;
     return (
@@ -178,6 +161,7 @@ class Rooms extends Component {
             </ReactModal>
             {/* MODAL */}
           </div>
+
           <div className="px-3 py-4 flex flex-col justify-center">
             <table className="w-full text-md bg-white shadow-md rounded mb-4">
               <thead className="border-b">
@@ -188,45 +172,29 @@ class Rooms extends Component {
                   <th className="text-left p-3 px-5">
                     {this.state.table_header.descripcion}
                   </th>
-                  {/* <th></th> */}
                   <th></th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr className="border-b hover:bg-orange-100 bg-gray-100">
-                  <td>
-                    {salas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.nombre}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  <td>
-                    {salas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        {" "}
-                        {element.descripcion}{" "}
-                      </p>
-                    ))}
-                  </td>
-                  {/* <td>
-                      { salas.map(element => <p className="p-2 px-5" key={ element.id }><button onClick={ () => this.handleOpenModal(element.id) } className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button></p> )}
-                  </td> */}
-                  <td>
-                    {salas.map((element) => (
-                      <p className="p-2 px-5" key={element.id}>
-                        <button
-                          className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
-                          onClick={() => this.deleteData(element.id)}
-                        >
-                          <i className="fas fa-trash-alt"></i>
-                        </button>
-                      </p>
-                    ))}
-                  </td>
-                </tr>
+                {salas.map((element) => (
+                  <tr className="border-b hover:bg-orange-100 bg-gray-100" key={element.id}>
+                    <td className="p-2 px-5" >
+                      {element.nombre}
+                    </td>
+                    <td className="p-2 px-5">
+                      {element.descripcion}
+                    </td>
+                    <td className="p-2 px-5">
+                      <button
+                        className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+                        onClick={() => this.deleteData(element.id)}
+                      >
+                        <i className="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <button
