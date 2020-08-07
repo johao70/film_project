@@ -6,8 +6,7 @@ import FusionCharts from "fusioncharts";
 import charts from "fusioncharts/fusioncharts.charts";
 import ReactFusioncharts from "react-fusioncharts";
 import axios from "axios";
-
-const API = "http://localhost:5000/film/raw4";
+import { API_URL } from "./components/web-service";
 
 charts(FusionCharts);
 
@@ -27,7 +26,7 @@ class Report extends Component {
 
   componentDidMount() {
     axios
-      .get(API)
+      .get(`${API_URL}/raw4`)
       .then((response) => {
         this.setState({ reporte: response.data.datos });
       })
@@ -37,30 +36,29 @@ class Report extends Component {
   }
 
   render() {
-    const { reporte } = this.state;
-    const datos = {
-      chart: {
-        caption: "Reporte de Compras",
-        subcaption: `Películas más aceptadas por los usuario`,
-        showpercentvalues: "1",
-        aligncaptionwithcanvas: "0",
-        captionpadding: "0",
-        decimals: "1",
-        plottooltext: "<h1>$percentValue</h1> recaudado por <h1>$label</h1>",
-        theme: "fusion",
-        baseFont: "Verdana",
-        baseFontSize: "15",
-        baseFontColor: "#0066cc",
+    const { reporte } = this.state,
+      datos = {
+        chart: {
+          caption: "Reporte de Compras",
+          subcaption: `Películas más aceptadas por los usuario`,
+          showpercentvalues: "1",
+          aligncaptionwithcanvas: "0",
+          captionpadding: "0",
+          decimals: "1",
+          plottooltext: "<h1>$percentValue</h1> recaudado por <h1>$label</h1>",
+          theme: "fusion",
+          baseFont: "Verdana",
+          baseFontSize: "15",
+          baseFontColor: "#0066cc",
+        },
+        data: this.state.reporte,
       },
-      data: this.state.reporte,
-    };
-
-    const chartConfigs = {
-      type: "doughnut2d",
-      dataSource: datos,
-      width: "800",
-      height: "600",
-    };
+      chartConfigs = {
+        type: "doughnut2d",
+        dataSource: datos,
+        width: "800",
+        height: "600",
+      };
 
     return (
       <div className="flex">

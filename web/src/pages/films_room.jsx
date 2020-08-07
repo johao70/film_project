@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import axios from "axios";
-
-const API = "http://localhost:5000/film/";
+import { API_URL } from "./components/web-service";
 
 class FilmsRoom extends Component {
   constructor(props) {
@@ -25,17 +24,17 @@ class FilmsRoom extends Component {
 
   componentDidMount() {
     axios
-      .get(API + "raw3")
+      .get(`${API_URL}/raw3`)
       .then((response) => {
         this.setState({ sala_peliculas: response.data.datos });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
   deleteData = (value) => {
-    axios.delete(`${API}/sala_pelicula/${value}`, {
+    axios.delete(`${API_URL}/sala_pelicula/${value}`, {
       data: { id: value },
     });
     window.location.assign("http://localhost:3000/films_room");
@@ -43,6 +42,7 @@ class FilmsRoom extends Component {
 
   render() {
     const { sala_peliculas } = this.state;
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">

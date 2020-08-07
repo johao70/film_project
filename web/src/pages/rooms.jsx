@@ -5,9 +5,9 @@ import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { API_URL } from "./components/web-service";
 
 ReactModal.setAppElement("#ModalCertificate");
-const API = "http://localhost:5000/film/sala";
 
 class Rooms extends Component {
   constructor(props) {
@@ -35,12 +35,12 @@ class Rooms extends Component {
 
   componentDidMount() {
     axios
-      .get(API)
+      .get(`${API_URL}/sala`)
       .then((response) => {
         this.setState({ salas: response.data.datos });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -63,7 +63,7 @@ class Rooms extends Component {
       });
     } else {
       axios
-        .post(API, this.post)
+        .post(`${API_URL}/sala`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
             window.location.assign("http://localhost:3000/rooms");
@@ -76,7 +76,7 @@ class Rooms extends Component {
   };
 
   deleteData = (value) => {
-    axios.delete(`${API}/${value}`, {
+    axios.delete(`${API_URL}/sala/${value}`, {
       data: { id: value },
     });
     window.location.assign("http://localhost:3000/rooms");
@@ -84,6 +84,7 @@ class Rooms extends Component {
 
   render() {
     const { salas, nombre, descripcion } = this.state;
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">

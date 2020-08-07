@@ -1,12 +1,10 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Swal from "sweetalert2";
 import axios from "axios";
-
-const API = "http://localhost:5000/film/pelicula";
+import { API_URL } from "./components/web-service";
 
 class UpdateMovie extends Component {
   constructor(props) {
@@ -38,6 +36,7 @@ class UpdateMovie extends Component {
 
   saveData = (e) => {
     e.preventDefault();
+
     this.update = {
       datos: {
         id: this.state.id,
@@ -68,13 +67,10 @@ class UpdateMovie extends Component {
       });
     } else {
       axios
-        .put(`${API}/${this.state.id}`, this.update)
+        .put(`${API_URL}/pelicula/${this.state.id}`, this.update)
         .then((response) => {
-          console.log(this.update);
-          console.log(response);
           if (response.data.ok === true) {
             this.props.history.push("movies");
-            // window.location.assign("http://localhost:3000/movies");
           }
         })
         .catch((error) => {
@@ -93,6 +89,7 @@ class UpdateMovie extends Component {
       imagen,
       newImage,
     } = this.state;
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">

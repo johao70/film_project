@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import ReactModal from "react-modal";
@@ -6,9 +5,9 @@ import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { API_URL } from "./components/web-service";
 
 ReactModal.setAppElement("#ModalCertificate");
-const API = "http://localhost:5000/film/horario";
 
 class Schedules extends Component {
   constructor(props) {
@@ -34,12 +33,12 @@ class Schedules extends Component {
 
   componentDidMount() {
     axios
-      .get(API)
+      .get(`${API_URL}/horario`)
       .then((response) => {
         this.setState({ horarios: response.data.datos });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -61,7 +60,7 @@ class Schedules extends Component {
       });
     } else {
       axios
-        .post(API, this.post)
+        .post(`${API_URL}/horario`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
             window.location.assign("http://localhost:3000/schedules");
@@ -74,7 +73,7 @@ class Schedules extends Component {
   };
 
   deleteData = (value) => {
-    axios.delete(`${API}/${value}`, {
+    axios.delete(`${API_URL}/horario/${value}`, {
       data: { id: value },
     });
     window.location.assign("http://localhost:3000/schedules");
@@ -82,6 +81,7 @@ class Schedules extends Component {
 
   render() {
     const { horarios, hora } = this.state;
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">

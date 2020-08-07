@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import Sidebar from "./components/sidebar.jsx";
 import Header from "./components/header.jsx";
 import axios from "axios";
-
-const API = "http://localhost:5000/film/pelicula";
+import { API_URL } from "./components/web-service";
 
 class Movies extends Component {
   constructor(props) {
@@ -17,27 +16,27 @@ class Movies extends Component {
 
   componentDidMount() {
     axios
-      .get(API + "?estado=1")
+      .get(`${API_URL}/pelicula?estado=1`)
       .then((response) => {
         this.setState({ peliculasDisponible: response.data.datos });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
 
     axios
-      .get(API)
+      .get(`${API_URL}/pelicula`)
       .then((response) => {
         this.setState({ peliculas: response.data.datos });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
   logicDelete = (item) => {
     axios
-      .put(`${API}/${item}`, {
+      .put(`${API_URL}/pelicula/${item}`, {
         datos: {
           id: item,
           estado: 0,
@@ -47,7 +46,7 @@ class Movies extends Component {
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

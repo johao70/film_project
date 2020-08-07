@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-
-const API_LOGIN = "http://localhost:5000/film/login";
+import { API_URL } from "./components/web-service";
 
 class Login extends Component {
   constructor(props) {
@@ -31,7 +30,7 @@ class Login extends Component {
       });
     } else {
       axios
-        .post(API_LOGIN, this.state)
+        .post(`${API_URL}/login`, this.state)
         .then((response) => {
           if (response.data.mensaje === "found") {
             localStorage.setItem("correo", this.state.correo);
@@ -46,15 +45,17 @@ class Login extends Component {
             showConfirmButton: false,
             timer: 1500,
           });
-          console.log(error);
+          console.error(error);
         });
     }
   };
 
   render() {
-    const { correo, clave } = this.state;
+    const { correo, clave } = this.state,
+      backgroundPic = require("../assets/login.jpg")
+
     return (
-      <div className="bg-teal-200 h-screen flex justify-center items-center">
+      <div className="w-screen h-screen flex justify-center items-center" style={{ backgroundImage: `url(${backgroundPic})` }}>
         <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg">
           <h1 className="font-bold uppercase underline mb-4 text-center text-2xl">
             Bienvenido!

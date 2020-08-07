@@ -1,12 +1,10 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import axios from "axios";
 import Swal from "sweetalert2";
-
-const API = "http://localhost:5000/film/";
+import { API_URL } from "./components/web-service";
 
 class FilmsRoomAdd extends Component {
   constructor(props) {
@@ -27,7 +25,7 @@ class FilmsRoomAdd extends Component {
 
   componentDidMount() {
     axios
-      .get(API + "sala")
+      .get(`${API_URL}/sala`)
       .then((response) => {
         this.setState({ salas: response.data.datos });
       })
@@ -36,7 +34,7 @@ class FilmsRoomAdd extends Component {
       });
 
     axios
-      .get(API + "pelicula?estado=1")
+      .get(`${API_URL}/pelicula?estado=1`)
       .then((response) => {
         this.setState({ peliculas: response.data.datos });
       })
@@ -45,7 +43,7 @@ class FilmsRoomAdd extends Component {
       });
 
     axios
-      .get(API + "horario")
+      .get(`${API_URL}/horario`)
       .then((response) => {
         this.setState({ horarios: response.data.datos });
       })
@@ -78,7 +76,7 @@ class FilmsRoomAdd extends Component {
       });
     } else {
       axios
-        .post(API + "sala_pelicula", this.post)
+        .post(`${API_URL}/sala_pelicula`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
             this.props.history.push("films_room");
@@ -99,6 +97,7 @@ class FilmsRoomAdd extends Component {
       idpelicula,
       idhorario,
     } = this.state;
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">

@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import axios from "axios";
-
-const API = "http://localhost:5000/film/pelicula";
+import { API_URL } from "./components/web-service";
 
 class AddMovie extends Component {
   constructor(props) {
@@ -28,7 +27,6 @@ class AddMovie extends Component {
     const reader = new FileReader();
     reader.onloadend = () => {
       this.setState({ imagen: reader.result });
-      // console.log(reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -56,21 +54,21 @@ class AddMovie extends Component {
       alert("Complete todos los datos para continuar...");
     } else {
       axios
-        .post(API, this.post)
+        .post(`${API_URL}/pelicula`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
             this.props.history.push("/movies");
-            // window.location.assign("http://localhost:3000/movies");
           }
         })
         .catch((error) => {
-          alert(error);
+          console.error(error);
         });
     }
   };
 
   render() {
     const { titulo, resumen, categoria, valorBoleto, imagen } = this.state;
+
     return (
       <div className="flex">
         <div className="flex w-1/5 border-r-2 h-screen px-6">
