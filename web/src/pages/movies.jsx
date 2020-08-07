@@ -79,7 +79,7 @@ class Movies extends Component {
           <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
             <Sidebar />
           </div>
-          <div className="flex flex-col px-12 border-b-2">
+          <div className="flex flex-col px-12 w-full">
             <p className="my-5 text-2xl">Cartelera Disponible</p>
             <div className="flex flex-wrap items-center justify-center py-2">
               {peliculasDisponible.map((element) => (

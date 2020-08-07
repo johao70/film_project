@@ -44,19 +44,18 @@ class FilmsRoom extends Component {
     const { sala_peliculas } = this.state;
 
     return (
-      <div className="flex">
-        <div className="flex w-1/5 border-r-2 h-screen px-6">
-          <Sidebar />
+      <div className="flex flex-col">
+        <div>
+          <Header />
         </div>
-
-        <div className="w-full">
-          <div>
-            <Header />
+        <div className="w-full flex xl:flex-row lg:flex-row flex-col">
+          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
+            <Sidebar />
           </div>
-          <div className="flex flex-col px-12">
-            <p className="mt-5 text-2xl">Asignar Películas</p>
-          </div>
-          <div className="px-3 py-4 flex flex-col justify-center">
+          <div className="px-3 py-4 flex flex-col justify-center w-full">
+            <div className="flex flex-col px-12">
+              <p className="mt-5 text-2xl">Asignar Películas</p>
+            </div>
             <table className="w-full text-md bg-white shadow-md rounded mb-4">
               <thead className="border-b">
                 <tr>
@@ -75,16 +74,13 @@ class FilmsRoom extends Component {
 
               <tbody>
                 {sala_peliculas.map((element) => (
-                  <tr className="border-b hover:bg-orange-100 bg-gray-100" key={element.id}>
-                    <td className="p-2 px-5" >
-                      {element.idsala_nombre}
-                    </td>
-                    <td className="p-2 px-5">
-                      {element.idpelicula_titulo}
-                    </td>
-                    <td className="p-2 px-5">
-                      {element.idhorario_hora}
-                    </td>
+                  <tr
+                    className="border-b hover:bg-orange-100 bg-gray-100"
+                    key={element.id}
+                  >
+                    <td className="p-2 px-5">{element.idsala_nombre}</td>
+                    <td className="p-2 px-5">{element.idpelicula_titulo}</td>
+                    <td className="p-2 px-5">{element.idhorario_hora}</td>
                     <td className="p-2 px-5">
                       <button
                         className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"

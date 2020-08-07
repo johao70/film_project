@@ -91,22 +91,22 @@ class UpdateMovie extends Component {
     } = this.state;
 
     return (
-      <div className="flex">
-        <div className="flex w-1/5 border-r-2 h-screen px-6">
-          <Sidebar />
+      <div className="flex flex-col">
+        <div>
+          <Header />
         </div>
-        <div className="w-full">
-          <div>
-            <Header />
+        <div className="w-full flex xl:flex-row lg:flex-row flex-col">
+          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
+            <Sidebar />
           </div>
-          <div className="flex flex-col px-12 ">
+          <div className="flex flex-col px-12 w-full">
             <p className="my-5 text-2xl">Modificar pelicula.</p>
             <form
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mx-8"
               onSubmit={this.saveData}
             >
-              <div className="flex">
-                <div className="flex flex-col w-3/4 mb-4">
+              <div className="flex xl:flex-row lg:flex-row flex-col">
+                <div className="flex flex-col xl:w-3/4 lg:w-3/4 w-full mb-4">
                   <div className="w-full px-2">
                     <label
                       className="block uppercase tracking-wide text-xs font-bold mb-2"
@@ -178,23 +178,8 @@ class UpdateMovie extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/4">
-                  {/* <div className="px-3">
-                    <label
-                      className="block uppercase tracking-wide text-xs font-bold mb-2"
-                      htmlFor="imagen"
-                    >
-                      Portada
-                    </label>
-                    <input
-                      className="appearance-none block w-full border rounded py-3 px-4 mb-3"
-                      name="imagen"
-                      type="file"
-                      defaultValue={imagen}
-                      onChange={this.onFileChange}
-                    />
-                  </div> */}
-                  <div className="px-1">
+                <div className="xl:w-1/4 lg:w-1/4 w-full">
+                  <div className="w-full flex justify-center">
                     {newImage ? (
                       <img alt="preview" className="w-64 h-64" src={imagen} />
                     ) : (
@@ -205,7 +190,6 @@ class UpdateMovie extends Component {
                       />
                     )}
                   </div>
-                  <div className="px-1"></div>
                 </div>
               </div>
               <p className="text-red text-xs italic">

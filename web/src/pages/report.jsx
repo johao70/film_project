@@ -56,24 +56,24 @@ class Report extends Component {
       chartConfigs = {
         type: "doughnut2d",
         dataSource: datos,
-        width: "800",
+        width: "100%",
         height: "600",
       };
 
     return (
-      <div className="flex">
-        <div className="flex w-1/5 border-r-2 h-screen px-6">
-          <Sidebar />
+      <div className="flex flex-col">
+        <div>
+          <Header />
         </div>
-        <div className="w-full">
-          <div>
-            <Header />
+        <div className="w-full flex xl:flex-row lg:flex-row flex-col">
+          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
+            <Sidebar />
           </div>
-          <div className="flex flex-col px-12">
-            <div className="flex flex-col px-12">
+          <div className="flex flex-col px-12 w-full">
+            <div className="flex flex-col">
               <p className="mt-5 text-2xl">Reporte de compras</p>
             </div>
-            <div className="px-3 py-4 flex flex-col justify-center">
+            <div className="flex flex-col justify-center">
               <table className="w-full text-md bg-white shadow-md rounded mb-4">
                 <thead className="border-b">
                   <tr>
@@ -94,19 +94,14 @@ class Report extends Component {
 
                 <tbody>
                   {reporte.map((element) => (
-                    <tr className="border-b hover:bg-orange-100 bg-gray-100" key={element.label}>
-                      <td className="p-2 px-5" >
-                        {element.label}
-                      </td>
-                      <td className="p-2 px-5">
-                        {element.valorBoleto}
-                      </td>
-                      <td className="p-2 px-5">
-                        {element.value}
-                      </td>
-                      <td className="p-2 px-5">
-                        $ {element.recaudado}
-                      </td>
+                    <tr
+                      className="border-b hover:bg-orange-100 bg-gray-100"
+                      key={element.label}
+                    >
+                      <td className="p-2 px-5">{element.label}</td>
+                      <td className="p-2 px-5">{element.valorBoleto}</td>
+                      <td className="p-2 px-5">{element.value}</td>
+                      <td className="p-2 px-5">$ {element.recaudado}</td>
                     </tr>
                   ))}
                 </tbody>
