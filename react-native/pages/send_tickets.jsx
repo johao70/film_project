@@ -39,6 +39,8 @@ export default class SendTickets extends Component {
   };
 
   saveData = () => {
+    console.log(this.state);
+
     this.post = {
       datos: {
         correo: this.state.correo,
@@ -63,7 +65,6 @@ export default class SendTickets extends Component {
         .then(async (response) => {
           if (await response.data.ok) {
             alert("Correo Enviado!");
-            console.log(response);
             await AsyncStorage.clear();
             this.props.history.push("/");
           } else {

@@ -18,7 +18,7 @@ const sendMail = (req, res) => {
     from: "cine@gmail.com",
     to: datos.correo,
     subject: "Comprobante",
-    html: `<div><h1>CINE</h1><br><h2>Sala: ${datos.sala}</h2><br><h2>Película: ${datos.pelicula}</h2><br><h2>Horario: ${datos.horario}</h2><br><h2>Número de Boletos: ${datos.boletos}</h2></div>`,
+    html: `<div><h1>CINE</h1><br><h2>Sala: ${datos.sala}</h2><br><h2>Película: ${datos.pelicula}</h2><br><h2>Horario: ${datos.horario}</h2><br><h2>Número de Boletos: ${datos.numero_boletos}</h2></div>`,
   };
 
   transporter.sendMail(mailOptions, (err, data) => {
@@ -37,4 +37,4 @@ const sendMail = (req, res) => {
   });
 };
 
-module.exports = sendMail
+module.exports = sendMail;
