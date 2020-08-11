@@ -15,6 +15,8 @@ import FilmsRoomAdd from "./pages/films_room_add.jsx";
 import Report from "./pages/report.jsx";
 import Page404 from "./pages/Page404.jsx";
 
+import Test from "./pages/asd.js";
+
 class App extends Component {
   render() {
     return (
@@ -30,6 +32,7 @@ class App extends Component {
           <Route path="/films_room" component={FilmsRoom} />
           <Route path="/films_room_add" component={FilmsRoomAdd} />
           <Route path="/report" component={Report} />
+          <Route path="/prueba" component={Test} />
           <Route component={Page404} />
         </Switch>
       </Router>

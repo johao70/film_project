@@ -52,10 +52,13 @@ class Login extends Component {
 
   render() {
     const { correo, clave } = this.state,
-      backgroundPic = require("../assets/login.jpg")
+      backgroundPic = require("../images/background.jpg");
 
     return (
-      <div className="w-screen h-screen flex justify-center items-center" style={{ backgroundImage: `url(${backgroundPic})` }}>
+      <div
+        className="w-screen h-screen flex justify-center items-center"
+        style={{ backgroundImage: `url(${backgroundPic})` }}
+      >
         <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg">
           <h1 className="font-bold uppercase underline mb-4 text-center text-2xl">
             Bienvenido!

@@ -14,6 +14,7 @@ export default class SendTickets extends Component {
       pelicula: "",
       horario: "",
       numero_boletos: "",
+      sala_pelicula: [],
     };
   }
 
@@ -27,20 +28,34 @@ export default class SendTickets extends Component {
 
   loadUserPreferences = async () => {
     try {
-      const pelicula = await AsyncStorage.getItem("peliculaTitulo"),
-        horario = await AsyncStorage.getItem("horaHorario"),
-        sala = await AsyncStorage.getItem("salaNombre"),
+      const idpelicula = await AsyncStorage.getItem("idPelicula"),
         numero_boletos = await AsyncStorage.getItem("numero_boletos");
 
-      this.setState({ pelicula, horario, sala, numero_boletos });
+      await axios
+        .get(`${API_URL}/raw2?idpelicula=${idpelicula}`)
+        .then((response) => {
+          response.data.datos.forEach((element) => {
+            if (element.idpelicula == idpelicula) {
+              this.setState({
+                sala: element.idsala_nombre,
+                pelicula: element.idpelicula_titulo,
+                horario: element.idhorario_hora,
+                numero_boletos,
+              });
+            } else {
+              alert("false");
+            }
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } catch (err) {
       console.error(err);
     }
   };
 
   saveData = () => {
-    console.log(this.state);
-
     this.post = {
       datos: {
         correo: this.state.correo,

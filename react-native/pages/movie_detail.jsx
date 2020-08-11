@@ -15,7 +15,7 @@ export default class MovieDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: "",
+      checked: false,
       pelicula: [],
       sala_peliculas: [],
     };
@@ -47,18 +47,16 @@ export default class MovieDetail extends Component {
       });
   };
 
-  saveDataSelected = async (idSalaPelicula, idPelicula, idHorario, idSala) => {
+  saveDataSelected = async (idSalaPelicula, idPelicula) => {
+    this.setState({ checked: idSalaPelicula });
+
     try {
       await AsyncStorage.setItem("idSalaPelicula", idSalaPelicula.toString());
       await AsyncStorage.setItem("idPelicula", idPelicula.toString());
 
-      await AsyncStorage.setItem("peliculaTitulo", idHorario.toString());
-      await AsyncStorage.setItem("horaHorario", idHorario.toString());
-      await AsyncStorage.setItem("salaNombre", idSala.toString());
-
       //AGREGAR MENSAJE DE CONFIRMACION SEGURO DE ESCOJER ESE HORARIO
       this.props.history.push("/buy_tickets");
-    } catch (error) {
+    } catch (err) {
       console.error(err);
       this.clearLocalStorage();
     }
@@ -135,13 +133,7 @@ export default class MovieDetail extends Component {
                           checked === element.id ? "checked" : "unchecked"
                         }
                         onPress={() => {
-                          this.setState({ checked: element.id }),
-                            this.saveDataSelected(
-                              element.id,
-                              element.idpelicula,
-                              element.idhorario,
-                              element.idsala
-                            );
+                          this.saveDataSelected(element.id, element.idpelicula);
                         }}
                       />
                       <View className="flex flex-col">
