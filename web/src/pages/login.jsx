@@ -52,7 +52,7 @@ class Login extends Component {
 
   render() {
     const { correo, clave } = this.state,
-      backgroundPic = require("../images/background.jpg");
+      backgroundPic = require("../assets/background.jpg");
 
     return (
       <div

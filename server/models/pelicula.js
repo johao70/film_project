@@ -21,7 +21,7 @@ module.exports = db.sequelize.define("pelicula", {
     type: Sequelize.STRING,
   },
   imagen: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT("long"),
   },
   estado: {
     type: Sequelize.BOOLEAN,

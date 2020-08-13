@@ -65,7 +65,7 @@ class Register extends Component {
 
   render() {
     const { nombre, correo, clave } = this.state,
-      backgroundPic = require("../images/background.jpg");
+      backgroundPic = require("../assets/background.jpg");
 
     return (
       <div
