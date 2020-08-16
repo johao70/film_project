@@ -18,7 +18,7 @@ class Report extends Component {
         pelicula: "Película",
         boletos: "Número de Boletos",
         precio: "Valor Unitario",
-        total: "Total Recaudado",
+        total: "Total Recaudado por Película",
       },
       reporte: [],
     };

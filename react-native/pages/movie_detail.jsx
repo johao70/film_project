@@ -54,7 +54,6 @@ export default class MovieDetail extends Component {
       await AsyncStorage.setItem("idSalaPelicula", idSalaPelicula.toString());
       await AsyncStorage.setItem("idPelicula", idPelicula.toString());
 
-      //AGREGAR MENSAJE DE CONFIRMACION SEGURO DE ESCOJER ESE HORARIO
       this.props.history.push("/buy_tickets");
     } catch (err) {
       console.error(err);
@@ -97,25 +96,16 @@ export default class MovieDetail extends Component {
                         image={{ uri: `${element.imagen}` }}
                       />
                     </View>
-                    <View className="flex w-1/2 h-64 py-6 bg-white">
-                      <Text>Resumen: {element.resumen}</Text>
-                      <Text>Categoría: {element.categoria}</Text>
-                      <Text>Valor de Boleto: {element.valorBoleto}</Text>
+                    <View className="flex w-1/2 py-2 bg-white rounded-lg px-3">
+                      <Text className="font-bold text-2xl">Resumen:</Text>
+                      <Text className="text-justify">{element.resumen}</Text>
+                      <Text className="font-bold text-2xl">Categoría:</Text>
+                      <Text>{element.categoria}</Text>
+                      <Text className="font-bold text-2xl">
+                        Valor de Boleto:
+                      </Text>
+                      <Text>$ {element.valorBoleto}</Text>
                     </View>
-                    {/* <Card
-                      title={element.titulo}
-                      image={{ uri: `${element.imagen}` }}
-                    >
-                      <Text style={{ marginBottom: 10 }}>
-                        Resumen: {element.resumen}
-                      </Text>
-                      <Text style={{ marginBottom: 10 }}>
-                        Categoría: {element.categoria}
-                      </Text>
-                      <Text style={{ marginBottom: 10 }}>
-                        Valor de Boleto: {element.valorBoleto}
-                      </Text>
-                    </Card> */}
                   </View>
                 ))}
               </View>
