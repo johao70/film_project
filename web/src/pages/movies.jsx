@@ -10,7 +10,6 @@ class Movies extends Component {
     super(props);
     this.state = {
       peliculasDisponible: [],
-      peliculas: [],
     };
   }
 
@@ -23,15 +22,6 @@ class Movies extends Component {
       .catch((error) => {
         console.error(error);
       });
-
-    // axios
-    //   .get(`${API_URL}/pelicula`)
-    //   .then((response) => {
-    //     this.setState({ peliculas: response.data.datos });
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   }
 
   logicDelete = (item) => {
@@ -68,10 +58,7 @@ class Movies extends Component {
   };
 
   render() {
-    const {
-      peliculasDisponible,
-      // peliculas
-    } = this.state;
+    const { peliculasDisponible } = this.state;
 
     return (
       <div className="flex flex-col">
@@ -148,42 +135,6 @@ class Movies extends Component {
                 </div>
               ))}
             </div>
-
-            {/* <hr />
-
-            <p className="my-5 text-2xl">Historial Cartelera</p>
-            <div className="flex flex-wrap items-center justify-center py-2">
-              {peliculas.map((element) => (
-                <div
-                  className="max-w-md flex border rounded-md mx-2"
-                  key={element.id}
-                >
-                  <img
-                    className="w-48"
-                    src={element.imagen}
-                    alt={element.titulo}
-                  />
-                  <div className="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                    <div className="mb-8">
-                      <div className="text-black font-bold text-xl mb-2">
-                        {element.titulo}
-                      </div>
-                      <p className="text-grey-darker text-base">
-                        {element.resumen}
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <i className="fas fa-archive text-2xl mr-2"></i>
-                      <div className="text-sm">
-                        <p className="text-black leading-none">
-                          {element.categoria}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>

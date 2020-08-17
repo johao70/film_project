@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import {
-  ImageBackground,
   ScrollView,
   TextInput,
   AsyncStorage,
-  Button,
+  TouchableOpacity,
 } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card } from "react-native-elements";
@@ -97,64 +96,65 @@ export default class BuyTickets extends Component {
     const { pelicula } = this.state;
 
     return (
-      <ImageBackground
-        style={{ width: "100%", height: "100%" }}
-        source={require("../assets/bg.jpg")}
-      >
-        <View>
-          <View className="h-24 flex justify-center">
-            <Text className="text-center text-white text-4xl font-bold border-b-4 border-white">
-              DETALLES DE COMPRA
-            </Text>
-          </View>
-
-          <ScrollView vertical={true}>
-            {pelicula.map((element) => (
-              <View key={element.id} className="w-full flex flex-row">
-                <View className="flex w-1/2 h-64">
-                  <Card
-                    title={element.titulo}
-                    image={{ uri: `${element.imagen}` }}
-                  />
-                </View>
-                <View className="flex w-1/2 py-2 bg-white rounded-lg px-3">
-                  <Text className="font-bold text-2xl">Resumen:</Text>
-                  <Text className="text-justify">{element.resumen}</Text>
-                  <Text className="font-bold text-2xl">Categoría:</Text>
-                  <Text>{element.categoria}</Text>
-                  <Text className="font-bold text-2xl">Valor de Boleto:</Text>
-                  <Text>$ {element.valorBoleto}</Text>
-                </View>
-              </View>
-            ))}
-
-            <Card title="Número de boletos">
-              <TextInput
-                placeholder="Ingrese el número de boletos que desea"
-                underlineColorAndroid="transparent"
-                keyboardType={"numeric"}
-                onChangeText={this.handleNumeroBoletos}
-              />
-            </Card>
-
-            <View className="py-6 items-center">
-              <Button
-                title="Volver a la Cartelera"
-                onPress={() => {
-                  this.asyncstorageClear();
-                }}
-              />
-
-              <Button
-                title="Continuar"
-                onPress={() => {
-                  this.saveData();
-                }}
-              />
-            </View>
-          </ScrollView>
+      <View>
+        <View className="h-24 flex justify-center">
+          <Text className="text-center text-white text-2xl font-bold border-b-4 border-white">
+            DETALLES DE COMPRA
+          </Text>
         </View>
-      </ImageBackground>
+
+        <ScrollView vertical={true}>
+          {pelicula.map((element) => (
+            <View key={element.id} className="w-full flex flex-row">
+              <View className="flex w-1/2 h-64">
+                <Card
+                  title={element.titulo}
+                  image={{ uri: `${element.imagen}` }}
+                />
+              </View>
+              <View className="flex w-1/2 py-2 bg-white rounded-lg px-3">
+                <Text className="font-bold text-xl">Resumen:</Text>
+                <Text className="text-justify">{element.resumen}</Text>
+                <Text className="font-bold text-xl">Categoría:</Text>
+                <Text>{element.categoria}</Text>
+                <Text className="font-bold text-xl">Valor de Boleto:</Text>
+                <Text>$ {element.valorBoleto}</Text>
+              </View>
+            </View>
+          ))}
+
+          <Card title="Número de boletos">
+            <TextInput
+              placeholder="Ingrese el número de boletos que desea"
+              underlineColorAndroid="transparent"
+              keyboardType={"numeric"}
+              onChangeText={this.handleNumeroBoletos}
+            />
+          </Card>
+
+          <View className="py-6 items-center flex flex-row justify-center">
+            <TouchableOpacity
+              onPress={() => {
+                this.asyncstorageClear();
+              }}
+            >
+              <Text className="border bg-red-500 p-3 rounded-lg text-white font-bold mx-6">
+                Volver a la Cartelera
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                this.saveData();
+              }}
+            >
+              <Text className="border bg-green-500 p-3 rounded-lg text-white font-bold mx-6">
+                Continuar
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  ImageBackground,
-  ScrollView,
-  AsyncStorage,
-  TouchableOpacity,
-} from "react-native";
+import { ScrollView, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card } from "react-native-elements";
 import axios from "axios";
@@ -46,39 +41,34 @@ export default class Index extends Component {
     const { peliculas } = this.state;
 
     return (
-      <ImageBackground
-        style={{ width: "100%", height: "100%" }}
-        source={require("../assets/bg.jpg")}
-      >
-        <View className="items-center">
-          <View className="w-56 h-24 flex justify-center">
-            <Text
-              className="text-center text-white text-4xl font-bold border-b-4 border-white"
-              onPress={() => this.getMovies()}
-            >
-              CARTELERA
-            </Text>
-          </View>
-
-          <ScrollView vertical={true}>
-            <View className="flex flex-row flex-wrap justify-center">
-              {peliculas.map((element) => (
-                <TouchableOpacity
-                  key={element.id}
-                  onPress={() => this.asyncstorageSave(element.id)}
-                >
-                  <View className="w-48 h-64">
-                    <Card
-                      title={element.titulo}
-                      image={{ uri: `${element.imagen}` }}
-                    />
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
+      <View className="items-center">
+        <View className="w-56 h-24 flex justify-center">
+          <Text
+            className="text-center text-white text-2xl font-bold border-b-4 border-white"
+            onPress={() => this.getMovies()}
+          >
+            CARTELERA
+          </Text>
         </View>
-      </ImageBackground>
+
+        <ScrollView vertical={true}>
+          <View className="flex flex-row flex-wrap justify-center">
+            {peliculas.map((element) => (
+              <TouchableOpacity
+                key={element.id}
+                onPress={() => this.asyncstorageSave(element.id)}
+              >
+                <View className="w-48 h-64">
+                  <Card
+                    title={element.titulo}
+                    image={{ uri: `${element.imagen}` }}
+                  />
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

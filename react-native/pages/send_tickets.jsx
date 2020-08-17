@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ImageBackground, TextInput, AsyncStorage, Button } from "react-native";
+import { TextInput, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card } from "react-native-elements";
 import axios from "axios";
@@ -55,7 +55,7 @@ export default class SendTickets extends Component {
     }
   };
 
-  saveData = () => {
+  saveData = async () => {
     this.post = {
       datos: {
         correo: this.state.correo,
@@ -75,7 +75,7 @@ export default class SendTickets extends Component {
     ) {
       alert("Algo salio mal, verifica tu correo");
     } else {
-      axios
+      await axios
         .post(`${API_URL}/send_mail`, this.post)
         .then(async (response) => {
           if (await response.data.ok) {
@@ -95,42 +95,44 @@ export default class SendTickets extends Component {
 
   render() {
     return (
-      <ImageBackground
-        style={{ width: "100%", height: "100%" }}
-        source={require("../assets/bg.jpg")}
-      >
-        <View>
-          <View className="h-24 flex justify-center">
-            <Text className="text-center text-white text-4xl font-bold border-b-4 border-white">
-              ENVIAR COMPROBANTE
-            </Text>
-          </View>
-
-          <Card title="Dirección de Correo Electrónico">
-            <TextInput
-              placeholder="tucorreo@gmail.com"
-              underlineColorAndroid="transparent"
-              keyboardType={"default"}
-              onChangeText={this.handleCorreo}
-            />
-          </Card>
-
-          <View className="py-6 items-center">
-            <Button
-              title="Enviar Comprobante"
-              onPress={() => {
-                this.saveData();
-              }}
-            />
-            <Button
-              title="Regresar a cartelera"
-              onPress={() => {
-                AsyncStorage.clear(), this.props.history.push("/");
-              }}
-            />
-          </View>
+      <View>
+        <View className="h-24 flex justify-center">
+          <Text className="text-center text-white text-2xl font-bold border-b-4 border-white">
+            ENVIAR COMPROBANTE
+          </Text>
         </View>
-      </ImageBackground>
+
+        <Card title="Dirección de Correo Electrónico">
+          <TextInput
+            placeholder="tucorreo@gmail.com"
+            underlineColorAndroid="transparent"
+            keyboardType={"default"}
+            onChangeText={this.handleCorreo}
+          />
+        </Card>
+
+        <View className="py-6 items-center flex flex-row justify-center">
+          <TouchableOpacity
+            onPress={() => {
+              AsyncStorage.clear(), this.props.history.push("/");
+            }}
+          >
+            <Text className="border bg-red-500 p-3 rounded-lg text-white font-bold mx-6">
+              Volver a la Cartelera
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              this.saveData();
+            }}
+          >
+            <Text className="border bg-green-500 p-3 rounded-lg text-white font-bold mx-6">
+              Enviar Comprobante
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 }
