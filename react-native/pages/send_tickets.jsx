@@ -55,7 +55,7 @@ export default class SendTickets extends Component {
     }
   };
 
-  saveData = async () => {
+  saveData = () => {
     this.post = {
       datos: {
         correo: this.state.correo,
@@ -75,7 +75,7 @@ export default class SendTickets extends Component {
     ) {
       alert("Algo salio mal, verifica tu correo");
     } else {
-      await axios
+      axios
         .post(`${API_URL}/send_mail`, this.post)
         .then(async (response) => {
           if (await response.data.ok) {
@@ -87,7 +87,8 @@ export default class SendTickets extends Component {
           }
         })
         .catch((error) => {
-          alert("Algo salio mal intentalo de nuevo más tarde");
+          // alert("Algo salio mal intentalo de nuevo más tarde");
+          alert(error);
           console.error(error);
         });
     }
