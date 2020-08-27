@@ -87,8 +87,7 @@ export default class SendTickets extends Component {
           }
         })
         .catch((error) => {
-          // alert("Algo salio mal intentalo de nuevo más tarde");
-          alert(error);
+          alert("Algo salio mal intentalo de nuevo más tarde");
           console.error(error);
         });
     }
