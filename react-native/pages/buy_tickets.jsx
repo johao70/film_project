@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { View, Text } from "react-native-tailwind";
-import { Card } from "react-native-elements";
+import { Card, Image } from "react-native-elements";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
@@ -35,10 +35,10 @@ export default class BuyTickets extends Component {
       const idSalaPelicula = await AsyncStorage.getItem("idSalaPelicula");
       this.setState({ idPelicula, idSalaPelicula });
 
-      await axios
+      axios
         .get(`${API_URL}/pelicula?id=${this.state.idPelicula}`)
-        .then((response) => {
-          this.setState({ pelicula: response.data.datos });
+        .then(async (response) => {
+          this.setState({ pelicula: await response.data.datos });
         })
         .catch((error) => {
           console.error(error);
@@ -49,9 +49,9 @@ export default class BuyTickets extends Component {
   };
 
   saveData = async () => {
-    await AsyncStorage.setItem(
+    AsyncStorage.setItem(
       "numero_boletos",
-      this.state.numero_boletos.toString()
+      await this.state.numero_boletos.toString()
     );
 
     this.post = {
@@ -64,8 +64,8 @@ export default class BuyTickets extends Component {
     if (this.post.datos.numero_boletos) {
       axios
         .post(`${API_URL}/compra`, this.post)
-        .then((response) => {
-          if (response.data.ok) {
+        .then(async (response) => {
+          if (await response.data.ok) {
             alert(
               "Compra exitosa, por favor ingrese su correo electrónico para enviar su comprobante"
             );
@@ -107,10 +107,14 @@ export default class BuyTickets extends Component {
           {pelicula.map((element) => (
             <View key={element.id} className="w-full flex flex-row">
               <View className="flex w-1/2 h-64">
-                <Card
-                  title={element.titulo}
-                  image={{ uri: `${element.imagen}` }}
-                />
+                <Card>
+                  <Card.Title>{element.titulo}</Card.Title>
+                  <Card.Divider />
+                  <Image
+                    source={{ uri: `${element.imagen}` }}
+                    style={{ width: 200, height: 150 }}
+                  />
+                </Card>
               </View>
               <View className="flex w-1/2 py-2 bg-white rounded-lg px-3">
                 <Text className="font-bold text-xl">Resumen:</Text>
@@ -123,7 +127,9 @@ export default class BuyTickets extends Component {
             </View>
           ))}
 
-          <Card title="Número de boletos">
+          <Card>
+            <Card.Title>Número de boletos</Card.Title>
+            <Card.Divider />
             <TextInput
               placeholder="Ingrese el número de boletos que desea"
               underlineColorAndroid="transparent"

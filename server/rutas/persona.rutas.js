@@ -2,14 +2,13 @@ const express = require("express");
 
 let api = express.Router(),
   personaControlador = require("../controladores/personaCRUD"),
-  send_mail = require("../controladores/send_mailCRUD");
-
+  mail = require("../controladores/mailControlador");
 
 api.get("/persona", personaControlador.getData);
 
 api.post("/persona", personaControlador.postData);
 api.post("/login", personaControlador.login);
-api.post("/send_mail", send_mail);
+api.post("/send_mail", mail.mail1);
 
 api.put("/persona/:id", personaControlador.putData);
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TextInput, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
-import { Card } from "react-native-elements";
+import { Card, Image } from "react-native-elements";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
@@ -55,6 +55,43 @@ export default class SendTickets extends Component {
     }
   };
 
+  enviarCorreo = () => {
+    let data = {
+      service_id: "service_t55aeno",
+      template_id: "template_8u5xdl7",
+      user_id: "user_cPpOrTiUwx4ZKHFw0anIh",
+      template_params: {
+        correo: this.state.correo,
+        sala: this.state.sala,
+        pelicula: this.state.pelicula,
+        horario: this.state.horario,
+        numero_boletos: this.state.numero_boletos,
+      },
+    };
+
+    if (
+      !data.template_params.correo ||
+      !data.template_params.sala ||
+      !data.template_params.pelicula ||
+      !data.template_params.horario ||
+      !data.template_params.numero_boletos
+    ) {
+      alert("Algo salio mal, verifica tu correo");
+    } else {
+      axios
+        .post("https://api.emailjs.com/api/v1.0/email/send", data)
+        .then(async (response) => {
+          alert("Correo Enviado!");
+          await AsyncStorage.clear();
+          this.props.history.push("/");
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Algo salio mal intentalo de nuevo más tarde");
+        });
+    }
+  };
+
   saveData = () => {
     this.post = {
       datos: {
@@ -102,7 +139,9 @@ export default class SendTickets extends Component {
           </Text>
         </View>
 
-        <Card title="Dirección de Correo Electrónico">
+        <Card>
+          <Card.Title>Dirección de Correo Electrónico</Card.Title>
+          <Card.Divider />
           <TextInput
             placeholder="tucorreo@gmail.com"
             underlineColorAndroid="transparent"
@@ -124,7 +163,7 @@ export default class SendTickets extends Component {
 
           <TouchableOpacity
             onPress={() => {
-              this.saveData();
+              this.enviarCorreo();
             }}
           >
             <Text className="border bg-green-500 p-3 rounded-lg text-white font-bold mx-6">

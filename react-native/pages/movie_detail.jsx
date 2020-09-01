@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ScrollView, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
-import { Card } from "react-native-elements";
+import { Card, Image } from "react-native-elements";
 import { RadioButton } from "react-native-paper";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
@@ -23,19 +23,19 @@ export default class MovieDetail extends Component {
   movieDetails = async () => {
     const idpelicula = await AsyncStorage.getItem("idpelicula");
 
-    await axios
+    axios
       .get(`${API_URL}/pelicula?id=${idpelicula}`)
-      .then((response) => {
-        this.setState({ pelicula: response.data.datos });
+      .then(async (response) => {
+        this.setState({ pelicula: await response.data.datos });
       })
       .catch((error) => {
         console.error(error);
       });
 
-    await axios
+    axios
       .get(`${API_URL}/raw2?idpelicula=${idpelicula}`)
-      .then((response) => {
-        this.setState({ sala_peliculas: response.data.datos });
+      .then(async (response) => {
+        this.setState({ sala_peliculas: await response.data.datos });
       })
       .catch((error) => {
         console.error(error);
@@ -43,11 +43,11 @@ export default class MovieDetail extends Component {
   };
 
   saveDataSelected = async (idSalaPelicula, idPelicula) => {
-    this.setState({ checked: idSalaPelicula });
+    this.setState({ checked: await idSalaPelicula });
 
     try {
-      await AsyncStorage.setItem("idSalaPelicula", idSalaPelicula.toString());
-      await AsyncStorage.setItem("idPelicula", idPelicula.toString());
+      AsyncStorage.setItem("idSalaPelicula", await idSalaPelicula.toString());
+      AsyncStorage.setItem("idPelicula", await idPelicula.toString());
 
       this.props.history.push("/buy_tickets");
     } catch (err) {
@@ -56,9 +56,9 @@ export default class MovieDetail extends Component {
     }
   };
 
-  clearLocalStorage = () => {
+  clearLocalStorage = async () => {
     try {
-      AsyncStorage.clear();
+      await AsyncStorage.clear();
       this.props.history.push("/");
     } catch (error) {
       console.error(error);
@@ -82,10 +82,14 @@ export default class MovieDetail extends Component {
               {pelicula.map((element) => (
                 <View key={element.id} className="w-full flex flex-row">
                   <View className="flex w-1/2 h-64">
-                    <Card
-                      title={element.titulo}
-                      image={{ uri: `${element.imagen}` }}
-                    />
+                    <Card>
+                      <Card.Title>{element.titulo}</Card.Title>
+                      <Card.Divider />
+                      <Image
+                        source={{ uri: `${element.imagen}` }}
+                        style={{ width: 200, height: 150 }}
+                      />
+                    </Card>
                   </View>
                   <View className="flex w-1/2 py-2 bg-white rounded-lg px-3">
                     <Text className="font-bold text-xl">Resumen:</Text>
@@ -100,7 +104,9 @@ export default class MovieDetail extends Component {
             </View>
 
             <View>
-              <Card title="Horarios Disponibles">
+              <Card>
+                <Card.Title>Horarios Disponibles</Card.Title>
+                <Card.Divider />
                 {sala_peliculas.map((element) => (
                   <View
                     key={element.id}

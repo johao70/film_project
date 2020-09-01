@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ScrollView, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
-import { Card } from "react-native-elements";
+import { Card, Image } from "react-native-elements";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
@@ -17,11 +17,11 @@ export default class Index extends Component {
     this.getMovies();
   }
 
-  getMovies = async () => {
-    await axios
+  getMovies = () => {
+    axios
       .get(`${API_URL}/pelicula?estado=1`)
-      .then((response) => {
-        this.setState({ peliculas: response.data.datos });
+      .then(async (response) => {
+        this.setState({ peliculas: await response.data.datos });
       })
       .catch((error) => {
         console.error(error);
@@ -59,10 +59,14 @@ export default class Index extends Component {
                 onPress={() => this.asyncstorageSave(element.id)}
               >
                 <View className="w-48 h-64">
-                  <Card
-                    title={element.titulo}
-                    image={{ uri: `${element.imagen}` }}
-                  />
+                  <Card>
+                    <Card.Title>{element.titulo}</Card.Title>
+                    <Card.Divider />
+                    <Image
+                      source={{ uri: `${element.imagen}` }}
+                      style={{ width: 200, height: 200 }}
+                    />
+                  </Card>
                 </View>
               </TouchableOpacity>
             ))}
