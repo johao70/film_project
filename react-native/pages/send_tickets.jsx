@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TextInput, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
-import { Card, Image } from "react-native-elements";
+import { Card } from "react-native-elements";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
@@ -92,43 +92,43 @@ export default class SendTickets extends Component {
     }
   };
 
-  saveData = () => {
-    this.post = {
-      datos: {
-        correo: this.state.correo,
-        sala: this.state.sala,
-        pelicula: this.state.pelicula,
-        horario: this.state.horario,
-        numero_boletos: this.state.numero_boletos,
-      },
-    };
+  // saveData = () => {
+  //   this.post = {
+  //     datos: {
+  //       correo: this.state.correo,
+  //       sala: this.state.sala,
+  //       pelicula: this.state.pelicula,
+  //       horario: this.state.horario,
+  //       numero_boletos: this.state.numero_boletos,
+  //     },
+  //   };
 
-    if (
-      !this.post.datos.correo ||
-      !this.post.datos.sala ||
-      !this.post.datos.pelicula ||
-      !this.post.datos.horario ||
-      !this.post.datos.numero_boletos
-    ) {
-      alert("Algo salio mal, verifica tu correo");
-    } else {
-      axios
-        .post(`${API_URL}/send_mail`, this.post)
-        .then(async (response) => {
-          if (await response.data.ok) {
-            alert("Correo Enviado!");
-            await AsyncStorage.clear();
-            this.props.history.push("/");
-          } else {
-            alert("Algo salio mal intentalo de nuevo");
-          }
-        })
-        .catch((error) => {
-          alert("Algo salio mal intentalo de nuevo más tarde");
-          console.error(error);
-        });
-    }
-  };
+  //   if (
+  //     !this.post.datos.correo ||
+  //     !this.post.datos.sala ||
+  //     !this.post.datos.pelicula ||
+  //     !this.post.datos.horario ||
+  //     !this.post.datos.numero_boletos
+  //   ) {
+  //     alert("Algo salio mal, verifica tu correo");
+  //   } else {
+  //     axios
+  //       .post(`${API_URL}/send_mail`, this.post)
+  //       .then(async (response) => {
+  //         if (await response.data.ok) {
+  //           alert("Correo Enviado!");
+  //           await AsyncStorage.clear();
+  //           this.props.history.push("/");
+  //         } else {
+  //           alert("Algo salio mal intentalo de nuevo");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         alert("Algo salio mal intentalo de nuevo más tarde");
+  //         console.error(error);
+  //       });
+  //   }
+  // };
 
   render() {
     return (

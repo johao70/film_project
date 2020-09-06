@@ -8,7 +8,7 @@ api.get("/persona", personaControlador.getData);
 
 api.post("/persona", personaControlador.postData);
 api.post("/login", personaControlador.login);
-api.post("/send_mail", mail.mail1);
+// api.post("/send_mail", mail.mail1);
 
 api.put("/persona/:id", personaControlador.putData);
 
