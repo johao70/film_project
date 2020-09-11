@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ScrollView, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card, Image } from "react-native-elements";
-import { RadioButton } from "react-native-paper";
+import RadioForm from "react-native-simple-radio-button";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
@@ -112,9 +112,8 @@ export default class MovieDetail extends Component {
                     key={element.id}
                     className="flex flex-row flex-wrap items-center py-4"
                   >
-                    <RadioButton
-                      value={element.id}
-                      status={checked === element.id ? "checked" : "unchecked"}
+                    <RadioForm
+                      radio_props={[{ value: element.id }]}
                       onPress={() => {
                         this.saveDataSelected(element.id, element.idpelicula);
                       }}
