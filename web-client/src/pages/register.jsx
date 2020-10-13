@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-
 import { useHistory } from "react-router-dom";
+
 import axios from "axios";
 import Swal from "sweetalert2";
-
 import { API_URL } from "./components/web-service";
 
 const backgroundPic = require("../assets/background.jpg");
 
-const Login = () => {
-  const [email, SetEmail] = useState(""),
+const Register = () => {
+  const [name, SetName] = useState(""),
+    [email, SetEmail] = useState(""),
     [password, SetPassword] = useState(""),
     router = useHistory();
 
-  const loginAccess = (event) => {
+  const registerUser = (event) => {
     event.preventDefault();
 
-    if (email === "" || password === "") {
+    let post = {
+      datos: {
+        nombre: name,
+        correo: email,
+        clave: password,
+      },
+    };
+
+    if (name === "" || email === "" || password === "") {
       Swal.fire({
         position: "center",
         icon: "error",
@@ -26,18 +34,18 @@ const Login = () => {
       });
     } else {
       axios
-        .post(`${API_URL}/login`, { correo: email, clave: password })
+        .post(`${API_URL}/persona`, post)
         .then((response) => {
-          if (response.data.mensaje === "found") {
-            localStorage.setItem("correo", email);
-            router.push("movies");
+          if (response.data.ok === true) {
+            localStorage.setItem("userEmail", email);
+            router.push("billboard");
           }
         })
         .catch((error) => {
           Swal.fire({
             position: "center",
-            icon: "warning",
-            title: "Datos incorrectos, vuelve a intentarlo.",
+            icon: "error",
+            title: "Algo salio mal, vuelve a intentarlo más tarde.",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -53,16 +61,28 @@ const Login = () => {
     >
       <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg">
         <h1 className="font-bold uppercase underline mb-4 text-center text-2xl">
-          Bienvenido!
+          Registrarse!
         </h1>
-        <form onSubmit={loginAccess}>
+        <form onSubmit={registerUser}>
           <div className="mb-6">
-            <label htmlFor="email" className="font-bold text-gray-700 mb-2">
+            <label className="font-bold text-gray-700 block mb-2">Nombre</label>
+            <input
+              className="appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-2 py-2 rounded shadow"
+              type="text"
+              placeholder="Ej: Paul"
+              value={name}
+              onChange={(event) => SetName(event.target.value)}
+              autoComplete="off"
+            />
+          </div>
+
+          <div className="mb-6">
+            <label className="font-bold text-gray-700 block mb-2">
               Correo Electrónico
             </label>
             <input
-              className="w-full bg-white border border-gray-300 hover:border-gray-500 px-2 py-2 rounded shadow"
-              type="text"
+              className="appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-2 py-2 rounded shadow"
+              type="email"
               placeholder="tucorreo@email.com"
               value={email}
               onChange={(event) => SetEmail(event.target.value)}
@@ -71,7 +91,7 @@ const Login = () => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="font-bold text-gray-700 mb-2">
+            <label className="font-bold text-gray-700 block mb-2">
               Contraseña
             </label>
             <input
@@ -90,23 +110,22 @@ const Login = () => {
               className="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
               type="submit"
             >
-              <i className="fas fa-sign-in-alt mr-2"></i>
-              Ingresar
+              <i className="fas fa-user-plus mr-2"></i>
+              Registrarse
             </button>
 
             <button
-              className="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
-              onClick={() => router.push("register")}
+              className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+              onClick={() => router.push("/")}
             >
-              <i className="fas fa-user-plus mr-2"></i>
-              Registrarme
+              <i className="fas fa-undo mr-2"></i>
+              Regresar
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-  // }
 };
 
-export default Login;
+export default Register;

@@ -9,18 +9,16 @@ import { API_URL } from "./components/web-service";
 
 ReactModal.setAppElement("#ModalCertificate");
 
-class Rooms extends Component {
+class Schedules extends Component {
   constructor(props) {
     super(props);
     this.state = {
       table_header: {
-        nombre: "Nombre de la Sala",
-        descripcion: "Descripción",
+        id: "N°",
+        hora: "Horas de Proyección",
       },
-      salas: [],
-      nombre: "",
-      descripcion: "",
-      test: "",
+      horarios: [],
+      hora: "",
       showModal: false,
     };
   }
@@ -35,9 +33,9 @@ class Rooms extends Component {
 
   componentDidMount() {
     axios
-      .get(`${API_URL}/sala`)
+      .get(`${API_URL}/horario`)
       .then((response) => {
-        this.setState({ salas: response.data.datos });
+        this.setState({ horarios: response.data.datos });
       })
       .catch((error) => {
         console.error(error);
@@ -48,12 +46,11 @@ class Rooms extends Component {
     e.preventDefault();
     this.post = {
       datos: {
-        nombre: this.state.nombre,
-        descripcion: this.state.descripcion,
+        hora: this.state.hora,
       },
     };
 
-    if (this.post.datos.nombre === "" || this.post.datos.descripcion === "") {
+    if (this.post.datos.hora === "") {
       Swal.fire({
         position: "center",
         icon: "error",
@@ -63,10 +60,10 @@ class Rooms extends Component {
       });
     } else {
       axios
-        .post(`${API_URL}/sala`, this.post)
+        .post(`${API_URL}/horario`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
-            window.location.assign("http://localhost:3000/rooms");
+            window.location.assign("http://localhost:3000/schedules");
           }
         })
         .catch((error) => {
@@ -76,50 +73,47 @@ class Rooms extends Component {
   };
 
   deleteData = (value) => {
-    axios.delete(`${API_URL}/sala/${value}`, {
+    axios.delete(`${API_URL}/horario/${value}`, {
       data: { id: value },
     });
-    window.location.assign("http://localhost:3000/rooms");
+    window.location.assign("http://localhost:3000/schedules");
   };
 
   render() {
-    const { salas, nombre, descripcion } = this.state;
+    const { horarios, hora } = this.state;
 
     return (
       <div className="flex flex-col">
-        <div>
-          <Header />
-        </div>
+        <Header />
+
         <div className="w-full flex xl:flex-row lg:flex-row flex-col">
-          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
-            <Sidebar />
-          </div>
+          <Sidebar />
 
           <div className="px-3 py-4 flex flex-col justify-center w-full">
             <div className="flex flex-col px-12">
-              <p className="mt-5 text-2xl">Salas</p>
+              <p className="mt-5 text-2xl">Horarios</p>
             </div>
             <table className="w-full text-md bg-white shadow-md rounded mb-4">
               <thead className="border-b">
                 <tr>
                   <th className="text-left p-3 px-5">
-                    {this.state.table_header.nombre}
+                    {this.state.table_header.id}
                   </th>
                   <th className="text-left p-3 px-5">
-                    {this.state.table_header.descripcion}
+                    {this.state.table_header.hora}
                   </th>
                   <th></th>
                 </tr>
               </thead>
 
               <tbody>
-                {salas.map((element) => (
+                {horarios.map((element, index) => (
                   <tr
                     className="border-b hover:bg-orange-100 bg-gray-100"
                     key={element.id}
                   >
-                    <td className="p-2 px-5">{element.nombre}</td>
-                    <td className="p-2 px-5">{element.descripcion}</td>
+                    <td className="p-2 px-5">{index + 1}</td>
+                    <td className="p-2 px-5">{element.hora}</td>
                     <td className="p-2 px-5">
                       <button
                         className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
@@ -137,7 +131,7 @@ class Rooms extends Component {
               onClick={() => this.handleReactModal()}
             >
               <i className="fas fa-plus-square mr-2"></i>
-              Agregar nueva sala
+              Agregar nuevo horario
             </button>
           </div>
         </div>
@@ -153,7 +147,7 @@ class Rooms extends Component {
           >
             <div className="flex justify-between w-full items-center py-4 border-b-2">
               <p className="text-gray-800 font-medium text-center text-2xl">
-                Nueva Sala
+                Nuevo Horario
               </p>
               <button onClick={() => this.handleReactModal()}>
                 <i className="fas fa-times-circle text-4xl text-red-500 hover:text-red-700"></i>
@@ -161,32 +155,15 @@ class Rooms extends Component {
             </div>
 
             <div className="mt-2">
-              <label className="block text-sm text-gray-600" htmlFor="nombre">
-                Nombre
+              <label className="block text-sm text-gray-600" htmlFor="hora">
+                Horario
               </label>
               <input
                 className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
                 type="text"
-                placeholder="Ej: Sala 1"
-                name="nombre"
-                value={nombre}
-                onChange={this.changeHandler}
-                autoComplete="off"
-              />
-            </div>
-            <div className="mt-2">
-              <label
-                className="block text-sm text-gray-600"
-                htmlFor="descripcion"
-              >
-                Descripción
-              </label>
-              <input
-                className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
-                type="text"
-                placeholder="Ej: Para 200 personas"
-                name="descripcion"
-                value={descripcion}
+                placeholder="Ej: 10 a 12 horas"
+                name="hora"
+                value={hora}
                 onChange={this.changeHandler}
                 autoComplete="off"
               />
@@ -208,4 +185,4 @@ class Rooms extends Component {
   }
 }
 
-export default withRouter(Rooms);
+export default withRouter(Schedules);

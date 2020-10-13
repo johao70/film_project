@@ -2,20 +2,17 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
-import Swal from "sweetalert2";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
-class UpdateMovie extends Component {
+class AddMovie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: localStorage.getItem("id"),
-      titulo: localStorage.getItem("titulo"),
-      resumen: localStorage.getItem("resumen"),
-      categoria: localStorage.getItem("categoria"),
-      valorBoleto: localStorage.getItem("valorBoleto"),
-      antigua_imagen: localStorage.getItem("imagen"),
+      titulo: "",
+      resumen: "",
+      categoria: "",
+      valorBoleto: "",
       imagen: "",
       estado: true,
     };
@@ -29,48 +26,38 @@ class UpdateMovie extends Component {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      this.setState({ newImage: true, imagen: reader.result });
+      this.setState({ imagen: reader.result });
     };
     reader.readAsDataURL(file);
   };
 
   saveData = (e) => {
     e.preventDefault();
-
-    this.update = {
+    this.post = {
       datos: {
-        id: this.state.id,
         titulo: this.state.titulo,
         resumen: this.state.resumen,
         categoria: this.state.categoria,
         valorBoleto: this.state.valorBoleto,
-        imagen: !this.state.imagen
-          ? this.state.image
-          : this.state.antigua_imagen,
+        imagen: this.state.imagen,
         estado: this.state.estado,
       },
     };
 
     if (
-      this.update.datos.id === "" ||
-      this.update.datos.titulo === "" ||
-      this.update.datos.resumen === "" ||
-      this.update.datos.categoria === "" ||
-      this.update.datos.valorBoleto === ""
+      this.post.datos.titulo === "" ||
+      this.post.datos.resumen === "" ||
+      this.post.datos.categoria === "" ||
+      this.post.datos.valorBoleto === "" ||
+      this.post.datos.imagen === ""
     ) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Complete todos los datos para continuar, por favor.",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      alert("Complete todos los datos para continuar...");
     } else {
       axios
-        .put(`${API_URL}/pelicula/${this.state.id}`, this.update)
+        .post(`${API_URL}/pelicula`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
-            this.props.history.push("movies");
+            this.props.history.push("/billboard");
           }
         })
         .catch((error) => {
@@ -80,29 +67,18 @@ class UpdateMovie extends Component {
   };
 
   render() {
-    const {
-      titulo,
-      resumen,
-      categoria,
-      valorBoleto,
-      antigua_imagen,
-      imagen,
-      newImage,
-    } = this.state;
+    const { titulo, resumen, categoria, valorBoleto, imagen } = this.state;
 
     return (
       <div className="flex flex-col">
-        <div>
-          <Header />
-        </div>
+        <Header />
+
         <div className="w-full flex xl:flex-row lg:flex-row flex-col">
-          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
-            <Sidebar />
-          </div>
+          <Sidebar />
           <div className="flex flex-col px-12 w-full">
-            <p className="my-5 text-2xl">Modificar pelicula.</p>
+            <p className="my-5 text-2xl">Agregar nueva pelicula.</p>
             <form
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mx-8"
+              className="bg-white shadow-md rounded px-8 py-4 mb-4 flex flex-col my-2 mx-8"
               onSubmit={this.saveData}
             >
               <div className="flex xl:flex-row lg:flex-row flex-col">
@@ -179,16 +155,25 @@ class UpdateMovie extends Component {
                   </div>
                 </div>
                 <div className="xl:w-1/4 lg:w-1/4 w-full">
+                  <div className="px-3">
+                    <label
+                      className="block uppercase tracking-wide text-xs font-bold mb-2"
+                      htmlFor="imagen"
+                    >
+                      Portada
+                    </label>
+                    <input
+                      className="appearance-none block w-full border rounded py-3 px-4 mb-3"
+                      name="imagen"
+                      type="file"
+                      defaultValue={imagen}
+                      onChange={this.onFileChange}
+                    />
+                  </div>
                   <div className="w-full flex justify-center">
-                    {newImage ? (
+                    {imagen ? (
                       <img alt="preview" className="w-64 h-64" src={imagen} />
-                    ) : (
-                      <img
-                        alt="preview"
-                        className="w-64 h-64"
-                        src={antigua_imagen}
-                      />
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -197,11 +182,11 @@ class UpdateMovie extends Component {
               </p>
               <div className="mt-4 text-center">
                 <button
-                  className="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
+                  className="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-3 inline-flex items-center"
                   type="submit"
                 >
                   <i className="fas fa-save mr-2"></i>
-                  Guardar
+                  Grabar
                 </button>
               </div>
             </form>
@@ -212,4 +197,4 @@ class UpdateMovie extends Component {
   }
 }
 
-export default withRouter(UpdateMovie);
+export default withRouter(AddMovie);

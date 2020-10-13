@@ -100,13 +100,10 @@ class FilmsRoomAdd extends Component {
 
     return (
       <div className="flex flex-col">
-        <div>
-          <Header />
-        </div>
+        <Header />
+
         <div className="w-full flex xl:flex-row lg:flex-row flex-col">
-          <div className="flex xl:w-1/5 lg:w-1/5 w-full px-6">
-            <Sidebar />
-          </div>
+          <Sidebar />
           <div className="flex flex-col px-12">
             <p className="my-5 text-2xl">Asignar Peliculas.</p>
             <form
