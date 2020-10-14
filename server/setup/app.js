@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Rutas
-app.get("/", (req, res) => res.send("Bienvenido"));
+app.get("/", (req, res) => res.send("Welcome"));
 app.use("/film", personaRutas);
 app.use("/film", compraRutas);
 app.use("/film", horarioRutas);

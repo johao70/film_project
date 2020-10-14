@@ -8,8 +8,8 @@ import Header from "./pages/components/header";
 import Login from "./pages/login.jsx";
 import Register from "./pages/register.jsx";
 import Billboard from "./pages/billboard.jsx";
-import AddMovie from "./pages/addMovie.jsx";
-import UpdateMovie from "./pages/updateMovie.jsx";
+import AddMovie from "./pages/add-movie.jsx";
+import UpdateMovie from "./pages/update-movie.jsx";
 import Rooms from "./pages/rooms.jsx";
 import Schedules from "./pages/schedules.jsx";
 import FilmsRoom from "./pages/films_room.jsx";
@@ -33,8 +33,24 @@ const App = () => {
             </div>
           </div>
         </Route>
-        <Route path="/add_movie" component={AddMovie} />
-        <Route path="/update_movie" component={UpdateMovie} />
+        <Route path="/billboard/add-movie">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <AddMovie />
+            </div>
+          </div>
+        </Route>
+        <Route path="/billboard/update-movie">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <UpdateMovie />
+            </div>
+          </div>
+        </Route>
         <Route path="/rooms" component={Rooms} />
         <Route path="/schedules" component={Schedules} />
         <Route path="/films_room" component={FilmsRoom} />

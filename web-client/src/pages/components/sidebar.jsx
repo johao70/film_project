@@ -19,7 +19,7 @@ const Sidebar = () => {
             <button
               className="mx-6 text-gray-600 hover:text-gray-900"
               onClick={() => {
-                router.push("add_movie");
+                router.push("/billboard/add-movie");
               }}
             >
               <i className="fas fa-plus mr-2"></i>
@@ -28,7 +28,7 @@ const Sidebar = () => {
             <button
               className="mx-6 text-gray-600 hover:text-gray-900"
               onClick={() => {
-                router.push("billboard");
+                router.push("/billboard");
               }}
             >
               <i className="fas fa-ticket-alt mr-2"></i>

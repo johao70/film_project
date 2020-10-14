@@ -11,6 +11,7 @@ const Sequelize = require("sequelize"),
       define: {
         timestamps: false,
       },
+      logging: false,
     }
   );
 

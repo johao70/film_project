@@ -49,7 +49,7 @@ const Billboard = () => {
     localStorage.setItem("imagen", p_imagen);
     localStorage.setItem("categoria", p_categoria);
     localStorage.setItem("valorBoleto", p_valorBoleto);
-    router.push("update_movie");
+    router.push("/billboard/update-movie");
   };
 
 

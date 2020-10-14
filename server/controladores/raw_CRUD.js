@@ -1,28 +1,5 @@
 const db = require("../config/db");
 
-let raw1 = (req, res) => {
-  let { pelicula, horario } = req.query;
-
-  db.sequelize
-    .query(
-      `select sala_peliculas.id, peliculas.titulo as titulo, horarios.hora as hora, salas.nombre as nombre, peliculas.id as idpelicula, horarios.id as idhorario from sala_peliculas join peliculas on peliculas.id = sala_peliculas.idpelicula join horarios on horarios.id = sala_peliculas.idhorario join salas on salas.id = sala_peliculas.idsala where peliculas.id=${pelicula} and horarios.id=${horario};`,
-      { type: db.sequelize.QueryTypes.SELECT }
-    )
-    .then((response) => {
-      return res.status(200).json({
-        ok: true,
-        datos: response,
-      });
-    })
-    .catch((error) => {
-      return res.status(500).json({
-        ok: false,
-        datos: null,
-        mensaje: `Error del servidor: ${error}`,
-      });
-    });
-};
-
 let raw2 = (req, res) => {
   let { idpelicula } = req.query;
 
@@ -89,7 +66,6 @@ let raw4 = (req, res) => {
 };
 
 module.exports = {
-  raw1,
   raw2,
   raw3,
   raw4,

@@ -54,7 +54,7 @@ const Header = () => {
         onClick={logout}
       >
         <i className="fas fa-sign-out-alt mr-2"></i>
-        Salir
+        Logout
       </button>
     </section>
   );
