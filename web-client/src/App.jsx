@@ -51,7 +51,15 @@ const App = () => {
             </div>
           </div>
         </Route>
-        <Route path="/rooms" component={Rooms} />
+        <Route path="/rooms">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <Rooms />
+            </div>
+          </div>
+        </Route>
         <Route path="/schedules" component={Schedules} />
         <Route path="/films_room" component={FilmsRoom} />
         <Route path="/films_room_add" component={FilmsRoomAdd} />

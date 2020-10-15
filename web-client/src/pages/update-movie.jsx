@@ -10,7 +10,9 @@ const UpdateMovie = () => {
     [title, SetTitle] = useState(localStorage.getItem("titulo")),
     [resume, SetResume] = useState(localStorage.getItem("resumen")),
     [category, SetCategory] = useState(localStorage.getItem("categoria")),
-    [ticketValue, SetTicketValue] = useState(localStorage.getItem("valorBoleto")),
+    [ticketValue, SetTicketValue] = useState(
+      localStorage.getItem("valorBoleto")
+    ),
     [image] = useState(localStorage.getItem("imagen")),
     [state] = useState(true),
     router = useHistory();
@@ -136,11 +138,7 @@ const UpdateMovie = () => {
           </div>
           <div className="xl:w-1/4 lg:w-1/4 w-full">
             <div className="w-full flex justify-center">
-                <img
-                  alt="preview"
-                  className="w-64 h-64"
-                  src={image}
-                />
+              <img alt="preview" className="w-64 h-64" src={image} />
             </div>
           </div>
         </div>
@@ -159,6 +157,6 @@ const UpdateMovie = () => {
       </form>
     </div>
   );
-}
+};
 
 export default UpdateMovie;

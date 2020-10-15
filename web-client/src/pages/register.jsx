@@ -65,7 +65,12 @@ const Register = () => {
         </h1>
         <form onSubmit={registerUser}>
           <div className="mb-6">
-            <label className="font-bold text-gray-700 block mb-2">Nombre</label>
+            <label
+              className="font-bold text-gray-700 block mb-2"
+              htmlFor="name"
+            >
+              Nombre
+            </label>
             <input
               className="appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-2 py-2 rounded shadow"
               type="text"
@@ -77,7 +82,10 @@ const Register = () => {
           </div>
 
           <div className="mb-6">
-            <label className="font-bold text-gray-700 block mb-2">
+            <label
+              className="font-bold text-gray-700 block mb-2"
+              htmlFor="email"
+            >
               Correo Electrónico
             </label>
             <input
@@ -91,7 +99,10 @@ const Register = () => {
           </div>
 
           <div className="mb-6">
-            <label className="font-bold text-gray-700 block mb-2">
+            <label
+              className="font-bold text-gray-700 block mb-2"
+              htmlFor="password"
+            >
               Contraseña
             </label>
             <input
