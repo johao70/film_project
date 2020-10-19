@@ -71,7 +71,7 @@ const Sidebar = () => {
             <button
               className="mx-6 text-gray-600 hover:text-gray-900"
               onClick={() => {
-                router.push("films_room");
+                router.push("films-room");
               }}
             >
               <i className="fas fa-map-signs mr-2"></i>

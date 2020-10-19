@@ -79,7 +79,7 @@ class FilmsRoomAdd extends Component {
         .post(`${API_URL}/sala_pelicula`, this.post)
         .then((response) => {
           if (response.data.ok === true) {
-            this.props.history.push("films_room");
+            this.props.history.push("films-room");
           }
         })
         .catch((error) => {

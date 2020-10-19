@@ -28,7 +28,7 @@ const Billboard = () => {
         },
       })
       .then(() => {
-        window.location.reload();
+        router.go(0);
       })
       .catch((error) => {
         console.error(error);

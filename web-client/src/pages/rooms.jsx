@@ -70,7 +70,7 @@ const Rooms = () => {
   };
 
   return (
-    <div className="px-3 py-4 flex flex-col justify-center w-full">
+    <div className="px-3 py-4 flex flex-col w-full">
       <div className="flex flex-col px-12">
         <p className="mt-5 text-2xl">Salas</p>
       </div>
@@ -111,7 +111,6 @@ const Rooms = () => {
         Agregar nueva sala
       </button>
 
-      {/* MODAL */}
       <ReactModal
         isOpen={showModal}
         className="flex justify-center items-center h-screen"
@@ -169,7 +168,6 @@ const Rooms = () => {
           </div>
         </form>
       </ReactModal>
-      {/* MODAL */}
     </div>
   );
 };

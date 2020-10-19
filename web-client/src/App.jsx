@@ -12,7 +12,7 @@ import AddMovie from "./pages/add-movie.jsx";
 import UpdateMovie from "./pages/update-movie.jsx";
 import Rooms from "./pages/rooms.jsx";
 import Schedules from "./pages/schedules.jsx";
-import FilmsRoom from "./pages/films_room.jsx";
+import FilmsRoom from "./pages/films-room.jsx";
 import FilmsRoomAdd from "./pages/films_room_add.jsx";
 import Report from "./pages/report.jsx";
 import Page404 from "./pages/Page404.jsx";
@@ -60,8 +60,24 @@ const App = () => {
             </div>
           </div>
         </Route>
-        <Route path="/schedules" component={Schedules} />
-        <Route path="/films_room" component={FilmsRoom} />
+        <Route path="/schedules">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <Schedules />
+            </div>
+          </div>
+        </Route>
+        <Route path="/films-room">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <FilmsRoom />
+            </div>
+          </div>
+        </Route>
         <Route path="/films_room_add" component={FilmsRoomAdd} />
         <Route path="/report" component={Report} />
         <Route component={Page404} />
