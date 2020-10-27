@@ -4,6 +4,7 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "./styles/tailwind.css";
 
 import Header from "./pages/components/header";
+import Sidebar from "./pages/components/sidebar";
 
 import Login from "./pages/login.jsx";
 import Register from "./pages/register.jsx";
@@ -16,7 +17,6 @@ import FilmsRoom from "./pages/films-room.jsx";
 import FilmsRoomAdd from "./pages/films-room-add.jsx";
 import Report from "./pages/report.jsx";
 import Page404 from "./pages/Page404.jsx";
-import Sidebar from "./pages/components/sidebar";
 
 const App = () => {
   return (
@@ -87,7 +87,15 @@ const App = () => {
             </div>
           </div>
         </Route>
-        <Route path="/report" component={Report} />
+        <Route path="/report">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <Report />
+            </div>
+          </div>
+        </Route>
         <Route component={Page404} />
       </Switch>
     </Router>
