@@ -33,11 +33,11 @@ const UpdateMovie = () => {
     };
 
     if (
-      update.datos.id === "" ||
-      update.datos.titulo === "" ||
-      update.datos.resumen === "" ||
-      update.datos.categoria === "" ||
-      update.datos.valorBoleto === ""
+      id === "" ||
+      title === "" ||
+      resume === "" ||
+      category === "" ||
+      ticketValue === ""
     ) {
       Swal.fire({
         position: "center",
@@ -50,7 +50,7 @@ const UpdateMovie = () => {
       axios
         .put(`${API_URL}/pelicula/${id}`, update)
         .then((response) => {
-          if (response.data.ok === true) {
+          if (response.data.ok) {
             router.push("billboard");
           }
         })

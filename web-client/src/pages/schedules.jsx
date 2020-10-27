@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { API_URL } from "./components/web-service";
 
-ReactModal.setAppElement("#ModalCertificate");
+ReactModal.setAppElement("#modalDialog");
 
 const Schedules = () => {
   const [table_header] = useState({
@@ -50,7 +50,7 @@ const Schedules = () => {
       axios
         .post(`${API_URL}/horario`, post)
         .then((response) => {
-          if (response.data.ok === true) {
+          if (response.data.ok) {
             router.go(0);
           }
         })
@@ -61,9 +61,7 @@ const Schedules = () => {
   };
 
   const deleteData = (value) => {
-    axios.delete(`${API_URL}/horario/${value}`, {
-      data: { id: value },
-    });
+    axios.delete(`${API_URL}/horario/${value}`);
     router.go(0);
   };
 

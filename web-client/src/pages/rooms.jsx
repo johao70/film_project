@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { API_URL } from "./components/web-service";
 
-ReactModal.setAppElement("#ModalCertificate");
+ReactModal.setAppElement("#modalDialog");
 
 const Rooms = () => {
   const [table_header] = useState({
@@ -40,7 +40,7 @@ const Rooms = () => {
       },
     };
 
-    if (post.datos.nombre === "" || post.datos.descripcion === "") {
+    if (name === "" || description === "") {
       Swal.fire({
         position: "center",
         icon: "error",
@@ -52,7 +52,7 @@ const Rooms = () => {
       axios
         .post(`${API_URL}/sala`, post)
         .then((response) => {
-          if (response.data.ok === true) {
+          if (response.data.ok) {
             router.go(0);
           }
         })
@@ -63,10 +63,8 @@ const Rooms = () => {
   };
 
   const deleteData = (value) => {
-    axios.delete(`${API_URL}/sala/${value}`, {
-      data: { id: value },
-    });
-    window.location.assign("http://localhost:3000/rooms");
+    axios.delete(`${API_URL}/sala/${value}`);
+    router.go(0);
   };
 
   return (

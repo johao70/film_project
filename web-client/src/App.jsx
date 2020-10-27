@@ -13,7 +13,7 @@ import UpdateMovie from "./pages/update-movie.jsx";
 import Rooms from "./pages/rooms.jsx";
 import Schedules from "./pages/schedules.jsx";
 import FilmsRoom from "./pages/films-room.jsx";
-import FilmsRoomAdd from "./pages/films_room_add.jsx";
+import FilmsRoomAdd from "./pages/films-room-add.jsx";
 import Report from "./pages/report.jsx";
 import Page404 from "./pages/Page404.jsx";
 import Sidebar from "./pages/components/sidebar";
@@ -78,7 +78,15 @@ const App = () => {
             </div>
           </div>
         </Route>
-        <Route path="/films_room_add" component={FilmsRoomAdd} />
+        <Route path="/films-room-add">
+          <div>
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <FilmsRoomAdd />
+            </div>
+          </div>
+        </Route>
         <Route path="/report" component={Report} />
         <Route component={Page404} />
       </Switch>

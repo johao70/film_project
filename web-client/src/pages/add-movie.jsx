@@ -39,11 +39,11 @@ const AddMovie = () => {
     };
 
     if (
-      post.datos.titulo === "" ||
-      post.datos.resumen === "" ||
-      post.datos.categoria === "" ||
-      post.datos.valorBoleto === "" ||
-      post.datos.imagen === ""
+      title === "" ||
+      resume === "" ||
+      category === "" ||
+      ticketValue === "" ||
+      image === ""
     ) {
       Swal.fire({
         position: "center",
@@ -56,7 +56,7 @@ const AddMovie = () => {
       axios
         .post(`${API_URL}/pelicula`, post)
         .then((response) => {
-          if (response.data.ok === true) {
+          if (response.data.ok) {
             router.push("billboard");
           }
         })
