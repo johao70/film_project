@@ -57,7 +57,7 @@ const AddMovie = () => {
         .post(`${API_URL}/pelicula`, post)
         .then((response) => {
           if (response.data.ok) {
-            router.push("billboard");
+            router.push("/billboard");
           }
         })
         .catch((error) => {

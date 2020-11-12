@@ -1,6 +1,6 @@
-create database cine;
+create database cinema;
 
-use cine;
+use cinema;
 
 create table personas(id int auto_increment not null primary key, nombre varchar(150), correo varchar(150), clave varchar(150));
 

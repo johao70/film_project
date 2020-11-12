@@ -3,7 +3,7 @@ PORT = 5000
 HOST_DB = 'localhost'
 USER_DB = 'root'
 PASS_DB = '1234'
-NAME_DB = 'cine'
+NAME_DB = 'cinema'
 
 EMAIL_USER = ''
 EMAIL_PASS = ''
