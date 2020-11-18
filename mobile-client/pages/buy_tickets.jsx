@@ -14,7 +14,6 @@ import { useHistory } from "react-router-native";
 
 const BuyTickets = () => {
   const [film, SetFilm] = useState([]),
-    [id_film, SetIdFilm] = useState(""),
     [id_room_film, SetIdRoomFilm] = useState(""),
     [tickets_number, SetTicketsNumber] = useState(""),
     router = useHistory();
@@ -23,10 +22,12 @@ const BuyTickets = () => {
     loadUserPreferences();
   }, []);
 
-  const loadUserPreferences = () => {
+  const loadUserPreferences = async () => {
     try {
-      SetIdFilm(AsyncStorage.getItem("idPelicula"));
-      SetIdRoomFilm(AsyncStorage.getItem("idSalaPelicula"));
+      const id_film = await AsyncStorage.getItem("idPelicula"),
+        id_room_film = await AsyncStorage.getItem("idSalaPelicula");
+
+      SetIdRoomFilm(id_room_film);
 
       axios
         .get(`${API_URL}/pelicula?id=${id_film}`)
@@ -75,7 +76,6 @@ const BuyTickets = () => {
   const asyncstorageClear = () => {
     try {
       AsyncStorage.clear();
-      SetIdFilm("");
       SetIdRoomFilm("");
       router.push("/");
     } catch (err) {

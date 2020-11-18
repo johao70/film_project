@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { TextInput, AsyncStorage, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card } from "react-native-elements";
+import { useHistory } from "react-router-native";
 import axios from "axios";
 
 import { API_URL } from "./components/web-service";
-import { useHistory } from "react-router-native";
 
 const SendTickets = () => {
-  const [id_film, SetIdFilm] = useState(""),
-    [email, SetEmail] = useState(""),
+  const [email, SetEmail] = useState(""),
     [room, SetRoom] = useState(""),
     [film, SetFilm] = useState(""),
     [schedule, SetSchedule] = useState(""),
@@ -23,10 +22,12 @@ const SendTickets = () => {
 
   const loadUserPreferences = async () => {
     try {
-      SetIdFilm(AsyncStorage.getItem("idPelicula"));
-      SetTicketsNumber(AsyncStorage.getItem("numero_boletos"));
+      const id_film = await AsyncStorage.getItem("idPelicula"),
+        numero_boletos = await AsyncStorage.getItem("numero_boletos");
 
-      await axios
+      SetTicketsNumber(numero_boletos);
+
+      axios
         .get(`${API_URL}/raw2?idpelicula=${id_film}`)
         .then((response) => {
           response.data.datos.forEach((element) => {

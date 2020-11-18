@@ -47,14 +47,14 @@ const MovieDetail = () => {
       AsyncStorage.setItem("idSalaPelicula", idSalaPelicula.toString());
       AsyncStorage.setItem("idPelicula", idPelicula.toString());
 
-      router.push("/buy_tickets");
+      router.push("buy_tickets");
     } catch (err) {
       console.error(err);
       clearLocalStorage();
     }
   };
 
-  clearLocalStorage = () => {
+  const clearLocalStorage = () => {
     try {
       AsyncStorage.clear();
       router.push("/");
