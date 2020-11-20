@@ -7,10 +7,10 @@ import {
 } from "react-native";
 import { View, Text } from "react-native-tailwind";
 import { Card, Image } from "react-native-elements";
+import { useHistory } from "react-router-native";
 import axios from "axios";
 
 import { API_URL } from "./components/web-service";
-import { useHistory } from "react-router-native";
 
 const BuyTickets = () => {
   const [film, SetFilm] = useState([]),
@@ -63,6 +63,7 @@ const BuyTickets = () => {
             router.push("/send_tickets");
           } else {
             alert("Algo salio mal intentalo de nuevo más tarde");
+            asyncstorageClear();
           }
         })
         .catch((error) => {

@@ -35,8 +35,6 @@ const SendTickets = () => {
               SetRoom(element.idsala_nombre);
               SetFilm(element.idpelicula_titulo);
               SetSchedule(element.idhorario_hora);
-            } else {
-              alert("false");
             }
           });
         })
@@ -67,9 +65,9 @@ const SendTickets = () => {
     } else {
       axios
         .post("https://api.emailjs.com/api/v1.0/email/send", data)
-        .then(async (response) => {
+        .then(() => {
           alert("Correo Enviado!");
-          await AsyncStorage.clear();
+          AsyncStorage.clear();
           router.push("/");
         })
         .catch((error) => {
